@@ -1,0 +1,36 @@
+
+# Please take the time to finish this file as described in
+# https://sourceforge.net/p/lirc-remotes/wiki/Checklist/
+# and make it available to others by sending it to
+# <lirc@bartelmus.de>
+#
+# This config file was automatically generated
+# using lirc-0.10.1(default) on Mon May 24 19:33:36 2021
+# Command line used: --force --disable-namespace
+# Kernel version (uname -r): 5.10.17-v7+
+#
+# Remote name (as of config file): mitsubishi_kh18a
+# Brand of remote device, the thing you hold in your hand:
+# Remote device model nr:
+# Remote device info url:
+# Does remote device has a bundled capture device e. g., a
+#     usb dongle? :
+# For bundled USB devices: usb vendor id, product id
+#     and device string (use dmesg or lsusb):
+# Type of device controlled
+#     (TV, VCR, Audio, DVD, Satellite, Cable, HTPC, ...) :
+# Device(s) controlled by this remote:
+
+begin remote
+
+  name  mitsubishi_kh18a
+  bits            0
+  eps             0
+  aeps            0
+
+  one             0     0
+  zero            0     0
+  gap          50000
+  toggle_bit_mask 0x0
+
+      begin codes
