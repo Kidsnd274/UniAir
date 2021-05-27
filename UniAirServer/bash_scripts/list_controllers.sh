@@ -1,0 +1,2 @@
+#!/bin/bash
+irsend LIST "" ""
