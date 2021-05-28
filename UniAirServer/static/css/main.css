@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    margin: auto;
+    font-family: 'Trebuchet MS';
+    vertical-align: middle;
+}
