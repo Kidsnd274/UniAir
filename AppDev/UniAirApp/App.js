@@ -1,18 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 import StartUp from './screens/StartUp';
 import FanDualButtons from './components/FanDualButtons'
 import TemperatureController from './components/TemperatureController';
 import ControllerInformation from './components/ControllerInformation'
 import Tabs from './components/Tabs'
 import Controller from './screens/Controller'
+import Registration from './screens/Registration'
+import SetUp from './screens/SetUp'
 
 
 
 export default function App() {
+  const Drawer = createDrawerNavigator();
   return (
-    <Controller/>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="SetUp">
+        <Drawer.Screen name="SetUp" component={SetUp} />
+        <Drawer.Screen name="Controller" component={Controller} />
+        <Drawer.Screen name="Registration" component={Registration} />
+        <Drawer.Screen name="StartUp" component={StartUp} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 

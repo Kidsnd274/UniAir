@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
-const SetUp = () => {
+const SetUp = ({navigation}) => {
   return <View style={styles.container}></View>;
 };
 
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartUp;
+export default SetUp;

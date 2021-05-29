@@ -7,15 +7,13 @@ import ControllerInformation from "../components/ControllerInformation";
 import Tabs from "../components/Tabs";
 import EconPowerDualButtons from "../components/EconPowerDualButton";
 
-const Controller = () => {
+const Controller = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
         <Header
           placement="left"
-          leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "MY TITLE", style: { color: "#fff" } }}
-          rightComponent={{ icon: "home", color: "#fff" }}
+          leftComponent={{ text: "MY TITLE", style: { color: "#fff" } }}
         />
       </View>
       <View style={styles.controllerContainer}>
