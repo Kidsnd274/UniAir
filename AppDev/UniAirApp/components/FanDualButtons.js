@@ -17,7 +17,7 @@ const FanDualButtons = () => {
   };
 
   const buttons = [{ element: fan }, { element: fan1 }];
-  return (<ButtonGroup buttons={buttons} containerStyle={{ height: 80 }} />);
+  return (<ButtonGroup buttons={buttons} containerStyle={{ height: "30%", }} />);
 };
 
 export default FanDualButtons;

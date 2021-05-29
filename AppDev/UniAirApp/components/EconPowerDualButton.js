@@ -17,7 +17,7 @@ const EconPowerDualButtons = () => {
   };
 
   const buttons = [{ element: powerButton }, { element: econButton }];
-  return (<ButtonGroup buttons={buttons} containerStyle={{ height: 80 }} />);
+  return (<ButtonGroup buttons={buttons} containerStyle={{ height: "30%",}} />);
 };
 
 
