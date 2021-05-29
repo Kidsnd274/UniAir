@@ -7,17 +7,20 @@ import ControllerInformation from "../components/ControllerInformation";
 import Tabs from "../components/Tabs";
 import EconPowerDualButtons from "../components/EconPowerDualButton";
 
-const Controller = ({navigation}) => {
+const Controller = props => {
+  const name = () => {
+    return (<Text>{props.data.roomName}</Text>)
+  }
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
         <Header
           placement="left"
-          leftComponent={{ text: "MY TITLE", style: { color: "#fff" } }}
+          leftComponent={name}
         />
       </View>
       <View style={styles.controllerContainer}>
-        <TemperatureController style={styles.subContainer} />
+        <TemperatureController temperatureDisplay = {props.data.temperatureDisplay}/>
         <ControllerInformation />
       </View>
       <View style={styles.tabContainer}>

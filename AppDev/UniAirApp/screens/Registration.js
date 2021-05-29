@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
 
-const Registration = ({navigation}) => {
+const Registration = () => {
   const [ipAddress, setIpAddress] = useState(0);
   const [portNo, setPortNo] = useState(0);
 

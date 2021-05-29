@@ -15,14 +15,15 @@ import SetUp from './screens/SetUp'
 
 
 export default function App() {
+  const dataSet = [{roomName:'Room1', temperatureDisplay: 'b'}, {roomName:'room2', temperatureDisplay: 'd'}, {roomName:'room3', temperatureDisplay: 'c'}]
   const Drawer = createDrawerNavigator();
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="SetUp">
         <Drawer.Screen name="SetUp" component={SetUp} />
-        <Drawer.Screen name="Controller" component={Controller} />
         <Drawer.Screen name="Registration" component={Registration} />
         <Drawer.Screen name="StartUp" component={StartUp} />
+        {dataSet.map(x => <Drawer.Screen name= {x.roomName} component= {ControllerCreater(x)} />)}
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -35,6 +36,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function ControllerCreater(dataSet) {
+  return () => {
+    return(<Controller data = {dataSet}/>)
+  }
+}
 
 // import React, { Component } from "react";
 // import { View } from "react-native";

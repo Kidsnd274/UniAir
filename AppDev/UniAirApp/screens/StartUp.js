@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
-const StartUp = ({navigation}) => {
+const StartUp = () => {
   return <View style = {styles.container}>
     <View style= {styles.subContainerTop}>
     </View>

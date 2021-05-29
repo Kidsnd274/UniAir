@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { ControllerContext } from "../Context/ControllerContext";
 
 
-const ControllerView = () => {
+const ControllerView = props => {
   const [controllerDetails, setControllerDetails] =
     useContext(ControllerContext);
 

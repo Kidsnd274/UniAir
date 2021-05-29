@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, View, Text  } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import Test from './Test'
 
 function HomeScreen({ navigation }) {
   return (
@@ -25,11 +26,13 @@ function NotificationsScreen({ navigation }) {
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  const dataSet = [{name : 'a'}, {name : 'b'}]
   return (
+
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={CustomComponenet('hi')} />
+        {dataSet.map(x => <Drawer.Screen name={x.name} component={CustomComponenet(x)} />)}
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -38,10 +41,15 @@ export default function App() {
 
 
 
-function CustomComponenet(name){
+function CustomComponenet(x){
   return (
     () => {
-      return (<Text>{name}</Text>);
+      return <Test data = {x}/>;
     }
   );
 }
+ const MiniComp = () => {
+   return(
+     <Text>Gi</Text>
+   )
+ }

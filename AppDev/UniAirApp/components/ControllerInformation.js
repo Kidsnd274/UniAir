@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Button, ButtonGroup, Icon, Tab } from "react-native-elements";
 
-const ControllerInformation = props => {
+const ControllerInformation = () => {
   
   return (
     <View style = {styles.container}>

@@ -9,7 +9,7 @@ const TemperatureController = props => {
   return (
     <View style = {styles.container}>
       <TouchableOpacity style = {styles.touchableStyle}><Icon name="minus" type = 'material-community' size = {50}/></TouchableOpacity>
-      <View style ={styles.circle}><Text style = {styles.temperatureText}>1<Icon name="temperature-celsius" type = 'material-community' /></Text></View>
+      <View style ={styles.circle}><Text style = {styles.temperatureText}>{props.temperatureDisplay}<Icon name="temperature-celsius" type = 'material-community' /></Text></View>
       <TouchableOpacity style = {styles.touchableStyle}><Icon name="plus" type = 'material-community' size = {50}/></TouchableOpacity>
     </View>
 
