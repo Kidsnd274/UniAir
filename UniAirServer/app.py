@@ -22,26 +22,16 @@ def toggle_power():
 
 @app.route('/api/aircon_data', methods=["GET", "POST"])
 def get_aircon_data():
-    if request.method == 'GET':
-        response = app.response_class(
-            response = virtual_controller.get_aircon_data(),
-            mimetype = 'application/json'
-        )
-        return response
-    elif request.method == 'POST':
+    if request.method == 'POST':
         if not request.json:
             abort(400)
         else:
             virtual_controller.update_aircon_data(request.json)
-            response = app.response_class(
-                response = virtual_controller.get_aircon_data(),
-                mimetype = 'application/json'
-            )
-            return response
-    else:
-        print("DEBUG: Unknown HTTP Method")
-        pass
-
+    response = app.response_class(
+        response = virtual_controller.get_aircon_data(),
+        mimetype = 'application/json'
+    )
+    return response
 
     # data = jsonify(
     #     date_and_time = datetime.now().isoformat(), # ISO 8601 format, find function to decode this format for JS
