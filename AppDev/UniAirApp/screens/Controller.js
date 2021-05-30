@@ -7,9 +7,10 @@ import ControllerInformation from "../components/ControllerInformation";
 import Tabs from "../components/Tabs";
 import EconPowerDualButtons from "../components/EconPowerDualButton";
 
+
 const Controller = props => {
   const name = () => {
-    return (<Text>{props.data.roomName}</Text>)
+    return (<Text>{props.data.controllerData.Id}</Text>)
   }
   return (
     <View style={styles.container}>
@@ -20,7 +21,7 @@ const Controller = props => {
         />
       </View>
       <View style={styles.controllerContainer}>
-        <TemperatureController temperatureDisplay = {props.data.temperatureDisplay}/>
+        <TemperatureController data = {props.data}/>
         <ControllerInformation />
       </View>
       <View style={styles.tabContainer}>
