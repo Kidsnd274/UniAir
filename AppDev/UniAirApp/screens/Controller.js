@@ -18,6 +18,7 @@ const Controller = props => {
         <Header
           placement="left"
           leftComponent={name}
+          width ='100%'
         />
       </View>
       <View style={styles.controllerContainer}>
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     borderWidth:2,
-    borderColor:'black'
+    borderColor:'black',
+    width : "100%"
   },
   controllerContainer: {
     flex: 1.5,

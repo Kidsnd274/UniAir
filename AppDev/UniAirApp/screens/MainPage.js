@@ -19,7 +19,7 @@ const MainPage = () => {
 
   return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Registration">
+        <Drawer.Navigator initialRouteName="1">
           <Drawer.Screen name="Registration" component={Registration} />
           {mainData.map((x) => (
   <Drawer.Screen name={x.roomName} component={ControllerCreater(x)} />

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+  StyleSheet,
+} from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
 import { useDispatch } from "react-redux";
 
@@ -14,6 +20,7 @@ const TemperatureController = (props) => {
 
   const dispatch = useDispatch();
 
+
   function Power(status, temp) {
     if (status) {
       return temp;
@@ -25,8 +32,8 @@ const TemperatureController = (props) => {
     dispatch({
       type: "SUBMIT_TEMPERATURE",
       payload: {
-        Id: airConditionerId,
-        Power: power,
+        id: airConditionerId,
+        power: power,
         temperatureDisplay: temperatureDisplay,
       },
     });
@@ -36,16 +43,18 @@ const TemperatureController = (props) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.touchableStyle}
-        onPress={() => setTemperatureDisplay(temperatureDisplay - 1)}
+        onPress={SubmitSettings}
+        onPressIn={() => setTemperatureDisplay(temperatureDisplay - 1)}
       >
         <Icon name="minus" type="material-community" size={50} />
       </TouchableOpacity>
       <View style={styles.circle}>
-        <TouchableOpacity style={styles.circle}>
-          <Text
-            style={styles.temperatureText}
-            onPress={() => setPower(power ? false : true)}
-          >
+        <TouchableOpacity
+          style={styles.circle}
+          onPressIn={() => setPower(power ? false : true)}
+          onPress={SubmitSettings}
+        >
+          <Text style={styles.temperatureText}>
             {String(Power(power, temperatureDisplay))}
             <Icon name="temperature-celsius" type="material-community" />
           </Text>
@@ -53,7 +62,8 @@ const TemperatureController = (props) => {
       </View>
       <TouchableOpacity
         style={styles.touchableStyle}
-        onPress={() => setTemperatureDisplay(temperatureDisplay + 1)}
+        onPress={SubmitSettings}
+        onPressIn={() => setTemperatureDisplay(temperatureDisplay + 1)}
       >
         <Icon name="plus" type="material-community" size={50} />
       </TouchableOpacity>

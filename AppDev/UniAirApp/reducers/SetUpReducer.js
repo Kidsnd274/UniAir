@@ -19,10 +19,11 @@ const SetUpReducer = (state = initalState, action) => {
         controllerData: {Id: String(payload.roomName) , Power: false ,temperatureDisplay: 1}
       }]
     case "SUBMIT_TEMPERATURE":
-      const copyState = [...state];
+      let copyState = [...state];
       const i = copyState.findIndex(x => x.roomName === payload.id);
-      copyState[i].controllerData = {Id: payload.airConditionerId , Power: payload.power ,temperatureDisplay: payload.temperatureDisplay}
-      return [...copyState]
+      copyState[i].controllerData = {Id: payload.id , Power: payload.power ,temperatureDisplay: payload.temperatureDisplay}
+      console.log(i)
+      return [...copyState];
 
       default: 
       return state;
