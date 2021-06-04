@@ -73,13 +73,14 @@ const TemperatureController = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     flexDirection: "row",
   },
   touchableStyle: {
-    margin: 20,
+    margin: '5%'
   },
   circle: {
     width: 200,

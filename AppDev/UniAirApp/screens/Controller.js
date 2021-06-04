@@ -28,7 +28,7 @@ const Controller = props => {
       <View style={styles.tabContainer}>
         <Tabs />
       </View>
-      <View style={styles.tabContainer}>
+      <View style={styles.miscContainer}>
         <FanDualButtons />
         <EconPowerDualButtons></EconPowerDualButtons>
       </View>
@@ -38,43 +38,43 @@ const Controller = props => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection:'column',
     borderWidth:2,
-    borderColor:'black'
+    borderColor:'blue'
   },
   subContainer: {
-    flex: 0.5,
+    flex: 0.8,
     alignItems: "center",
     justifyContent: "flex-start",
     borderWidth:2,
-    borderColor:'black',
+    borderColor:'red',
     width : "100%"
   },
   controllerContainer: {
-    flex: 1.5,
+    flex: 2,
     alignItems: "stretch",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     flexDirection: 'column',
     width:'100%',
     borderWidth:2,
-    borderColor:'black'
+    borderColor:'green'
   },
   tabContainer: {
-    flex: 1,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "flex-start",
-    marginTop: -50,
     width:'100%',
     borderWidth:2,
     borderColor:'black'
   },
   miscContainer: {
-    flex: 3,
+    flex: 2,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     borderWidth:2,
     borderColor:'black'
   },
