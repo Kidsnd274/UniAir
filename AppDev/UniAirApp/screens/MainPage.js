@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import StartUp from "./StartUp";
 import Controller from "./Controller";
 import Registration from "./Registration";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const MainPage = () => {
   const mainData = useSelector(state => state.airconReducer);

@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import MainPage from './screens/MainPage'
-// import oldStore from './store/store'
 import {store} from './redux/store'
 import {Provider} from 'react-redux';
 
