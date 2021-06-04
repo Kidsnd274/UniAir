@@ -7,19 +7,17 @@ import {
   StyleSheet,
 } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
-import { useDispatch } from "react-redux";
+import { State } from "react-native-gesture-handler";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTemperature, togglePower } from "../redux/actions"
 
 const TemperatureController = (props) => {
-  const [power, setPower] = useState(props.data.controllerData.Power);
-  const [temperatureDisplay, setTemperatureDisplay] = useState(
-    props.data.controllerData.temperatureDisplay
-  );
-  const [airConditionerId, setAirConditionerId] = useState(
-    props.data.controllerData.Id
-  );
+  const controllerData = useSelector(state => state.airconReducer.aircons[props.id])
+
+  const [aircon_power, set_aircon_power] = useState(controllerData.controllerData.aircon_power)
+  const [aircon_temp, set_aircon_temp] = useState(controllerData.controllerData.aircon_temp);
 
   const dispatch = useDispatch();
-
 
   function Power(status, temp) {
     if (status) {
@@ -28,48 +26,54 @@ const TemperatureController = (props) => {
     return "-";
   }
 
-  const SubmitSettings = () => {
-    dispatch({
-      type: "SUBMIT_TEMPERATURE",
-      payload: {
-        id: airConditionerId,
-        power: power,
-        temperatureDisplay: temperatureDisplay,
-      },
-    });
-  };
+  const onPowerChanged = () => {
+    var newValue = aircon_power ? false : true;
+    set_aircon_power(newValue);
+    togglePower(props.id, newValue);
+  }
+
+  const increaseTemperature = () => {
+    var newValue = aircon_temp + 1;
+    set_aircon_temp(newValue);
+    changeTemperature(props.id, newValue);
+  }
+
+  const decreaseTemperature = () => {
+    debugCall();
+    var newValue = aircon_temp - 1;
+    set_aircon_temp(newValue);
+    changeTemperature(props.id, newValue);
+  }
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.touchableStyle}
-        onPress={SubmitSettings}
-        onPressIn={() => setTemperatureDisplay(temperatureDisplay - 1)}
+        onPress={decreaseTemperature}
       >
         <Icon name="minus" type="material-community" size={50} />
       </TouchableOpacity>
       <View style={styles.circle}>
         <TouchableOpacity
           style={styles.circle}
-          onPressIn={() => setPower(power ? false : true)}
-          onPress={SubmitSettings}
-        >
+          onPress={onPowerChanged}>
           <Text style={styles.temperatureText}>
-            {String(Power(power, temperatureDisplay))}
+            {String(Power(aircon_power, aircon_temp))}
             <Icon name="temperature-celsius" type="material-community" />
           </Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
         style={styles.touchableStyle}
-        onPress={SubmitSettings}
-        onPressIn={() => setTemperatureDisplay(temperatureDisplay + 1)}
+        onPress={increaseTemperature}
       >
         <Icon name="plus" type="material-community" size={50} />
       </TouchableOpacity>
     </View>
   );
 };
+
+export default TemperatureController;
 
 const styles = StyleSheet.create({
   container: {
@@ -101,4 +105,33 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TemperatureController;
+  // const dispatch = useDispatch();
+
+
+
+  // const fetchAirconData = () => dispatch(getAirconData());
+  // useEffect(() => {
+  //   fetchAirconData();
+  // }, [])
+
+  // const SubmitSettings = () => {
+  //   dispatch({
+  //     type: "SUBMIT_TEMPERATURE",
+  //     payload: {
+  //       id: airConditionerId,
+  //       aircon_power: aircon_power,
+  //       aircon_temp: aircon_temp,
+  //     },
+  //   });
+  // };
+
+  // const SubmitPower = () => {
+  //   dispatch({
+  //     type: "SUBMIT_POWER",
+  //     payload: {
+  //       id: airConditionerId,
+  //       aircon_power: aircon_power,
+  //       aircon_temp: aircon_temp,
+  //     },
+  //   });
+  // };

@@ -6,28 +6,23 @@ import { NavigationContainer } from "@react-navigation/native";
 import StartUp from "./StartUp";
 import Controller from "./Controller";
 import Registration from "./Registration";
-import {useSelector} from "react-redux"
-
-
-
+import { connect, useSelector } from "react-redux";
 
 const MainPage = () => {
-
-  const mainData = useSelector(x => x.setUp)
-
+  const mainData = useSelector(state => state.airconReducer);
   const Drawer = createDrawerNavigator();
 
   return (
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName="1">
-          <Drawer.Screen name="Registration" component={Registration} />
-          {mainData.map((x) => (
-  <Drawer.Screen name={x.roomName} component={ControllerCreater(x)} />
-))}
-        </Drawer.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="1">
+        <Drawer.Screen name="Registration" component={Registration} />
+        {mainData.aircons.map((x) => (
+          <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
+        ))}
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function ControllerCreater(dataSet) {
+function ControllerCreator(dataSet) {
   return () => {
     return <Controller data={dataSet} />;
   };

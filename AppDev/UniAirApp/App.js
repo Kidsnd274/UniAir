@@ -4,15 +4,14 @@ import { StyleSheet, Text, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import MainPage from './screens/MainPage'
-import store from './store/store'
+// import oldStore from './store/store'
+import {store} from './redux/store'
 import {Provider} from 'react-redux';
 
 export default function App() {
-
-
   return (
     <Provider store = {store}>
-    <MainPage/>
+      <MainPage />
     </Provider>
   );
 }
