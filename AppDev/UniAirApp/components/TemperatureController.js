@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
 import { State } from "react-native-gesture-handler";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { changeTemperature, togglePower } from "../redux/actions"
 
 const TemperatureController = (props) => {
@@ -16,8 +16,6 @@ const TemperatureController = (props) => {
 
   const [aircon_power, set_aircon_power] = useState(controllerData.controllerData.aircon_power)
   const [aircon_temp, set_aircon_temp] = useState(controllerData.controllerData.aircon_temp);
-
-  const dispatch = useDispatch();
 
   function Power(status, temp) {
     if (status) {
