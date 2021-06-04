@@ -103,34 +103,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-  // const dispatch = useDispatch();
-
-
-
-  // const fetchAirconData = () => dispatch(getAirconData());
-  // useEffect(() => {
-  //   fetchAirconData();
-  // }, [])
-
-  // const SubmitSettings = () => {
-  //   dispatch({
-  //     type: "SUBMIT_TEMPERATURE",
-  //     payload: {
-  //       id: airConditionerId,
-  //       aircon_power: aircon_power,
-  //       aircon_temp: aircon_temp,
-  //     },
-  //   });
-  // };
-
-  // const SubmitPower = () => {
-  //   dispatch({
-  //     type: "SUBMIT_POWER",
-  //     payload: {
-  //       id: airConditionerId,
-  //       aircon_power: aircon_power,
-  //       aircon_temp: aircon_temp,
-  //     },
-  //   });
-  // };
