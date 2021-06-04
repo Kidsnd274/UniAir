@@ -10,7 +10,7 @@ import EconPowerDualButtons from "../components/EconPowerDualButton";
 
 const Controller = props => {
   const name = () => {
-    return (<Text>{props.data.controllerData.Id}</Text>)
+    return (<Text>{props.data.roomName}</Text>)
   }
   return (
     <View style={styles.container}>
@@ -22,7 +22,7 @@ const Controller = props => {
         />
       </View>
       <View style={styles.controllerContainer}>
-        <TemperatureController data = {props.data}/>
+        <TemperatureController id={props.data.id}/>
         <ControllerInformation />
       </View>
       <View style={styles.tabContainer}>
