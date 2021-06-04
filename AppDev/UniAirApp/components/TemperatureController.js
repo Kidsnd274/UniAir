@@ -39,7 +39,6 @@ const TemperatureController = (props) => {
   }
 
   const decreaseTemperature = () => {
-    debugCall();
     var newValue = aircon_temp - 1;
     set_aircon_temp(newValue);
     changeTemperature(props.id, newValue);
