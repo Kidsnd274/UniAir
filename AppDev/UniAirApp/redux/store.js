@@ -11,6 +11,6 @@ const rootReducer = combineReducers(
     {airconReducer}
 )
 
-const enhancers = [composeWithDevTools, applyMiddleware(thunk)]
+// const enhancers = [composeWithDevTools, applyMiddleware(thunk)]
 
-export const store = createStore(rootReducer, compose(...enhancers));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
