@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -8,10 +8,11 @@ import {
 } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
 import { State } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
-import { changeTemperature, togglePower } from "../redux/actions"
+import { useSelector, useDispatch } from "react-redux";
+import { changeTemperature, fetchAirconData, togglePower } from "../redux/actions"
 
 const TemperatureController = (props) => {
+  const dispatch = useDispatch();
   const controllerData = useSelector(state => state.airconReducer.aircons[props.id])
 
   const [aircon_power, set_aircon_power] = useState(controllerData.controllerData.aircon_power)
@@ -27,19 +28,19 @@ const TemperatureController = (props) => {
   const onPowerChanged = () => {
     var newValue = aircon_power ? false : true;
     set_aircon_power(newValue);
-    togglePower(props.id, newValue);
+    togglePower(props.id, newValue)(dispatch);
   }
 
   const increaseTemperature = () => {
     var newValue = aircon_temp + 1;
     set_aircon_temp(newValue);
-    changeTemperature(props.id, newValue);
+    changeTemperature(props.id, newValue)(dispatch);
   }
 
   const decreaseTemperature = () => {
     var newValue = aircon_temp - 1;
     set_aircon_temp(newValue);
-    changeTemperature(props.id, newValue);
+    changeTemperature(props.id, newValue)(dispatch);
   }
 
   return (
