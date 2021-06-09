@@ -17,6 +17,16 @@ export const togglePower = (airconId, newValue) => (dispatch) => {
   // sendAirconData(airconList[airconId].ipAddress, airconList[airconId].port, airconId, dispatch)
 };
 
+export const updateTab = (airconId, newValue) => (dispatch) => {
+  console.log("Actions/DATE_TAB");
+  dispatch({
+    type: "UPDATE_TAB",
+    payload: {
+      id: airconId,
+      newValue: newValue,
+    },
+  });
+};
 export const changeTemperature = (airconId, newValue) => (dispatch) => {
   console.log("Temperature adjusted");
   dispatch({
@@ -49,7 +59,7 @@ export const fetchAirconData = async (ipAddress, port, airconId, dispatch) => {
       payload: {
         id: airconId,
         newValue: response.data,
-      }
+      },
     });
   } else {
     console.error(

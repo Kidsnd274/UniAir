@@ -5,6 +5,7 @@ const initialState = {
       port: "5000",
       roomName: "Living Room",
       id: "0",
+      aircon_tab: "1",
       controllerData: {
         date_and_time: "",
         aircon_power: false,
@@ -13,7 +14,6 @@ const initialState = {
         aircon_flap: 3,
         aircon_eco_mode: false,
         aircon_powerful_mode: false,
-        aircon_tab: "1"
       },
     },
   ],
@@ -34,8 +34,10 @@ function airconReducer(state = initialState, action) {
         action.payload.newValue;
       return { ...state, aircons: newArray };
     case "UPDATE_AIRCON_DATA":
-      newArray[action.payload.id].controllerData =
-        action.payload.newValue;
+      newArray[action.payload.id].controllerData = action.payload.newValue;
+      return { ...state, aircons: newArray };
+    case "UPDATE_TAB":
+      newArray[action.payload.id].aircon_tab = action.payload.newValue;
       return { ...state, aircons: newArray };
     default:
       return state;

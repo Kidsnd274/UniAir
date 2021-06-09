@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Header } from "react-native-elements";
 import TemperatureController from "../components/TemperatureController";
 import ControllerInformation from "../components/ControllerInformation";
 
-ControllerTop = props => {
+const ControllerTop = props => {
   return (
     <View style = {styles.container}>
     <View style = {styles.TemperatureContainer}>

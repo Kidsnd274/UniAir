@@ -14,7 +14,7 @@ const MainPage = () => {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="1">
+      <Drawer.Navigator initialRouteName="Living Room">
         <Drawer.Screen name="Registration" component={Registration} />
         {mainData.aircons.map((x) => (
           <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
