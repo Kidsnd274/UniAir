@@ -12,6 +12,7 @@ const initialState = {
         aircon_flap: 3,
         aircon_eco_mode: false,
         aircon_powerful_mode: false,
+        aircon_tab: "1"
       },
     },
   ],

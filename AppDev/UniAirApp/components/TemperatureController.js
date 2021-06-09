@@ -16,7 +16,7 @@ const TemperatureController = (props) => {
 
   const [aircon_power, set_aircon_power] = useState(controllerData.controllerData.aircon_power)
   const [aircon_temp, set_aircon_temp] = useState(controllerData.controllerData.aircon_temp);
-
+  
   function Power(status, temp) {
     if (status) {
       return temp;

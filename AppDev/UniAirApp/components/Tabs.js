@@ -46,7 +46,7 @@ const Tabs = () => {
     { element: Scheduler },
     { element: Other },
   ];
-  return <View style = {styles.container}><ButtonGroup buttons={buttons} containerStyle={{ height: 50, width: "90%" }} /></View>
+  return <View style = {styles.container}><ButtonGroup buttons={buttons} containerStyle={{ height: 50, width: "90%" }} flex = {1}/></View>
 
 };
 
