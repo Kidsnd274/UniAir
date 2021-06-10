@@ -10,7 +10,7 @@ const SchedulerController = () => {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
+    setShow(Platform.OS === "default");
     setDate(currentDate);
   };
 

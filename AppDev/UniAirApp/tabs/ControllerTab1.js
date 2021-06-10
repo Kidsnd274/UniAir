@@ -4,12 +4,12 @@ import { Button, ButtonGroup, Header } from "react-native-elements";
 import FanDualButtons from "../components/FanDualButtons";
 import EconPowerDualButtons from "../components/EconPowerDualButton";
 
-const ControllerTab1 = () => {
+const ControllerTab1 = props => {
 
   return (
     <View style={styles.container}>
-    <FanDualButtons></FanDualButtons>
-    <EconPowerDualButtons></EconPowerDualButtons>
+    <FanDualButtons id = {props.id} style = {{flex:1}}></FanDualButtons>
+    <EconPowerDualButtons id = {props.id} style = {{flex:1}}></EconPowerDualButtons>
     </View>
   );
 };

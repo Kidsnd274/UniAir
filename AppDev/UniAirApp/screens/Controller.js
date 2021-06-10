@@ -14,10 +14,11 @@ import ControllerTop from "../tabs/ControllerTop";
 
 const Controller = (props) => {
   const dispatch = useDispatch();
-  const controllerData = useSelector(state => state.airconReducer.aircons[props.data.id])
-  
-  const [aircon_tab, set_aircon_tab] = useState(controllerData.aircon_tab)
-  
+  const controllerData = useSelector(
+    (state) => state.airconReducer.aircons[props.data.id]
+  );
+
+  const [aircon_tab, set_aircon_tab] = useState(controllerData.aircon_tab);
 
   const name = () => {
     return <Text>{props.data.roomName}</Text>;
@@ -49,33 +50,33 @@ const Controller = (props) => {
     setTimeout(() => {
       updateCooldown = false;
     }, cooldownTime);
-
   }
 
   const tabsFunction = () => {
-      console.log("Tabs Function" + controllerData.aircon_tab)
-      switch (controllerData.aircon_tab) {
-        case "1":
-          return <ControllerTab1/>
-        case "2":
-          return <ControllerTab2/>
-        default:
-          return <ControllerTab1/>
-      }
-  }
+    console.log("Tabs Function" + controllerData.aircon_tab);
+    switch (controllerData.aircon_tab) {
+      case "1":
+        return <ControllerTab1 id={props.data.id} />;
+      case "2":
+        return <ControllerTab2 id={props.data.id} />;
+      default:
+        return <ControllerTab1 id={props.data.id} />;
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <Header placement="left" leftComponent={name} width="100%" />
+        <Header placement="left" leftComponent={name} width="100%" flex={1} />
       </View>
       <View style={styles.controllerContainer}>
         <ControllerTop id={props.data.id} />
       </View>
       <View style={styles.tabContainer}>
-        <Tabs id={props.data.id}/>
+        <Tabs id={props.data.id} />
       </View>
       <View style={styles.miscContainer}>
+        {/* <ControllerTab1 id={props.data.id} /> */}
         {tabsFunction()}
       </View>
     </View>

@@ -11,22 +11,22 @@ const ControllerInformation = (props) => {
   const [aircon_eco_mode, setstate_aircon_eco_mode] = useState(controllerData.controllerData.aircon_eco_mode)
   const [aircon_powerful_mode, setstate_aircon_powerful_mode] = useState(controllerData.controllerData.aircon_powerful_mode)
 
-  function Ffanspeed() {
+  function fanSpeed() {
     return aircon_fanspeed;
   }
 
-  function Faircon_flap() {
+  function airconFlap() {
     return aircon_flap;
   }
 
-  function Faircon_eco_mode() {
+  function airconEcoMode() {
     if (aircon_eco_mode){
       return "#8ac926"
     }
     return "#0d1b2a"
   }
 
-  function Faircon_powerful_mode() {
+  function airconPowerfulMode() {
     if (aircon_powerful_mode){
       return "#00b4d8"
     }
@@ -35,10 +35,10 @@ const ControllerInformation = (props) => {
   
   return (
     <View style = {styles.container}>
-      <View style = {styles.subContainer}><Text><Icon name="tailwind" type = 'material-community' />{Ffanspeed()}</Text></View>
-      <View style = {styles.subContainer}><Text><Icon name="fan" type = 'material-community' />{Faircon_flap()}</Text></View>
-      <View style = {styles.subContainer}><Icon name="tree" type = 'entypo' color = {Faircon_eco_mode()} /></View>
-      <View style = {styles.subContainer}><Icon name="snowflake" type = 'material-community' color = {Faircon_powerful_mode()}/></View>
+      <View style = {styles.subContainer}><Text><Icon name="tailwind" type = 'material-community' />{fanSpeed()}</Text></View>
+      <View style = {styles.subContainer}><Text><Icon name="fan" type = 'material-community' />{airconFlap()}</Text></View>
+      <View style = {styles.subContainer}><Icon name="tree" type = 'entypo' color = {airconEcoMode()} /></View>
+      <View style = {styles.subContainer}><Icon name="snowflake" type = 'material-community' color = {airconPowerfulMode()}/></View>
     </View>
   );
 };

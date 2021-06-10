@@ -5,6 +5,39 @@ const axiosInstance = axios.create({
   timeout: 5000,
 });
 
+export const updateFanSpeed = (airconId, newValue) => (dispatch) => {
+  console.log("Actions/updateFanSpeed");
+  dispatch({
+    type: "UPDATE_FAN_SPEED",
+    payload: {
+      id: airconId,
+      newValue: newValue,
+    },
+  });
+};
+
+export const toggleEcoMode = (airconId, newValue) => (dispatch) => {
+  console.log("Actions/togglePowerfulMode");
+  dispatch({
+    type: "TOGGLE_ECO_MODE",
+    payload: {
+      id: airconId,
+      newValue: newValue,
+    },
+  });
+};
+
+export const togglePowerMode= (airconId, newValue) => (dispatch) => {
+  console.log("Actions/toggleEcoMode");
+  dispatch({
+    type: "TOGGLE_POWER_MODE",
+    payload: {
+      id: airconId,
+      newValue: newValue,
+    },
+  });
+};
+
 export const togglePower = (airconId, newValue) => (dispatch) => {
   console.log("Toggle Power");
   dispatch({

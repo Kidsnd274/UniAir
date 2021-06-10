@@ -39,6 +39,16 @@ function airconReducer(state = initialState, action) {
     case "UPDATE_TAB":
       newArray[action.payload.id].aircon_tab = action.payload.newValue;
       return { ...state, aircons: newArray };
+    case "UPDATE_FAN_SPEED":
+      newArray[action.payload.id].controllerData.aircon_fanspeed = action.payload.newValue;
+      return { ...state, aircons: newArray };
+    case "TOGGLE_ECO_MODE":
+      newArray[action.payload.id].controllerData.aircon_eco_mode = action.payload.newValue;
+      return { ...state, aircons: newArray };
+      case "TOGGLE_POWER_MODE":
+        newArray[action.payload.id].controllerData.aircon_powerful_mode = action.payload.newValue;
+        return { ...state, aircons: newArray };
+
     default:
       return state;
   }
