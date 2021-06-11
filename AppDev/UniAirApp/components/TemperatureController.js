@@ -9,39 +9,58 @@ import {
 import { Button, ButtonGroup, Icon } from "react-native-elements";
 import { State } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
-import { changeTemperature, fetchAirconData, togglePower } from "../redux/actions"
+import {
+  changeTemperature,
+  fetchAirconData,
+  togglePower,
+} from "../redux/actions";
 
 const TemperatureController = (props) => {
   const dispatch = useDispatch();
-  const controllerData = useSelector(state => state.airconReducer.aircons[props.id])
+  const controllerData = useSelector(
+    (state) => state.airconReducer.aircons[props.id]
+  );
 
-  const [aircon_power, set_aircon_power] = useState(controllerData.controllerData.aircon_power)
-  const [aircon_temp, set_aircon_temp] = useState(controllerData.controllerData.aircon_temp);
-  
+  const [aircon_power, set_aircon_power] = useState(
+    controllerData.controllerData.aircon_power
+  );
+  const [aircon_temp, set_aircon_temp] = useState(
+    controllerData.controllerData.aircon_temp
+  );
+
   function Power(status, temp) {
     if (status) {
-      return temp;
+      return (
+        <Text style={styles.temperatureText}>
+          {String(aircon_temp)}
+          <Icon name="temperature-celsius" type="material-community" />
+        </Text>
+      );
     }
-    return "-";
+    return (
+      <Text style={styles.temperatureText}>
+        <Icon name="power" type="material-community" size = {60}/>
+      </Text>
+    );
   }
 
   const onPowerChanged = () => {
     var newValue = aircon_power ? false : true;
     set_aircon_power(newValue);
     togglePower(props.id, newValue)(dispatch);
-  }
+  };
 
   const increaseTemperature = () => {
     var newValue = aircon_temp + 1;
     set_aircon_temp(newValue);
     changeTemperature(props.id, newValue)(dispatch);
-  }
+  };
 
   const decreaseTemperature = () => {
     var newValue = aircon_temp - 1;
     set_aircon_temp(newValue);
     changeTemperature(props.id, newValue)(dispatch);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -52,12 +71,9 @@ const TemperatureController = (props) => {
         <Icon name="minus" type="material-community" size={50} />
       </TouchableOpacity>
       <View style={styles.circle}>
-        <TouchableOpacity
-          style={styles.circle}
-          onPress={onPowerChanged}>
+        <TouchableOpacity style={styles.circle} onPress={onPowerChanged}>
           <Text style={styles.temperatureText}>
-            {String(Power(aircon_power, aircon_temp))}
-            <Icon name="temperature-celsius" type="material-community" />
+            {Power(aircon_power, aircon_temp)}
           </Text>
         </TouchableOpacity>
       </View>
@@ -75,14 +91,14 @@ export default TemperatureController;
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
   },
   touchableStyle: {
-    margin: '5%'
+    margin: "5%",
   },
   circle: {
     width: 200,

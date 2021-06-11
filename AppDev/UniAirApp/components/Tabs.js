@@ -16,19 +16,33 @@ const Tabs = (props) => {
     updateTab(props.id, x)(dispatch);
   };
 
+  const selectedTabGroup = (x) => {
+    if (x == aircon_tab) {
+      return "#0077b6"
+    }
+    return "#FFFF"
+  }
+
+  const selectedIconGroup = (x) => {
+    if (x == aircon_tab) {
+      return "#FFFF"
+    }
+    return "#0077b6"
+  }
+
   return (
     <View style={styles.container}>
-      <View style = {styles.subcontainer}>
+      <View style = {[styles.subcontainer, {backgroundColor : selectedTabGroup("1")}]}>
         <TouchableOpacity
           style={styles.touchableStyle}
           onPress={() => changeTab("1")}
         >
           <Text>
-            <Icon name="fan" type="material-community" size={30} />
+            <Icon name="fan" type="material-community" size={30} color = {selectedIconGroup("1")}/>
           </Text>
         </TouchableOpacity>
       </View>
-      <View style = {styles.subcontainer}>
+      <View style = {[styles.subcontainer, {backgroundColor : selectedTabGroup("2")}]}>
         <TouchableOpacity
           style={styles.touchableStyle}
           onPress={() => changeTab("2")}
@@ -38,11 +52,12 @@ const Tabs = (props) => {
               name="clock-time-eight-outline"
               type="material-community"
               size={30}
+              color = {selectedIconGroup("2")}
             />
           </Text>
         </TouchableOpacity>
       </View>
-      <View style = {styles.subcontainer}>
+      <View style = {[styles.subcontainer, {backgroundColor : selectedTabGroup("3")}]}>
         <TouchableOpacity
           style={styles.touchableStyle}
           onPress={() => changeTab("3")}
@@ -52,6 +67,7 @@ const Tabs = (props) => {
               name="weather-partly-lightning"
               type="material-community"
               size={30}
+              color = {selectedIconGroup("3")}
             />
           </Text>
         </TouchableOpacity>
@@ -71,7 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "green"
+    borderColor: "green",
   }
 
   ,touchableStyle: {

@@ -19,14 +19,14 @@ const ControllerInformation = (props) => {
     return aircon_flap;
   }
 
-  function airconEcoMode() {
+  function airconIconEcoMode() {
     if (aircon_eco_mode){
       return "#8ac926"
     }
     return "#0d1b2a"
   }
 
-  function airconPowerfulMode() {
+  function airconIconPowerfulMode() {
     if (aircon_powerful_mode){
       return "#00b4d8"
     }
@@ -37,8 +37,8 @@ const ControllerInformation = (props) => {
     <View style = {styles.container}>
       <View style = {styles.subContainer}><Text><Icon name="tailwind" type = 'material-community' />{fanSpeed()}</Text></View>
       <View style = {styles.subContainer}><Text><Icon name="fan" type = 'material-community' />{airconFlap()}</Text></View>
-      <View style = {styles.subContainer}><Icon name="tree" type = 'entypo' color = {airconEcoMode()} /></View>
-      <View style = {styles.subContainer}><Icon name="snowflake" type = 'material-community' color = {airconPowerfulMode()}/></View>
+      <View style = {styles.subContainer}><Icon name="tree" type = 'entypo' color = {airconIconEcoMode()} /></View>
+      <View style = {styles.subContainer}><Icon name="snowflake" type = 'material-community' color = {airconIconPowerfulMode()}/></View>
     </View>
   );
 };
