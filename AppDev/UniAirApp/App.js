@@ -3,14 +3,31 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import MainPage from './screens/MainPage'
 import {store} from './redux/store'
 import {Provider} from 'react-redux';
+import Controller from "./screens/Controller";
+import Registration from "./screens/Registration";
 
 export default function App() {
+  const mainData = store.getState().airconReducer;
+  const Drawer = createDrawerNavigator();
+
+  function ControllerCreator(dataSet) {
+    return () => {
+      return <Controller data={dataSet} />;
+    };
+  }
+
   return (
     <Provider store = {store}>
-      <MainPage />
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Living Room">
+          <Drawer.Screen name="Registration" component={Registration} />
+            {mainData.aircons.map((x) => (
+              <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
+            ))}
+        </Drawer.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }

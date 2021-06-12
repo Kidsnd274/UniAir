@@ -7,10 +7,15 @@ import StartUp from "./StartUp";
 import Controller from "./Controller";
 import Registration from "./Registration";
 import { useSelector } from "react-redux";
+import { updateAirconData } from "../redux/actions";
 
 const MainPage = () => {
   const mainData = useSelector(state => state.airconReducer);
   const Drawer = createDrawerNavigator();
+
+  useEffect(() => {
+    updateAirconData(0);
+  })
 
   return (
     <NavigationContainer>
@@ -33,6 +38,7 @@ const styles = StyleSheet.create({
 });
 
 function ControllerCreator(dataSet) {
+  console.log("LOG: Controller created at screens/MainPage")
   return () => {
     return <Controller data={dataSet} />;
   };

@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toggleEcoMode, togglePowerMode } from "../redux/actions"
 
 const EconPowerDualButtons = props => {
-  const dispatch = useDispatch();
   const controllerData = useSelector(
     (state) => state.airconReducer.aircons[props.id]
   );
@@ -19,13 +18,13 @@ const EconPowerDualButtons = props => {
   const onEcoChanged = () => {
     var newValue = aircon_eco_mode ? false : true;
     set_aircon_eco_mode(newValue);
-    toggleEcoMode(props.id, newValue)(dispatch);
+    toggleEcoMode(props.id, newValue);
   }
 
   const onPowerModeChanged = () => {
     var newValue = aircon_powerful_mode ? false : true;
     set_aircon_powerful_mode(newValue);
-    togglePowerMode(props.id, newValue)(dispatch);
+    togglePowerMode(props.id, newValue);
   }
 
   return (

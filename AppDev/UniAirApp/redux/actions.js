@@ -1,150 +1,97 @@
-import axios from "axios";
-// import { getAirconData } from './api'
+import { fetchAirconData, sendAirconData } from './api'
+import { store } from './store'
 
-const axiosInstance = axios.create({
-  timeout: 5000,
-});
-
-export const updateFanSpeed = (airconId, newValue) => (dispatch) => {
-  console.log("Actions/updateFanSpeed");
-  dispatch({
-    type: "UPDATE_FAN_SPEED",
-    payload: {
-      id: airconId,
-      newValue: newValue,
-    },
-  });
-};
-
-export const toggleEcoMode = (airconId, newValue) => (dispatch) => {
-  console.log("Actions/togglePowerfulMode");
-  dispatch({
-    type: "TOGGLE_ECO_MODE",
-    payload: {
-      id: airconId,
-      newValue: newValue,
-    },
-  });
-};
-
-export const togglePowerMode= (airconId, newValue) => (dispatch) => {
-  console.log("Actions/toggleEcoMode");
-  dispatch({
-    type: "TOGGLE_POWER_MODE",
-    payload: {
-      id: airconId,
-      newValue: newValue,
-    },
-  });
-};
-
-export const togglePower = (airconId, newValue) => (dispatch) => {
-  console.log("Toggle Power");
-  dispatch({
-    type: "TOGGLE_POWER",
-    payload: {
-      id: airconId,
-      newValue: newValue,
-    },
-  });
-  // sendAirconData(airconList[airconId].ipAddress, airconList[airconId].port, airconId, dispatch)
-};
-
-export const updateTab = (airconId, newValue) => (dispatch) => {
-  console.log("Actions/DATE_TAB");
-  dispatch({
-    type: "UPDATE_TAB",
-    payload: {
-      id: airconId,
-      newValue: newValue,
-    },
-  });
-};
-export const changeTemperature = (airconId, newValue) => (dispatch) => {
-  console.log("Temperature adjusted");
-  dispatch({
-    type: "CHANGE_TEMP",
-    payload: {
-      id: airconId,
-      newValue: newValue,
-    },
-  });
-  // sendAirconData(airconList[airconId].ipAddress, airconList[airconId].port, airconId, dispatch)
-};
-
-// Doesn't work
-// export const dispatchAirconData = (dispatch, payload) => {
-//   dispatch({
-//     type: "UPDATE_AIRCON_DATA",
-//     newValue: payload,
-//   });
-// };
-
-export const fetchAirconData = async (ipAddress, port, airconId, dispatch) => {
-  console.log("fetchAirconData called");
-  const response = await axiosInstance
-    .get("http://" + ipAddress + ":" + port + "/api/aircon_data")
-    .catch((error) => console.error("Error:", error));
-  if (response.data != "unexpected end of stream") {
-    console.log("Dispatching... GET_AIRCON_DATA");
+// TemperatureController Functions
+export const togglePower = (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch, getState) => {
+    console.log("LOG: togglePower from redux/actions + newValue " + newValue);
     dispatch({
-      type: "UPDATE_AIRCON_DATA",
+      type: "TOGGLE_POWER",
       payload: {
         id: airconId,
-        newValue: response.data,
+        newValue: newValue,
       },
     });
-  } else {
-    console.error(
-      "ERROR: Something happened when fetching aircon data\nresponse.data = " +
-        response.data
-    );
   }
+  store.dispatch(thunkFunction(airconId, newValue));
+  store.dispatch(sendAirconData(airconId)); // Send update to the server
 };
 
-// Trying to access the store from './api' and trying to chuck api calls there (not working tho)
-// export const fetchAirconData = airconId => {
-//     return async (dispatch) => {
-//         const response = await getAirconData(airconId).get()
-//             .catch(error => console.error("Error:", error));
-//         if (response.data != "unexpected end of stream") {
-//             console.log("Dispatching... GET_AIRCON_DATA")
-//             // dispatchAirconData(dispatch, response.data)
-//             dispatch({
-//                 type: 'UPDATE_AIRCON_DATA',
-//                 newValue: response.data,
-//             })
-//         } else {
-//             console.error("ERROR: Something happened when fetching aircon data\nresponse.data = " + response.data);
-//         }
-//     }
-// }
-
-// Not working also
-export const sendAirconData = async (ipAddress, port, airconId, dispatch) => {
-  console.log("sendAirconData called");
-  // var airconData = airconList[airconId].controllerData
-  const options = {
-    method: "post",
-    url: "http://" + ipAddress + ":" + port + "/api/aircon_data",
-    // data: airconData,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  const response = axiosInstance(options).catch((error) =>
-    console.error("Error:", error)
-  );
-  if (response.data != "unexpected end of stream") {
-    console.log("Dispatching... GET_AIRCON_DATA");
+export const changeTemperature = (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch) => {
+    console.log("LOG: changeTemperature from redux/actions + newValue " + newValue);
     dispatch({
-      type: "UPDATE_AIRCON_DATA",
-      newValue: response.data,
+      type: "CHANGE_TEMP",
+      payload: {
+        id: airconId,
+        newValue: newValue,
+      },
     });
-  } else {
-    console.error(
-      "ERROR: Something happened when fetching aircon data\nresponse.data = " +
-        response.data
-    );
   }
+  store.dispatch(thunkFunction(airconId, newValue));
+  store.dispatch(sendAirconData(airconId));
 };
+
+
+export const updateFanSpeed = (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch) => {
+    console.log("LOG: updateFanSpeed from redux/actions + newValue " + newValue);
+    dispatch({
+      type: "UPDATE_FAN_SPEED",
+      payload: {
+        id: airconId,
+        newValue: newValue,
+      },
+    });
+  }
+  store.dispatch(thunkFunction(airconId, newValue));
+  // store.dispatch(sendAirconData(airconId)) // Send updates to server
+};
+
+export const toggleEcoMode = (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch) => {
+    console.log("LOG: toggleEcoMode from redux/actions + newValue " + newValue);
+    dispatch({
+      type: "TOGGLE_ECO_MODE",
+      payload: {
+        id: airconId,
+        newValue: newValue,
+      },
+    });
+  }
+  store.dispatch(thunkFunction(airconId, newValue));
+  // store.dispatch(sendAirconData(airconId))
+};
+
+export const togglePowerMode= (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch) => {
+    console.log("LOG: togglePowerMode from redux/actions + newValue " + newValue);
+    dispatch({
+      type: "TOGGLE_POWER_MODE",
+      payload: {
+        id: airconId,
+        newValue: newValue,
+      },
+    });
+  }
+  store.dispatch(thunkFunction(airconId, newValue))
+};
+
+export const updateTab = (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch) => {
+    console.log("LOG: updateTab from redux/actions + newValue " + newValue);
+    dispatch({
+      type: "UPDATE_TAB",
+      payload: {
+        id: airconId,
+        newValue: newValue,
+      },
+    });
+  }
+  store.dispatch(thunkFunction(airconId, newValue));
+};
+
+// API functions
+export const updateAirconData = (airconId) => {
+  return store.dispatch(fetchAirconData(airconId));
+}

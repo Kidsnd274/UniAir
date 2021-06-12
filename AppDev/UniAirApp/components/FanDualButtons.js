@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { updateFanSpeed } from "../redux/actions";
 
 const FanDualButtons = (props) => {
-  const dispatch = useDispatch();
   const controllerData = useSelector(
     (state) => state.airconReducer.aircons[props.id]
   );
@@ -16,13 +15,13 @@ const FanDualButtons = (props) => {
   const increaseFanSpeed = () => {
     var newValue = aircon_fanspeed + 1;
     set_aircon_fanspeed(newValue);
-    updateFanSpeed(props.id, newValue)(dispatch);
+    updateFanSpeed(props.id, newValue);
   };
 
   const decreaseFanSpeed = () => {
     var newValue = aircon_fanspeed - 1;
     set_aircon_fanspeed(newValue);
-    updateFanSpeed(props.id, newValue)(dispatch);
+    updateFanSpeed(props.id, newValue);
   };
 
   return (

@@ -6,14 +6,13 @@ import TemperatureController from "../components/TemperatureController";
 import ControllerInformation from "../components/ControllerInformation";
 import Tabs from "../components/Tabs";
 import EconPowerDualButtons from "../components/EconPowerDualButton";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { fetchAirconData } from "../redux/actions";
 import ControllerTab2 from "../tabs/ControllerTab2";
 import ControllerTab1 from "../tabs/ControllerTab1";
 import ControllerTop from "../tabs/ControllerTop";
 
 const Controller = (props) => {
-  const dispatch = useDispatch();
   const controllerData = useSelector(
     (state) => state.airconReducer.aircons[props.data.id]
   );
@@ -23,34 +22,6 @@ const Controller = (props) => {
   const name = () => {
     return <Text>{props.data.roomName}</Text>;
   };
-
-  // Logic to prevent app from constantly request to server
-  let updateCooldown = false;
-
-  // Update from server after every update
-  // useEffect(() => {
-  //   console.log("updateCooldown = ", updateCooldown)
-  //   if (updateCooldown == false) {
-  //     timeoutCooldown(5000);
-  //     console.log("running fetch")
-  //     fetchAirconData(
-  //       props.data.ipAddress,
-  //       props.data.port,
-  //       props.data.id,
-  //       dispatch
-  //     );
-  //   } else {
-  //     console.log("Cooldown still running!!")
-  //   }
-  //   // fetchAirconData(props.data.id)(dispatch) // For the new function, but doesn't work
-  // });
-
-  function timeoutCooldown(cooldownTime) {
-    updateCooldown = true;
-    setTimeout(() => {
-      updateCooldown = false;
-    }, cooldownTime);
-  }
 
   const tabsFunction = () => {
     console.log("Tabs Function" + controllerData.aircon_tab);
