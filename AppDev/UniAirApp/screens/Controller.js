@@ -17,15 +17,19 @@ const Controller = (props) => {
     (state) => state.airconReducer.aircons[props.data.id]
   );
 
-  const [aircon_tab, set_aircon_tab] = useState(controllerData.aircon_tab);
+  const aircon_tab = useSelector(
+    (state) => state.airconReducer.aircons[props.data.id].aircon_tab
+  );
+
+  // const [aircon_tab, set_aircon_tab] = useState(controllerData.aircon_tab);
 
   const name = () => {
     return <Text>{props.data.roomName}</Text>;
   };
 
   const tabsFunction = () => {
-    console.log("Tabs Function" + controllerData.aircon_tab);
-    switch (controllerData.aircon_tab) {
+    console.log("Tabs Function" + aircon_tab);
+    switch (aircon_tab) {
       case "1":
         return <ControllerTab1 id={props.data.id} />;
       case "2":

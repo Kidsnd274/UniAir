@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { updateTab } from "../redux/actions";
 
 const Tabs = (props) => {
-  const dispatch = useDispatch();
   const controllerData = useSelector(
     (state) => state.airconReducer.aircons[props.id]
   );
-  const [aircon_tab, set_aircon_tab] = useState(controllerData.aircon_tab);
+  // const [aircon_tab, set_aircon_tab] = useState(controllerData.aircon_tab);
+  const aircon_tab = useSelector(
+    (state) => state.airconReducer.aircons[props.id].aircon_tab
+  );
 
   const changeTab = (x) => {
     console.log("Change Tab: Component/Tab");
-    updateTab(props.id, x)(dispatch);
+    updateTab(props.id, x);
   };
 
   const selectedTabGroup = (x) => {

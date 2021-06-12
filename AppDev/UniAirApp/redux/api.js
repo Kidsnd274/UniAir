@@ -30,7 +30,6 @@ export const fetchAirconData = airconId => async (dispatch, getState) => {
             response.data
         );
     }
-    
 };
 
 export const sendAirconData = airconId => async (dispatch, getState) => {

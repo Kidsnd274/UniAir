@@ -19,18 +19,14 @@ const TemperatureController = (props) => {
     (state) => state.airconReducer.aircons[props.id]
   );
 
-  const [aircon_power, set_aircon_power] = useState(
-    controllerData.controllerData.aircon_power
+  const aircon_power = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerData.aircon_power
   );
+
   const [aircon_temp, set_aircon_temp] = useState(
     controllerData.controllerData.aircon_temp
   );
 
-  // A possible way to fix the current non-updating issue
-  const updateLabels = () => {
-    set_aircon_power(controllerData.controllerData.aircon_power)
-    set_aircon_temp(controllerData.controllerData.aircon_temp)
-  }
 
   function Power(status, temp) {
     if (status) {
@@ -50,23 +46,17 @@ const TemperatureController = (props) => {
 
   const onPowerChanged = () => {
     var newValue = aircon_power ? false : true;
-    // set_aircon_power(newValue);
     togglePower(props.id, newValue);
-    updateLabels();
   };
 
   const increaseTemperature = () => {
     var newValue = aircon_temp + 1;
-    // set_aircon_temp(newValue);
     changeTemperature(props.id, newValue);
-    updateLabels(); //can update labels after dispatching
   };
 
   const decreaseTemperature = () => {
     var newValue = aircon_temp - 1;
-    // set_aircon_temp(newValue);
     changeTemperature(props.id, newValue);
-    updateLabels();
   };
 
   return (
