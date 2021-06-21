@@ -1,27 +1,51 @@
 import React, { useState } from "react";
+import { Alert } from "react-native";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
+import { max } from "react-native-reanimated";
 import { useSelector } from "react-redux";
 import { updateFanSpeed } from "../redux/actions";
 
 const FanDualButtons = (props) => {
-  const controllerData = useSelector(
-    (state) => state.airconReducer.aircons[props.id]
+
+  const aircon_fanspeed = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerData.aircon_fanspeed
   );
-  const [aircon_fanspeed, set_aircon_fanspeed] = useState(
-    controllerData.controllerData.aircon_fanspeed
+  
+  const max_aircon_fanspeed = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerConfig.max_aircon_fanspeed
   );
 
+  const min_aircon_fanspeed = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerConfig.min_aircon_fanspeed
+  );
+
+
   const increaseFanSpeed = () => {
+    
     var newValue = aircon_fanspeed + 1;
-    set_aircon_fanspeed(newValue);
-    updateFanSpeed(props.id, newValue);
+
+    if (newValue > max_aircon_fanspeed) {
+      console.log(max_aircon_fanspeed)
+      console.log("LOG: Error, Invalid Value")
+      Alert.alert("Invalid Value", "Max FanSpeed")
+    }
+    else{
+      updateFanSpeed(props.id, newValue);
+    }
+
   };
 
   const decreaseFanSpeed = () => {
     var newValue = aircon_fanspeed - 1;
-    set_aircon_fanspeed(newValue);
-    updateFanSpeed(props.id, newValue);
+    
+    if (newValue < min_aircon_fanspeed) {
+      console.log("LOG: Error, Invalid Value")
+      Alert.alert("Invalid Value", "Min FanSpeed")
+    }
+    else{
+      updateFanSpeed(props.id, newValue);
+    }
   };
 
   return (

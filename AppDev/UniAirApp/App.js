@@ -7,6 +7,7 @@ import {store} from './redux/store'
 import {Provider} from 'react-redux';
 import Controller from "./screens/Controller";
 import Registration from "./screens/Registration";
+import ControllerSelector from "./screens/ControllerSelector";
 
 export default function App() {
   const mainData = store.getState().airconReducer;
@@ -19,16 +20,17 @@ export default function App() {
   }
 
   return (
-    <Provider store = {store}>
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Living Room">
-          <Drawer.Screen name="Registration" component={Registration} />
-            {mainData.aircons.map((x) => (
-              <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
-            ))}
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </Provider>
+    // <Provider store = {store}>
+    //   <NavigationContainer>
+    //     <Drawer.Navigator initialRouteName="Living Room">
+    //       <Drawer.Screen name="Registration" component={Registration} />
+    //         {mainData.aircons.map((x) => (
+    //           <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
+    //         ))}
+    //     </Drawer.Navigator>
+    //   </NavigationContainer>
+    // </Provider>
+    <ControllerSelector></ControllerSelector>
   );
 }
 

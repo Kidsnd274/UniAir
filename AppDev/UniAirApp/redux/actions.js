@@ -63,6 +63,23 @@ export const toggleEcoMode = (airconId, newValue) => {
   // store.dispatch(sendAirconData(airconId))
 };
 
+
+export const updateFlap= (airconId, newValue) => {
+  const thunkFunction = (airconId, newValue) => (dispatch) => {
+    console.log("LOG: updateFanSpeed from redux/actions + newValue " + newValue);
+    dispatch({
+      type: "UPDATE_FAN_FLAP",
+      payload: {
+        id: airconId,
+        newValue: newValue,
+      },
+    });
+  }
+  store.dispatch(thunkFunction(airconId, newValue));
+  // store.dispatch(sendAirconData(airconId)) // Send updates to server
+};
+
+
 export const togglePowerMode= (airconId, newValue) => {
   const thunkFunction = (airconId, newValue) => (dispatch) => {
     console.log("LOG: togglePowerMode from redux/actions + newValue " + newValue);

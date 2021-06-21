@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
 import { State } from "react-native-gesture-handler";
@@ -15,17 +16,24 @@ import {
 } from "../redux/actions";
 
 const TemperatureController = (props) => {
-  const controllerData = useSelector(
-    (state) => state.airconReducer.aircons[props.id]
-  );
+
 
   const aircon_power = useSelector(
     (state) => state.airconReducer.aircons[props.id].controllerData.aircon_power
   );
 
-  const [aircon_temp, set_aircon_temp] = useState(
-    controllerData.controllerData.aircon_temp
+  const aircon_temp = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerData.aircon_temp
   );
+
+  const max_aircon_temp = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerConfig.max_aircon_temp
+  );
+
+  const min_aircon_temp = useSelector(
+    (state) => state.airconReducer.aircons[props.id].controllerConfig.min_aircon_temp
+  );
+
 
 
   function Power(status, temp) {
@@ -51,12 +59,25 @@ const TemperatureController = (props) => {
 
   const increaseTemperature = () => {
     var newValue = aircon_temp + 1;
-    changeTemperature(props.id, newValue);
+
+    if (newValue > max_aircon_temp) {
+      console.log("LOG: Error, Invalid Value")
+      Alert.alert("Invalid Value", "Max Temp")
+    }
+    else{
+      changeTemperature(props.id, newValue);
+    }
   };
 
   const decreaseTemperature = () => {
     var newValue = aircon_temp - 1;
-    changeTemperature(props.id, newValue);
+    if (newValue < min_aircon_temp) {
+      console.log("LOG: Error, Invalid Value")
+      Alert.alert("Invalid Value", "Max Temp")
+    }
+    else{
+      changeTemperature(props.id, newValue);
+    }
   };
 
   return (

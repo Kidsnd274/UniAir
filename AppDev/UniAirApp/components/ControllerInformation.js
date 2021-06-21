@@ -4,12 +4,16 @@ import { Button, ButtonGroup, Icon, Tab } from "react-native-elements";
 import { useSelector } from "react-redux";
 
 const ControllerInformation = (props) => {
-  const controllerData = useSelector(state => state.airconReducer.aircons[props.id])
+  //const controllerData = useSelector(state => state.airconReducer.aircons[props.id])
 
-  const [aircon_fanspeed, setstate_aircon_fanspeed] = useState(controllerData.controllerData.aircon_fanspeed)
-  const [aircon_flap, setstate_aircon_flap] = useState(controllerData.controllerData.aircon_flap)
-  const [aircon_eco_mode, setstate_aircon_eco_mode] = useState(controllerData.controllerData.aircon_eco_mode)
-  const [aircon_powerful_mode, setstate_aircon_powerful_mode] = useState(controllerData.controllerData.aircon_powerful_mode)
+  const aircon_fanspeed = useSelector(state => state.airconReducer.aircons[props.id].controllerData.aircon_fanspeed)
+  const aircon_flap = useSelector(state => state.airconReducer.aircons[props.id].controllerData.aircon_flap)
+  const aircon_eco_mode = useSelector(state => state.airconReducer.aircons[props.id].controllerData.aircon_eco_mode)
+  const aircon_powerful_mode = useSelector(state => state.airconReducer.aircons[props.id].controllerData.aircon_powerful_mode)
+  // const [aircon_fanspeed, setstate_aircon_fanspeed] = useState(controllerData.controllerData.aircon_fanspeed)
+  // const [aircon_flap, setstate_aircon_flap] = useState(controllerData.controllerData.aircon_flap)
+  // const [aircon_eco_mode, setstate_aircon_eco_mode] = useState(controllerData.controllerData.aircon_eco_mode)
+  // const [aircon_powerful_mode, setstate_aircon_powerful_mode] = useState(controllerData.controllerData.aircon_powerful_mode)
 
   function fanSpeed() {
     return aircon_fanspeed;

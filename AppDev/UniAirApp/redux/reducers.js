@@ -6,6 +6,7 @@ const initialState = {
       roomName: "Living Room",
       id: "0",
       aircon_tab: "1",
+      aircon_model: "1",
       controllerData: {
         date_and_time: "",
         aircon_power: false,
@@ -14,6 +15,14 @@ const initialState = {
         aircon_flap: 3,
         aircon_eco_mode: false,
         aircon_powerful_mode: false,
+      },
+      controllerConfig: {
+        max_aircon_temp: 30,
+        min_aircon_temp: 20,
+        max_aircon_fanspeed: 4,
+        min_aircon_fanspeed: 0,
+        max_aircon_flap: 4,
+        min_aircon_flap: 0,
       },
     },
   ],
@@ -40,15 +49,21 @@ function airconReducer(state = initialState, action) {
       newArray[action.payload.id].aircon_tab = action.payload.newValue;
       return { ...state, aircons: newArray };
     case "UPDATE_FAN_SPEED":
-      newArray[action.payload.id].controllerData.aircon_fanspeed = action.payload.newValue;
+      newArray[action.payload.id].controllerData.aircon_fanspeed =
+        action.payload.newValue;
       return { ...state, aircons: newArray };
     case "TOGGLE_ECO_MODE":
-      newArray[action.payload.id].controllerData.aircon_eco_mode = action.payload.newValue;
+      newArray[action.payload.id].controllerData.aircon_eco_mode =
+        action.payload.newValue;
       return { ...state, aircons: newArray };
-      case "TOGGLE_POWER_MODE":
-        newArray[action.payload.id].controllerData.aircon_powerful_mode = action.payload.newValue;
-        return { ...state, aircons: newArray };
-
+    case "TOGGLE_POWER_MODE":
+      newArray[action.payload.id].controllerData.aircon_powerful_mode =
+        action.payload.newValue;
+      return { ...state, aircons: newArray };
+    case "UPDATE_FAN_FLAP":
+      newArray[action.payload.id].controllerData.aircon_flap =
+        action.payload.newValue;
+      return { ...state, aircons: newArray };
     default:
       return state;
   }
