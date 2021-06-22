@@ -10,49 +10,35 @@ import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-const listOfAc = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "7",
-  "2",
-  "3",
-  "4",
-  "7",
-  "2",
-  "3",
-  "4",
-  "7",
-  "2",
-  "3",
-  "4",
-  "7",
-];
+
+const listOfAc = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 const ControllerSelector = () => {
+  // const Stack = createStackNavigator();
+
   return (
     <View style={styles.container}>
       <Header
         centerComponent={<Text>Controller</Text>}
         leftComponent={<Icon name="tailwind" type="material-community" />}
       />
-      <ScrollView style={styles.scrollview} contentContainerStyle = {styles.childScrollView}>
+      <ScrollView
+        style={styles.scrollview}
+        contentContainerStyle={styles.childScrollView}
+      >
         {listOfAc.map((x) => Selector(x))}
       </ScrollView>
     </View>
   );
 };
 
-const Selector = (ac) => {
-  return (
-    <TouchableOpacity style={styles.selector}>
-      <Text>{ac}</Text>
-      <View style={styles.selectorDisplay}>
-        <Icon type="material-community" name="tailwind"></Icon>
-      </View>
-    </TouchableOpacity>
-  );
+const Selector = (info) => {
+  return (<TouchableOpacity style={styles.selector}>
+    <Text>{info}</Text>
+    <View style={styles.selectorDisplay}>
+      <Icon type="material-community" name="tailwind"></Icon>
+    </View>
+  </TouchableOpacity>)
 };
 
 const SelectorInformation = (info) => {
