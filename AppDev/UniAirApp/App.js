@@ -7,6 +7,7 @@ import {store} from './redux/store'
 import {Provider} from 'react-redux';
 import Controller from "./screens/Controller";
 import Registration from "./screens/Registration";
+import ControllerSelectorMain from "./screens/ControllerSelectorMain";
 import ControllerSelector from "./screens/ControllerSelector";
 
 export default function App() {

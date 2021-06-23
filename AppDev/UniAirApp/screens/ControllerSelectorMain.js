@@ -9,24 +9,44 @@ import {
 import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import ControllerSelectorMain from "./ControllerSelectorMain";
 
 
 const listOfAc = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
-const ControllerSelector = () => {
-  const Stack = createStackNavigator();
+const ControllerSelectorMain = () => {
+  // const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName = "main">
-        <Stack.Screen name = "main" component = {ControllerSelectorMain}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <Header
+        centerComponent={<Text>Controller</Text>}
+        leftComponent={<Icon name="tailwind" type="material-community" />}
+      />
+      <ScrollView
+        style={styles.scrollview}
+        contentContainerStyle={styles.childScrollView}
+      >
+        {listOfAc.map((x) => Selector(x))}
+      </ScrollView>
+    </View>
   );
 };
 
+const Selector = (info) => {
+  return (<TouchableOpacity style={styles.selector}>
+    <Text>{info}</Text>
+    <View style={styles.selectorDisplay}>
+      <Icon type="material-community" name="tailwind"></Icon>
+    </View>
+  </TouchableOpacity>)
+};
 
+const SelectorInformation = (info) => {
+  <View>
+    <Icon></Icon>
+    <Text>{info}</Text>
+  </View>;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -65,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ControllerSelector;
+export default ControllerSelectorMain;
