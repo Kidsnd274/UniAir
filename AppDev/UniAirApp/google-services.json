@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "302102177397",
+    "project_id": "uniairserver",
+    "storage_bucket": "uniairserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302102177397:android:4d561dbd6863316bbb7a3c",
+        "android_client_info": {
+          "package_name": "com.airconboys.uniair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302102177397-os70g1g892k0b7dk9vcnmtorpu0p8t0a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.airconboys.uniair",
+            "certificate_hash": "e875c0f194a5bb5186d61081f3c7174ebe035ba2"
+          }
+        },
+        {
+          "client_id": "302102177397-g8oj89d4kjjb1r3bkc1bg8824be6cqng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGjohaCdU794FncXqmJU83nCfFVwh3dHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302102177397-g8oj89d4kjjb1r3bkc1bg8824be6cqng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
