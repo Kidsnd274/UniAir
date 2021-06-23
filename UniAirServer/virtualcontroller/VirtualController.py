@@ -23,14 +23,28 @@ class VirtualController():
         return self.controllerData.exportJson()
 
     def update_aircon_data(self, jsonData):
-        self.controllerData.updateControllerData(jsonData)
+        controllerDataTemp = {
+            "aircon_power": jsonData['aircon_power'],
+            "aircon_temp": jsonData['aircon_temp'],
+            "aircon_fanspeed": jsonData['aircon_fanspeed'],
+            "aircon_flap": jsonData['aircon_flap'],
+            "aircon_eco_mode": jsonData['aircon_eco_mode'],
+            "aircon_powerful_mode": jsonData['aircon_powerful_mode'],
+        }
+        if self.controllerData.checkNotEqual(ControllerData(controllerDataTemp)):
+            self.controllerData.updateControllerData(jsonData)
+            print("LOG: Aircon Data changes made, sending IR...")
+            self.send_updated_data_ir()
 
     def send_once(self, controller, command):
         self.client.send_once(controller, command)
 
     def send_updated_data_ir(self):
-        # ON_FANSPEED_VANE_MODE_TEMP
-        command = "ON_" + self.controllerData.aircon_fanspeed + "_" + self.controllerData.aircon_flap + "_COOL_" + self.controllerData.aircon_temp
+        if self.controllerData.aircon_powerful_mode:
+            command = "ON_POWERFUL"
+        else:
+            # ON_FANSPEED_VANE_MODE_TEMP
+            command = "ON_" + str(self.controllerData.aircon_fanspeed) + "_" + str(self.controllerData.aircon_flap) + "_COOL_" + str(self.controllerData.aircon_temp)
         self.client.send_once(self.controllerName, command)
 
     def test_ir(self):
