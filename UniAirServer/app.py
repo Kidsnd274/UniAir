@@ -1,9 +1,19 @@
 from flask import Flask, render_template, url_for, request, abort
-from virtualcontroller import VirtualController
+from virtualcontroller.VirtualController import VirtualController
 from datetime import datetime
 
 app = Flask(__name__)
-virtual_controller = VirtualController()
+
+controllerData = {
+    "controllerName": "mitsubishi_kh18a",
+    "aircon_power": False,
+    "aircon_temp": 100,
+    "aircon_fanspeed": 2,
+    "aircon_flap": 3,
+    "aircon_eco_mode": False,
+    "aircon_powerful_mode": False,
+}
+virtual_controller = VirtualController(controllerData)
 
 @app.route('/')
 def index():
@@ -15,10 +25,14 @@ def test_ir():
     return render_template('index.html')
 
 # API Calls
-@app.route('/api/toggle-power')
+@app.route('/api/toggle_power')
 def toggle_power():
     virtual_controller.toggle_power()
-    return app.response_class(status = 200)
+    response = app.response_class(
+        response = virtual_controller.get_aircon_data(),
+        mimetype = 'application/json'
+    )
+    return response
 
 @app.route('/api/aircon_data', methods=["GET", "POST"])
 def get_aircon_data():
@@ -27,6 +41,7 @@ def get_aircon_data():
             abort(400)
         else:
             virtual_controller.update_aircon_data(request.json)
+            virtual_controller.send_updated_data_ir()
     response = app.response_class(
         response = virtual_controller.get_aircon_data(),
         mimetype = 'application/json'

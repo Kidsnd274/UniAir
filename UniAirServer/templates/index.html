@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
+{% block title %}
+UniAir Server Test Page
 {% endblock %}
 
-{% block body %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
 <h1>UniAir Server Development</h1>
 <form action="/test-ir" method="post">
-    <button type="submit">Test IR</button>
+    <button class="btn btn-outline btn-info" type="submit">Test IR</button>
 </form>
 
 {% endblock %}

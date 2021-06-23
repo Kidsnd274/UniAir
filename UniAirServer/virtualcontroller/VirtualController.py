@@ -1,0 +1,66 @@
+import socket
+import lirc
+import json
+from datetime import datetime
+from virtualcontroller.ControllerData import ControllerData
+
+class VirtualController():
+    """Main virtual controller handling IR commands with LIRC and web server"""
+
+    def __init__(self, initDict):
+        self.controllerName = initDict['controllerName']
+        self.controllerData = ControllerData(initDict)
+
+        self.client = lirc.Client(
+            connection = lirc.LircdConnection(
+                address = "/var/run/lirc/lircd-tx", # Use /var/run/lirc/lircd for default lirc installations
+                socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM),
+                timeout = 5.0
+            )
+        )
+
+    def get_aircon_data(self):
+        return self.controllerData.exportJson()
+
+    def update_aircon_data(self, jsonData):
+        self.controllerData.updateControllerData(jsonData)
+
+    def send_once(self, controller, command):
+        self.client.send_once(controller, command)
+
+    def send_updated_data_ir(self):
+        # ON_FANSPEED_VANE_MODE_TEMP
+        command = "ON_" + self.controllerData.aircon_fanspeed + "_" + self.controllerData.aircon_flap + "_COOL_" + self.controllerData.aircon_temp
+        self.client.send_once(self.controllerName, command)
+
+    def test_ir(self):
+        self.client.send_once("mitsubishi_kh18a", "SWITCH_OFF")
+        print("DEBUG: Sent IR Test, SWITCH_OFF from mitsubishi_kh18a")
+
+    def toggle_power(self):
+        if self.controllerData.aircon_power == False:
+            self.client.send_once(self.controllerName, "SWITCH_ON")
+            print("DEBUG: Sent IR Test, SWITCH_ON from mitsubishi_kh18a")
+            self.controllerData.aircon_power = True
+        elif self.controllerData.aircon_power == True:
+            self.client.send_once(self.controllerName, "SWITCH_OFF")
+            print("DEBUG: Sent IR Test, SWITCH_OFF from mitsubishi_kh18a")
+            self.controllerData.aircon_power = False
+        else:
+            pass
+
+if __name__ == "__main__":
+    print("Please run main webserver app.py!")
+    print("DEBUG: Runnnig IR test...")
+    controllerData = {
+        "controller": "mitsubishi_kh18a",
+        "aircon_power": False,
+        "aircon_temp": 100,
+        "aircon_fanspeed": 2,
+        "aircon_flap": 3,
+        "aircon_eco_mode": False,
+        "aircon_powerful_mode": False,
+    }
+    TestController = VirtualController(controllerData)
+    TestController.send_once("mitsubishi_kh18a", "SWITCH_OFF")
+    print("DEBUG: Sent IR Test, sent SWITCH_OFF from mitsubishi_kh18a")
