@@ -4,7 +4,7 @@ const initialState = {
       ipAddress: "192.168.1.83",
       port: "5000",
       roomName: "Living Room",
-      id: "0",
+      id: 0,
       aircon_tab: "1",
       aircon_model: "1",
       controllerData: {
@@ -29,7 +29,7 @@ const initialState = {
       ipAddress: "192.168.1.81",
       port: "5001",
       roomName: "Toliet",
-      id: "1",
+      id: 1,
       aircon_tab: "1",
       aircon_model: "1",
       controllerData: {
@@ -89,8 +89,15 @@ function airconReducer(state = initialState, action) {
       newArray[action.payload.id].controllerData.aircon_flap =
         action.payload.newValue;
       return { ...state, aircons: newArray };
-    //case "ADD_CONTROLLER":
-
+    case "ADD_CONTROLLER":
+      newArray.push(action.payload);
+      return { ...state, aircons: newArray };
+    case "REMOVE_CONTROLLER":
+      for (let index = action.airconId + 1; index < newArray.length; index++) {
+        newArray[index].id -= 1;        
+      }
+      newArray.splice(action.airconId, 1);
+      return { ...state, aircons: newArray };
     default:
       return state;
   }
