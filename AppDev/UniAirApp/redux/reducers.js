@@ -1,7 +1,7 @@
 const initialState = {
   aircons: [
     {
-      ipAddress: "192.168.1.80",
+      ipAddress: "192.168.1.83",
       port: "5000",
       roomName: "Living Room",
       id: "0",
@@ -17,8 +17,8 @@ const initialState = {
         aircon_powerful_mode: false,
       },
       controllerConfig: {
-        max_aircon_temp: 30,
-        min_aircon_temp: 20,
+        max_aircon_temp: 31,
+        min_aircon_temp: 16,
         max_aircon_fanspeed: 4,
         min_aircon_fanspeed: 0,
         max_aircon_flap: 4,
