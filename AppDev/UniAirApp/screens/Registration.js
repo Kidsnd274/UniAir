@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
-import { addController } from '../redux/actions'
+import { addController, removeController } from '../redux/actions'
 
 const Registration = () => {
   const [roomName, setRoomName] = useState("3");
@@ -19,6 +19,9 @@ const Registration = () => {
     addController(ipAddress, portNo, roomName, airconModel);
   };
 
+  const removeConc = () => {
+    removeController(1);
+  }
 
   return (
     <View style={styles.container}>
@@ -46,6 +49,11 @@ const Registration = () => {
         title="Submit"
         containerStyle={styles.buttonStyle}
         onPress={submitNewController}
+      />
+      <Button
+        title="Remove"
+        containerStyle={styles.buttonStyle}
+        onPress={removeConc}
       />
     </View>
   );

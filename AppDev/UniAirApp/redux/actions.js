@@ -163,7 +163,7 @@ export const removeController = (airconId) => {
       airconId: airconId,
     })
   }
-  store.dispatch(thunkFunction(ipAddress));
+  store.dispatch(thunkFunction(airconId));
 }
 
 // API functions

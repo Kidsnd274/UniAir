@@ -94,8 +94,9 @@ function airconReducer(state = initialState, action) {
       return { ...state, aircons: newArray };
     case "REMOVE_CONTROLLER":
       for (let index = action.airconId + 1; index < newArray.length; index++) {
-        newArray[index].id -= 1;        
+        newArray[index].id -= 1;
       }
+      console.log("For loop done")
       newArray.splice(action.airconId, 1);
       return { ...state, aircons: newArray };
     default:
