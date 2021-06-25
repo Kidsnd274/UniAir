@@ -41,9 +41,6 @@ const Controller = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subContainer}>
-        <Header placement="left" leftComponent={name} width="100%" flex={1} />
-      </View>
       <View style={styles.controllerContainer}>
         <ControllerTop id={props.data.id} />
       </View>
