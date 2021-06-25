@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-
 import {
   Avatar,
   Title,
@@ -20,14 +19,38 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Icon } from "react-native-elements";
 import firebase from "../database/firebaseConfig";
 
-const NavigationDrawer = (props) => {
+const NavigationDrawerContent = (props) => {
+
+  var user = firebase.auth().currentUser
+
+  function userAvatar() {
+    if (user) {
+      return firebase.auth().currentUser.photoURL;
+    } else {
+      return "https://i.imgur.com/VCHkniz.png";
+    }
+  }
+
+  function userTitle() {
+    if (user) {
+      return firebase.auth().currentUser.displayNames;
+    } else {
+      return "Guest";
+    }
+  }
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
         <View style={styles.accountDrawer}>
           <View style={styles.accountDrawerDetails}>
+            <Avatar.Image
+              source={{ uri: userAvatar() }}
+              size={50}
+              style={{ marginTop: 10 }}
+            />
             <View style={{ marginTop: 5, marginLeft: 15 }}>
-              <Title></Title>
+              <Title>{userTitle()}</Title>
             </View>
           </View>
         </View>
@@ -41,53 +64,16 @@ const NavigationDrawer = (props) => {
                   type="material-community"
                 />
               )}
-              label="Gaming-Channel"
+              label="Welcome"
               onPress={() => {
-                props.navigation.navigate("GamingScreen");
+                props.navigation.navigate("Welcome");
               }}
             />
             <DrawerItem
               icon={() => <Icon name="tailwind" type="material-community" />}
-              label="Chill-Zone"
+              label="Controller List"
               onPress={() => {
-                props.navigation.navigate("GamingScreen");
-              }}
-            />
-            <DrawerItem
-              icon={() => <Icon name="music" type="material-community" />}
-              label="Lofi-Lounge"
-              onPress={() => {
-                props.navigation.navigate("GamingScreen");
-              }}
-            />
-            <DrawerItem
-              icon={() => <Icon name="bookshelf" type="material-community" />}
-              label="Study-Group"
-              onPress={() => {
-                props.navigation.navigate("SettingsScreen");
-              }}
-            />
-            <DrawerItem
-              icon={() => <Icon name="filmstrip" type="material-community" />}
-              label="Movie-Appreciation"
-              onPress={() => {
-                props.navigation.navigate("SettingsScreen");
-              }}
-            />
-            <DrawerItem
-              icon={() => (
-                <Icon name="image-filter-hdr" type="material-community" />
-              )}
-              label="Rock-Climbing"
-              onPress={() => {
-                props.navigation.navigate("SettingsScreen");
-              }}
-            />
-            <DrawerItem
-              icon={() => <Icon name="plus" type="material-community" />}
-              label="Add More"
-              onPress={() => {
-                props.navigation.navigate("SettingsScreen");
+                props.navigation.navigate("ControllerList");
               }}
             />
           </Drawer.Section>
@@ -96,16 +82,9 @@ const NavigationDrawer = (props) => {
           <Drawer.Section title="Settings">
             <DrawerItem
               icon={() => <Icon name="account-cog" type="material-community" />}
-              label="Account-Details"
+              label="Settings"
               onPress={() => {
-                props.navigation.navigate("SettingsScreen");
-              }}
-            />
-            <DrawerItem
-              icon={() => <Icon name="exit-to-app" type="material-community" />}
-              label="Sign-Out"
-              onPress={() => {
-                props.navigation.navigate("SettingsScreen");
+                props.navigation.navigate("Settings");
               }}
             />
           </Drawer.Section>
@@ -115,7 +94,7 @@ const NavigationDrawer = (props) => {
   );
 };
 
-export default NavigationDrawer;
+export default NavigationDrawerContent;
 
 const styles = StyleSheet.create({
   container: {

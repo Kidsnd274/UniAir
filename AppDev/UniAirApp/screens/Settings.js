@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
-const Setting = () => {
+const Settings = () => {
   return(
     <View style = {styles.container}>
       <Text>Settings</Text>
@@ -9,7 +9,7 @@ const Setting = () => {
   );
 }
 
-export default Setting
+export default Settings
 
 const styles = StyleSheet.create({
   container : {flex : 1}
