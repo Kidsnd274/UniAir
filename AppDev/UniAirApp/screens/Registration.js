@@ -7,31 +7,23 @@ import {
   TextInput,
 } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
-import { useDispatch } from "react-redux";
+import { addController } from '../redux/actions'
 
 const Registration = () => {
   const [roomName, setRoomName] = useState("3");
-  const [ipAddress, setIpAddress] = useState(0);
+  const [ipAddress, setIpAddress] = useState(5000);
   const [portNo, setPortNo] = useState(0);
-
-  const dispatch = useDispatch();
+  const [airconModel, setAirconModel] = useState("Mitsubishi");
 
   const submitNewController = () => {
-    dispatch({
-      type: "ADD_CONTROLLER",
-      payload: {
-        roomName: roomName,
-        ipAddress: ipAddress,
-        portNo: portNo,
-      },
-    });
+    addController(ipAddress, portNo, roomName, airconModel);
   };
 
 
   return (
     <View style={styles.container}>
       <Input
-        placeholder="RoomName"
+        placeholder="Room Name"
         leftIcon={{ type: "material-community", name: "serial-port" }}
         onChangeText={(x) => setRoomName(x)}
       />
@@ -44,6 +36,11 @@ const Registration = () => {
         placeholder="Port Number"
         leftIcon={{ type: "material-community", name: "serial-port" }}
         onChangeText={(x) => setPortNo(x)}
+      />
+      <Input
+        placeholder="Aircon Model"
+        leftIcon={{ type: "material-community", name: "serial-port" }}
+        onChangeText={(x) => setAirconModel(x)}
       />
       <Button
         title="Submit"
