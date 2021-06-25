@@ -117,26 +117,54 @@ export const updateTab = (airconId, newValue) => {
 };
 
 //Adding New Controller
-// export const addController = (ipAddress, port, roomName, aircon_model) => {
-//   const thunkFunction =
-//     (ipAddress, port, roomName, aircon_model) => (dispatch, getState) => {
-//       console.log("LOG: ADD_CONTROLLER ");
-//       console.log(getState().airconReducer.aircons.length)
-      
-//       dispatch({
-//         type: "ADD_CONTROLLER",
-//         payload: {
-//           ipAddress: ipAddress,
-//           port: port,
-//           roomName: roomName,
-//           aircon_model: aircon_model,
-//           aircon_id: getState().airconReducer.aircons.length
-//         },
-//       });
-//     };
-//   store.dispatch(thunkFunction(airconId, newValue));
-//   // store.dispatch(sendAirconData(airconId))
-// };
+export const addController = (ipAddress, port, roomName, airconModel) => {
+  const thunkFunction =
+    (ipAddress, port, roomName, aircon_model) => (dispatch, getState) => {
+      console.log("LOG: ADD_CONTROLLER ");
+      // console.log(getState().airconReducer.aircons.length)
+      dispatch({
+        type: "ADD_CONTROLLER",
+        payload: {
+          ipAddress: ipAddress,
+          port: port,
+          roomName: roomName,
+          aircon_model: aircon_model,
+          id: getState().airconReducer.aircons.length,
+          aircon_tab: "1",
+          // Default values that should change
+          controllerData: {
+            date_and_time: "",
+            aircon_power: false,
+            aircon_temp: 24,
+            aircon_fanspeed: 2,
+            aircon_flap: 3,
+            aircon_eco_mode: false,
+            aircon_powerful_mode: false,
+          },
+          controllerConfig: {
+            max_aircon_temp: 31,
+            min_aircon_temp: 16,
+            max_aircon_fanspeed: 4,
+            min_aircon_fanspeed: 0,
+            max_aircon_flap: 4,
+            min_aircon_flap: 0,
+          }
+        },
+      });
+    };
+  store.dispatch(thunkFunction(ipAddress, port, roomName, airconModel));
+};
+
+export const removeController = (airconId) => {
+  const thunkFunction = (airconId) => (dispatch) => {
+    console.log("LOG: Remove controller " + airconId);
+    dispatch({
+      type: "REMOVE_CONTROLLER",
+      airconId: airconId,
+    })
+  }
+  store.dispatch(thunkFunction(ipAddress));
+}
 
 // API functions
 export const updateAirconData = (airconId) => {
