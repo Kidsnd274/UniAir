@@ -8,7 +8,8 @@ import {Provider} from 'react-redux';
 import Controller from "./screens/Controller";
 import Registration from "./screens/Registration";
 import ControllerSelectorMain from "./screens/ControllerSelectorMain";
-import ControllerSelector from "./screens/ControllerSelector";
+import ControllerSelector from "./screens/ControllerSelectorNavigation";
+import Welcome from "./screens/WelcomeNavigation";
 
 export default function App() {
   const mainData = store.getState().airconReducer;
@@ -21,17 +22,15 @@ export default function App() {
   }
 
   return (
-    // <Provider store = {store}>
-    //   <NavigationContainer>
-    //     <Drawer.Navigator initialRouteName="Living Room">
-    //       <Drawer.Screen name="Registration" component={Registration} />
-    //         {mainData.aircons.map((x) => (
-    //           <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
-    //         ))}
-    //     </Drawer.Navigator>
-    //   </NavigationContainer>
-    // </Provider>
-    <ControllerSelector></ControllerSelector>
+    <Provider store = {store}>
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Welcome">
+          <Drawer.Screen name="Welcome" component={Welcome} />
+          <Drawer.Screen name = "ControllerList" component = {ControllerSelector} />
+        </Drawer.Navigator>
+       </NavigationContainer>
+     </Provider>
+   //<Provider store = {store}><ControllerSelector/></Provider>
   );
 }
 

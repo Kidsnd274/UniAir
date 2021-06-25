@@ -10,19 +10,29 @@ import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ControllerSelectorMain from "./ControllerSelectorMain";
+import Controller from "./Controller";
+import { useSelector } from "react-redux";
 
 
-const listOfAc = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const ControllerSelectorNavigation = () => {
 
-const ControllerSelector = () => {
+  function ControllerCreator(dataSet) {
+    return () => {
+      return <Controller data={dataSet}/>
+    }
+  }
+  
+  const controllerData = useSelector(
+    (state) => state.airconReducer
+  );
+  
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
       <Stack.Navigator initialRouteName = "main">
-        <Stack.Screen name = "main" component = {ControllerSelectorMain}/>
+        <Stack.Screen name = "Controllers" component = {ControllerSelectorMain}/>
+        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerCreator(x)}/>))}
       </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 
@@ -65,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ControllerSelector;
+export default ControllerSelectorNavigation;
