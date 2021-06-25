@@ -25,6 +25,31 @@ const initialState = {
         min_aircon_flap: 0,
       },
     },
+    {
+      ipAddress: "192.168.1.81",
+      port: "5001",
+      roomName: "Toliet",
+      id: "1",
+      aircon_tab: "1",
+      aircon_model: "1",
+      controllerData: {
+        date_and_time: "",
+        aircon_power: false,
+        aircon_temp: 24,
+        aircon_fanspeed: 2,
+        aircon_flap: 3,
+        aircon_eco_mode: false,
+        aircon_powerful_mode: false,
+      },
+      controllerConfig: {
+        max_aircon_temp: 30,
+        min_aircon_temp: 20,
+        max_aircon_fanspeed: 4,
+        min_aircon_fanspeed: 0,
+        max_aircon_flap: 4,
+        min_aircon_flap: 0,
+      },
+    },
   ],
   settings: {
     something_here: 0,
@@ -64,6 +89,8 @@ function airconReducer(state = initialState, action) {
       newArray[action.payload.id].controllerData.aircon_flap =
         action.payload.newValue;
       return { ...state, aircons: newArray };
+    //case "ADD_CONTROLLER":
+
     default:
       return state;
   }

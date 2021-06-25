@@ -9,37 +9,41 @@ import {
 import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useSelector } from "react-redux";
 
 
-const listOfAc = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
-const ControllerSelectorMain = () => {
+const ControllerSelectorMain = (props) => {
   // const Stack = createStackNavigator();
+  const Selector = (info) => {
+    return (<TouchableOpacity style={styles.selector} onPress = {() => {props.navigation.navigate(info)}}>
+      <Text>{info}</Text>
+      <View style={styles.selectorDisplay}>
+        <Icon type="material-community" name="tailwind"></Icon>
+      </View>
+    </TouchableOpacity>)
+  };
+
+  const controllerData = useSelector(
+    (state) => state.airconReducer
+  );
 
   return (
     <View style={styles.container}>
-      <Header
+      {/* <Header
         centerComponent={<Text>Controller</Text>}
         leftComponent={<Icon name="tailwind" type="material-community" />}
-      />
+      /> */}
       <ScrollView
         style={styles.scrollview}
         contentContainerStyle={styles.childScrollView}
       >
-        {listOfAc.map((x) => Selector(x))}
+        {controllerData.aircons.map((x) => Selector(x.roomName))}
       </ScrollView>
     </View>
   );
 };
 
-const Selector = (info) => {
-  return (<TouchableOpacity style={styles.selector}>
-    <Text>{info}</Text>
-    <View style={styles.selectorDisplay}>
-      <Icon type="material-community" name="tailwind"></Icon>
-    </View>
-  </TouchableOpacity>)
-};
 
 const SelectorInformation = (info) => {
   <View>

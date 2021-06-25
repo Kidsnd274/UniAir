@@ -22,16 +22,16 @@ export default function App() {
 
   return (
     // <Provider store = {store}>
-    //   <NavigationContainer>
-    //     <Drawer.Navigator initialRouteName="Living Room">
-    //       <Drawer.Screen name="Registration" component={Registration} />
-    //         {mainData.aircons.map((x) => (
-    //           <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
-    //         ))}
-    //     </Drawer.Navigator>
-    //   </NavigationContainer>
+      // <NavigationContainer>
+      //   <Drawer.Navigator initialRouteName="Living Room">
+      //     <Drawer.Screen name="Registration" component={Registration} />
+      //       {mainData.aircons.map((x) => (
+      //         <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
+      //       ))}
+      //   </Drawer.Navigator>
+      // </NavigationContainer>
     // </Provider>
-    <ControllerSelector></ControllerSelector>
+    <Provider store = {store}><ControllerSelector/></Provider>
   );
 }
 
