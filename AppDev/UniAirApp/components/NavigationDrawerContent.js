@@ -20,8 +20,7 @@ import { Icon } from "react-native-elements";
 import firebase from "../database/firebaseConfig";
 
 const NavigationDrawerContent = (props) => {
-
-  var user = firebase.auth().currentUser
+  var user = firebase.auth().currentUser;
 
   function userAvatar() {
     if (user) {

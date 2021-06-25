@@ -13,6 +13,9 @@ import Welcome from "./screens/WelcomeNavigation";
 import SettingsNavigation from "./screens/SettingsNavigation";
 import AuthScreen from "./screens/AuthScreen";
 import NavigationDrawerContent from "./components/NavigationDrawerContent";
+import ControllerEditor from "./screens/ControllerEditor";
+import ControllerSettingNavigation from "./screens/ControllerSettingNavigation";
+import ControllerSettingMain from "./screens/ControllerSettingMain";
 
 export default function App() {
   const mainData = store.getState().airconReducer;
@@ -35,7 +38,8 @@ export default function App() {
         </Drawer.Navigator>
        </NavigationContainer>
      </Provider>
-   //<Provider store = {store}><ControllerSelector/></Provider>
+   
+ 
   );
 }
 

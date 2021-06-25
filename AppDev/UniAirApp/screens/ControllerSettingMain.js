@@ -9,32 +9,35 @@ import {
 import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import ControllerSelectorMain from "./ControllerSelectorMain";
 import { useSelector } from "react-redux";
-import ControllerEditor from "./ControllerEditor";
 
-const ControllerSelectorNavigation = () => {
 
-  function ControllerCreator(dataSet) {
-    return () => {
-      return <Controller data={dataSet}/>
-    }
-  }
-  
+
+const ControllerSettingMain = (props) => {
+  // const Stack = createStackNavigator();
+
+
   const controllerData = useSelector(
     (state) => state.airconReducer
   );
-  
-  const Stack = createStackNavigator();
+
+  const Selector = (info) => {
+    return (<TouchableOpacity style={styles.selector} onPress = {() => {props.navigation.navigate(info.roomName)}}>
+      <View style = {styles.selectorTitle}><Text style = {styles.selectorTitleText}>{info.roomName}</Text></View>
+    </TouchableOpacity>)
+  };
 
   return (
-      <Stack.Navigator initialRouteName = "main">
-        <Stack.Screen name = "Controllers" component = {ControllerSelectorMain}/>
-        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerCreator(x)}/>))}
-      </Stack.Navigator>
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.scrollview}
+        contentContainerStyle={styles.childScrollView}
+      >
+        {controllerData.aircons.map((x) => Selector(x))}
+      </ScrollView>
+    </View>
   );
 };
-
 
 
 const styles = StyleSheet.create({
@@ -55,12 +58,21 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     borderWidth: 1,
-    width: "80%",
+    width: "90%",
     alignContent: "center",
     marginVertical: 10,
-    borderColor: "red",
     alignItems: "center",
+    borderRadius: 10
   },
+  selectorTitle : {
+    flex: 2,
+    justifyContent: "flex-start",
+    width: "100%",
+  },
+  selectorTitleText: {
+    fontSize: 20
+  },
+
   selectorDisplay: {
     flex: 1,
     flexDirection: "row",
@@ -72,6 +84,13 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
   },
+  subContainer: {
+    alignItems: 'center',
+    width: "10%",
+    flex: 1,
+    flexDirection: 'row', justifyContent:"center"
+  }
+  
 });
 
-export default ControllerSelectorNavigation;
+export default ControllerSettingMain;

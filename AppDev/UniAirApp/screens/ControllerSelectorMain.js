@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 
 
+
 const ControllerSelectorMain = (props) => {
   // const Stack = createStackNavigator();
 
@@ -22,7 +23,7 @@ const ControllerSelectorMain = (props) => {
       if (!data.controllerData.aircon_power) {
         return <Icon name = "power" type = 'material-community'/>
       }
-      return <View style = {{flexDirection: "row"}}><Text>{data.controllerData.aircon_temp}</Text><Icon name="temperature-celsius" type="material-community" size = {12}/></View>
+      return <View style = {{flexDirection: "row"}}><Text>{data.controllerData.aircon_temp}</Text><Icon name="temperature-celsius" type="material-community" size = {5}/></View>
     }
 
     function airconIconEcoMode() {
