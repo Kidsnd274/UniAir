@@ -49,7 +49,7 @@ export const updateFanSpeed = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
-  // store.dispatch(sendAirconData(airconId)) // Send updates to server
+  store.dispatch(sendAirconData(airconId)) // Send updates to server
 };
 
 export const toggleEcoMode = (airconId, newValue) => {
@@ -64,7 +64,7 @@ export const toggleEcoMode = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
-  // store.dispatch(sendAirconData(airconId))
+  store.dispatch(sendAirconData(airconId))
 };
 
 export const updateFlap = (airconId, newValue) => {
@@ -81,7 +81,7 @@ export const updateFlap = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
-  // store.dispatch(sendAirconData(airconId)) // Send updates to server
+  store.dispatch(sendAirconData(airconId)) // Send updates to server
 };
 
 export const togglePowerMode = (airconId, newValue) => {
@@ -98,6 +98,7 @@ export const togglePowerMode = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
+  store.dispatch(sendAirconData(airconId));
 };
 
 export const updateTab = (airconId, newValue) => {
@@ -112,6 +113,7 @@ export const updateTab = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
+  store.dispatch(sendAirconData(airconId));
 };
 
 //Adding New Controller
