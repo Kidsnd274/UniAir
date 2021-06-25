@@ -14,7 +14,7 @@ import Controller from "./Controller";
 import { useSelector } from "react-redux";
 
 
-const ControllerSelector = () => {
+const ControllerSelectorNavigation = () => {
 
   function ControllerCreator(dataSet) {
     return () => {
@@ -29,12 +29,10 @@ const ControllerSelector = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
       <Stack.Navigator initialRouteName = "main">
         <Stack.Screen name = "Controllers" component = {ControllerSelectorMain}/>
         {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerCreator(x)}/>))}
       </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 
@@ -77,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ControllerSelector;
+export default ControllerSelectorNavigation;

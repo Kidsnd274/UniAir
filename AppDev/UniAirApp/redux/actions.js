@@ -115,26 +115,26 @@ export const updateTab = (airconId, newValue) => {
 };
 
 //Adding New Controller
-export const addController = (ipAddress, port, roomName, aircon_model) => {
-  const thunkFunction =
-    (ipAddress, port, roomName, aircon_model) => (dispatch, getState) => {
-      console.log("LOG: ADD_CONTROLLER ");
-      console.log(getState().airconReducer.aircons.length)
+// export const addController = (ipAddress, port, roomName, aircon_model) => {
+//   const thunkFunction =
+//     (ipAddress, port, roomName, aircon_model) => (dispatch, getState) => {
+//       console.log("LOG: ADD_CONTROLLER ");
+//       console.log(getState().airconReducer.aircons.length)
       
-      dispatch({
-        type: "ADD_CONTROLLER",
-        payload: {
-          ipAddress: ipAddress,
-          port: port,
-          roomName: roomName,
-          aircon_model: aircon_model,
-          aircon_id: getState().airconReducer.aircons.length
-        },
-      });
-    };
-  store.dispatch(thunkFunction(airconId, newValue));
-  // store.dispatch(sendAirconData(airconId))
-};
+//       dispatch({
+//         type: "ADD_CONTROLLER",
+//         payload: {
+//           ipAddress: ipAddress,
+//           port: port,
+//           roomName: roomName,
+//           aircon_model: aircon_model,
+//           aircon_id: getState().airconReducer.aircons.length
+//         },
+//       });
+//     };
+//   store.dispatch(thunkFunction(airconId, newValue));
+//   // store.dispatch(sendAirconData(airconId))
+// };
 
 // API functions
 export const updateAirconData = (airconId) => {

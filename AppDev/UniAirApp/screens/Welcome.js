@@ -1,17 +1,17 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 
-const StartUp = () => {
+const Welcome = (props) => {
   return <View style = {styles.container}>
     <View style= {styles.subContainerTop}>
     </View>
     <View style = {styles.subContainerBottom}>
     <Text style = {styles.tagLine}>Hello</Text>
-    <TouchableOpacity style = {styles.buttonStyleLearnMore}>
-      <Text style ={styles.textLearnMore}>Hi</Text>
+    <TouchableOpacity style = {styles.buttonStyleLearnMore} onPress = {() => [props.navigation.navigate("LearnMore")]}>
+      <Text style ={styles.textLearnMore}>Learn More</Text>
     </TouchableOpacity>
-    <TouchableOpacity style = {styles.buttonStyleRegister}>
-      <Text style = {styles.textRegister} >Hi</Text>
+    <TouchableOpacity style = {styles.buttonStyleRegister} onPress = {() => [props.navigation.navigate("Registration")]}>
+      <Text style = {styles.textRegister} >Register</Text>
     </TouchableOpacity>
     </View>
   </View>;
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     fontSize:20,
     paddingTop:'2.2%',
-    color:'black'
+    color:'#00B4D8'
   }, 
 
   tagLine: {
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default StartUp;
+export default Welcome;
