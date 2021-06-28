@@ -104,6 +104,8 @@ const styles = StyleSheet.create({
     height: "10%",
     margin: 10,
     justifyContent: "center",
+    alignItems: "center"
+
   },
 });
 

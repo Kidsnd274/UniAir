@@ -51,10 +51,10 @@ const FlapDualButtons = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.TextStyle} onPress={increaseFlap}>
-        <Icon name="fan-chevron-up" type="material-community" />
+        <Icon name="fan-chevron-up" type="material-community" /><Text>Fan Vane /\</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.TextStyle} onPress={decreaseFlap}>
-        <Icon name="fan-chevron-down" type="material-community" />
+        <Icon name="fan-chevron-down" type="material-community" /><Text>Fan Vane \/</Text>
       </TouchableOpacity>
     </View>
   );
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     borderWidth: 2,
+    alignItems: "center"
   },
   container: {
     flex: 1,

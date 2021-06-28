@@ -32,7 +32,7 @@ const NavigationDrawerContent = (props) => {
 
   function userTitle() {
     if (user) {
-      return firebase.auth().currentUser.displayNames;
+      return firebase.auth().currentUser.displayName;
     } else {
       return "Guest";
     }
@@ -59,8 +59,8 @@ const NavigationDrawerContent = (props) => {
             <DrawerItem
               icon={() => (
                 <Icon
-                  name="gamepad-variant-outline"
-                  type="material-community"
+                  name="file-tray-stacked-sharp"
+                  type="ionicon"
                 />
               )}
               label="Welcome"
@@ -69,7 +69,7 @@ const NavigationDrawerContent = (props) => {
               }}
             />
             <DrawerItem
-              icon={() => <Icon name="tailwind" type="material-community" />}
+              icon={() => <Icon name="controller-classic-outline" type="material-community" />}
               label="Controller List"
               onPress={() => {
                 props.navigation.navigate("ControllerList");

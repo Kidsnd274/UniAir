@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, LogBox } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import {store} from './redux/store'
@@ -26,6 +26,8 @@ export default function App() {
       return <Controller data={dataSet} />;
     };
   }
+
+  LogBox.ignoreAllLogs(true);
 
   return (
     <Provider store = {store}>

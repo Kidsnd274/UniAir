@@ -50,11 +50,6 @@ const Registration = () => {
         containerStyle={styles.buttonStyle}
         onPress={submitNewController}
       />
-      <Button
-        title="Remove"
-        containerStyle={styles.buttonStyle}
-        onPress={removeConc}
-      />
     </View>
   );
 };
@@ -69,7 +64,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
   },
   buttonStyle: {
-    width: "70%",
+    width: "80%",
+    justifyContent: "center",
+    // alignItems: "center"
   },
 });
 

@@ -11,7 +11,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ControllerSelectorMain from "./ControllerSelectorMain";
 import { useSelector } from "react-redux";
-import ControllerEditor from "./ControllerEditor";
+import Controller from "./Controller";
 
 const ControllerSelectorNavigation = () => {
 

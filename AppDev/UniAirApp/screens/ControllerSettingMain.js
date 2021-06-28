@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     marginVertical: 10,
     alignItems: "center",
-    borderRadius: 10
+    borderRadius: 5
   },
   selectorTitle : {
     flex: 2,
