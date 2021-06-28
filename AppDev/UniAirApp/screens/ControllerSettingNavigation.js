@@ -31,7 +31,7 @@ const ControllerSettingNavigation = () => {
   return (
       <Stack.Navigator initialRouteName = "main">
         <Stack.Screen name = "Controllers" component = {ControllerSettingMain}/>
-        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerEditorCreator(x)} options = {headerStyling}/>))}
+        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerEditorCreator(x)} options = {headerStyling} />))}
       </Stack.Navigator>
   );
 };

@@ -54,11 +54,9 @@ const styles = StyleSheet.create({
   selector: {
     flexDirection: "column",
     flex: 1,
-    borderWidth: 1,
     width: "80%",
     alignContent: "center",
     marginVertical: 10,
-    borderColor: "red",
     alignItems: "center",
   },
   selectorDisplay: {
