@@ -53,16 +53,18 @@ const styles = StyleSheet.create({
     margin: 10,
     alignContent: "space-between",
   },
-  childScrollView: { alignItems: "center" },
+  childScrollView: { alignItems: "center", justifyContent: "center" },
   selector: {
     flexDirection: "column",
     flex: 1,
     borderWidth: 1,
     width: "90%",
     alignContent: "center",
-    marginVertical: 10,
     alignItems: "center",
-    borderRadius: 5
+    borderRadius: 5,
+    justifyContent: "center",
+    marginVertical: 10
+
   },
   selectorTitle : {
     flex: 2,

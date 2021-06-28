@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { Icon } from "react-native-elements";
 import * as GoogleSignIn from "expo-google-sign-in";
 import * as Google from "expo-google-app-auth";
@@ -130,6 +130,7 @@ const AuthScreen = () => {
 
   return (
     <View style={styles.container}>
+     <Image source = {require('../src/Images/google-color.png')}/>
       <TouchableOpacity style={styles.button} onPress={signInWithGoogle}>
         <Text style={styles.btnText}>Sign in with Google </Text>
         <Icon type="material-community" name="google" color="#748cf8" />

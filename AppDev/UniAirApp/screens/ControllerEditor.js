@@ -29,7 +29,8 @@ const ControllerEditor = (props) => {
         <TextInput label = "Port" value = {port} onChange = {x => setPort(x)} style = {styles.textInputStyles}/>
       </View>
       <View style= {styles.subContainer}>
-      <TouchableOpacity style = {styles.submitTouchable}><Text>SUBMIT</Text></TouchableOpacity>
+      <TouchableOpacity style = {styles.submitTouchable}><Text style = {styles.submitText}>SUBMIT CHANGES</Text></TouchableOpacity>
+      <TouchableOpacity style = {{...styles.submitTouchable, backgroundColor :"red"}}><Text style = {styles.submitText}>DELETE CONTROLLER</Text></TouchableOpacity>
       </View>
     </View>
   );
@@ -37,9 +38,11 @@ const ControllerEditor = (props) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  subContainer: {flex: 1, flexDirection: "row", alignItems: "center", width : "100%", justifyContent: "center"},
+  subContainer: {flex: 1, flexDirection: "column", alignItems: "center", width : "100%", justifyContent: "center"},
   textInputStyles : {width: "80%"},
-  submitTouchable : {alignItems: "center", borderRadius : 10, backgroundColor: "#00B4D8", width: "60%", height: 50,}
+  submitTouchable : {alignItems: "center", borderRadius : 10, backgroundColor: "#00B4D8", width: "60%", height: 50, justifyContent: "center", marginVertical: 10},
+  submitText: {color : "#FFFF"},
+
 });
 
 export default ControllerEditor
