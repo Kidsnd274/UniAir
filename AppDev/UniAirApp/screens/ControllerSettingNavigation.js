@@ -31,7 +31,7 @@ const ControllerSettingNavigation = () => {
   return (
       <Stack.Navigator initialRouteName = "main">
         <Stack.Screen name = "Controllers" component = {ControllerSettingMain}/>
-        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerEditorCreator(x)}/>))}
+        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerEditorCreator(x)} options = {headerStyling}/>))}
       </Stack.Navigator>
   );
 };
@@ -75,4 +75,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const headerStyling = {
+  headerStyle: {
+    backgroundColor: "#00B4D8",
+  },
+  headerTitleStyle: {
+    color: "#FFFF"
+  },
+};
 export default ControllerSettingNavigation;

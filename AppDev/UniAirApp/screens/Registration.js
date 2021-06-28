@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    borderWidth: 2,
     borderColor: "black",
   },
   buttonStyle: {

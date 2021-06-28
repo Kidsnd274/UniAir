@@ -18,9 +18,9 @@ const Stack = createStackNavigator();
 const WelcomeNavigation = (props) => {
   return (
     <Stack.Navigator initialRouteName = "StartUp">
-      <Stack.Screen name = "Welcome" component = {Welcome}/>
-      <Stack.Screen name = "LearnMore" component = {LearnMore}/>
-      <Stack.Screen name = "Registration" component = {Registration}/>
+      <Stack.Screen name = "Welcome" component = {Welcome} options = {headerStyling}/>
+      <Stack.Screen name = "Learn More" component = {LearnMore} options = {headerStyling}/>
+      <Stack.Screen name = "Registration" component = {Registration} options = {headerStyling}/>
     </Stack.Navigator>
   )
 }
@@ -32,4 +32,12 @@ const styles = StyleSheet.create({
   }
 })
 
+const headerStyling = {
+  headerStyle: {
+    backgroundColor: "#00B4D8",
+  },
+  headerTitleStyle: {
+    color: "#FFFF"
+  },
+};
 export default WelcomeNavigation

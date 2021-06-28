@@ -62,15 +62,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "column",
-    borderWidth: 2,
-    borderColor: "blue",
   },
   subContainer: {
     flex: 0.7,
     alignItems: "center",
     justifyContent: "flex-start",
-    borderWidth: 2,
-    borderColor: "red",
     width: "100%",
   },
   controllerContainer: {
@@ -79,23 +75,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     flexDirection: "column",
     width: "100%",
-    borderWidth: 2,
-    borderColor: "green",
   },
   tabContainer: {
     flex: 0.5,
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
-    borderWidth: 2,
-    borderColor: "black",
   },
   miscContainer: {
     flex: 3,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderColor: "black",
   },
 });
 

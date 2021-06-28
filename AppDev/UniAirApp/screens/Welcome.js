@@ -10,7 +10,7 @@ const Welcome = (props) => {
       <View style={styles.subContainerBottom}>
         <TouchableOpacity
           style={styles.buttonStyleLearnMore}
-          onPress={() => [props.navigation.navigate("LearnMore")]}
+          onPress={() => [props.navigation.navigate("Learn More")]}
         >
           <Text style={styles.textLearnMore}>Learn More</Text>
         </TouchableOpacity>

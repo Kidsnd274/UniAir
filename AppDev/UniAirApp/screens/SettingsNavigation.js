@@ -17,9 +17,9 @@ const Stack = createStackNavigator();
 const SettingsNavigation = (props) => {
   return (
     <Stack.Navigator initialRouteName = "Settings">
-      <Stack.Screen name = "Settings"  component = {Settings}/>
-      <Stack.Screen name = "Google Sign in" component = {AuthScreen}/>
-      <Stack.Screen name = "Edit Controller Details" component = {ControllerSettingNavigation}/>
+      <Stack.Screen name = "Settings"  component = {Settings} options = {headerStyling}/>
+      <Stack.Screen name = "Google Sign in" component = {AuthScreen} options = {headerStyling}/>
+      <Stack.Screen name = "Edit Controller Details" component = {ControllerSettingNavigation} options = {headerStyling}/>
     </Stack.Navigator>
   )
 }
@@ -30,5 +30,14 @@ const styles = StyleSheet.create({
     borderWidth:1
   }
 })
+
+const headerStyling = {
+  headerStyle: {
+    backgroundColor: "#00B4D8",
+  },
+  headerTitleStyle: {
+    color: "#FFFF"
+  },
+};
 
 export default SettingsNavigation

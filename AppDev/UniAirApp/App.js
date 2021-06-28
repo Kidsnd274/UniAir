@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, View, LogBox } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import {store} from './redux/store'
-import {Provider} from 'react-redux';
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 import Controller from "./screens/Controller";
 import Registration from "./screens/Registration";
 import ControllerSelectorMain from "./screens/ControllerSelectorMain";
@@ -30,18 +30,22 @@ export default function App() {
   LogBox.ignoreAllLogs(true);
 
   return (
-    <Provider store = {store}>
+    <Provider store={store}>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Welcome" drawerContent = {(props) => <NavigationDrawerContent {...props} />}>
+        <Drawer.Navigator
+          initialRouteName="Welcome"
+          drawerContent={(props) => <NavigationDrawerContent {...props} />}
+        >
           <Drawer.Screen name="Welcome" component={Welcome} />
-          <Drawer.Screen name = "ControllerList" component = {ControllerSelectorNavigation} />
-          <Drawer.Screen name = "Settings" component = {SettingsNavigation}/>
-          <Drawer.Screen name = "Sign In" component= {AuthScreen}/>
+          <Drawer.Screen
+            name="ControllerList"
+            component={ControllerSelectorNavigation}
+          />
+          <Drawer.Screen name="Settings" component={SettingsNavigation} />
+          <Drawer.Screen name="Sign In" component={AuthScreen} />
         </Drawer.Navigator>
-       </NavigationContainer>
-     </Provider>
-   
- 
+      </NavigationContainer>
+    </Provider>
   );
 }
 
@@ -52,3 +56,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+const headerStyling = {
+  headerStyle: {
+    backgroundColor: "#00B4D8",
+  },
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    color: "#FFFF"
+  },
+};
