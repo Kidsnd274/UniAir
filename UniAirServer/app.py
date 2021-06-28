@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 controllerData = {
-    "controllerName": "mitsubishi_kh18a",
+    "controllerName": "mitsu_control",
     "aircon_power": False,
     "aircon_temp": 100,
     "aircon_fanspeed": 2,

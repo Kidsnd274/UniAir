@@ -40,7 +40,9 @@ class VirtualController():
         self.client.send_once(controller, command)
 
     def send_updated_data_ir(self):
-        if self.controllerData.aircon_powerful_mode:
+        if not self.controllerData.aircon_power:
+            command = "OFF"
+        elif self.controllerData.aircon_powerful_mode:
             command = "ON_POWERFUL"
         else:
             # ON_FANSPEED_VANE_MODE_TEMP
