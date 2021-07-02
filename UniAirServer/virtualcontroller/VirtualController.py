@@ -49,6 +49,12 @@ class VirtualController():
             command = "ON_" + str(self.controllerData.aircon_fanspeed) + "_" + str(self.controllerData.aircon_flap) + "_COOL_" + str(self.controllerData.aircon_temp)
         self.client.send_once(self.controllerName, command)
 
+    def export_dict(self):
+        data = {}
+        data['controllerName'] = self.controllerName
+        data.update(self.controllerData.exportDict())
+        return data
+
     def test_ir(self):
         self.client.send_once("mitsubishi_kh18a", "SWITCH_OFF")
         print("DEBUG: Sent IR Test, SWITCH_OFF from mitsubishi_kh18a")

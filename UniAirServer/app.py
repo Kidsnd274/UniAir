@@ -1,6 +1,5 @@
 from flask import Flask, render_template, url_for, request, abort
 from virtualcontroller.VirtualController import VirtualController
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -47,6 +46,10 @@ def get_aircon_data():
         mimetype = 'application/json'
     )
     return response
+
+@app.route('/api/is_setup')
+def is_setup():
+    return True
 
     # data = jsonify(
     #     date_and_time = datetime.now().isoformat(), # ISO 8601 format, find function to decode this format for JS

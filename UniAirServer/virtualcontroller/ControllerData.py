@@ -32,6 +32,16 @@ class ControllerData():
             'aircon_powerful_mode': self.aircon_powerful_mode
         })
 
+    def exportDict(self):
+        return {
+            'aircon_power': self.aircon_power,
+            'aircon_temp': self.aircon_temp,
+            'aircon_fanspeed': self.aircon_fanspeed,
+            'aircon_flap': self.aircon_flap,
+            'aircon_eco_mode': self.aircon_eco_mode,
+            'aircon_powerful_mode': self.aircon_powerful_mode
+        }
+
     def updateControllerData(self, jsonData):
         self.aircon_power = jsonData['aircon_power']
         self.aircon_temp = jsonData['aircon_temp']
