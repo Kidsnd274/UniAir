@@ -56,8 +56,8 @@ class VirtualController():
         return data
 
     def test_ir(self):
-        self.client.send_once("mitsubishi_kh18a", "SWITCH_OFF")
-        print("DEBUG: Sent IR Test, SWITCH_OFF from mitsubishi_kh18a")
+        self.client.send_once(self.controllerName, "OFF")
+        print("DEBUG: Sent IR Test, OFF from " + self.controllerName)
 
     def toggle_power(self):
         if self.controllerData.aircon_power == False:

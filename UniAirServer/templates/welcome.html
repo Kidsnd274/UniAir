@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+UniAir Server
+{% endblock %}
+
+{% block head %}
+<style>
+    .vertical {
+        border-left: 6px solid white;
+        height: 200px;
+        position:absolute;
+        left: 50%;
+    }
+
+    .right_line {
+        border-right: 1px solid white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<center>
+<h1>Welcome to UniAir</h1>
+<h2>Setting up your UniAir Server</h2>
+<div class="container">
+    <div class="row">
+        <div class="col right_line">
+            Download mobile app
+            <img class="img-fluid" src="{{url_for('static', filename='img/UniAirMobile.png')}}" />
+        </div>
+        <div class="col">
+            Continue Setup here
+            <form action="/setup/register">
+                <button class="btn btn-outline btn-info" type="submit">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}

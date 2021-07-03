@@ -1,5 +1,7 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
+from flask.templating import render_template
 from config import config
+from database import read_from_database, virtual_controller
 
 def create_app():
     """Create and configure an instance of the Flask Application"""
@@ -10,9 +12,14 @@ def create_app():
         # 'database_file': './database.db',
     }
     config.read('settings.ini')
-    print(config.get('settings', 'first_time_done'))
+    # print(config.get('settings', 'first_time_done'))
 
     app = Flask(__name__, instance_relative_config=True)
+
+    try:
+        read_from_database()
+    except FileNotFoundError:
+        print("ERROR: Could not find database. Is this a first time setup?")
 
     # if config.getboolean('settings', 'first_time_done') is False:
     import setup_page
@@ -24,9 +31,13 @@ def create_app():
     app.register_blueprint(controller.bp)
 
     @app.route("/")
-    def default_page():
-        return "Hello, World!"
-    # app.add_url_rule("/", endpoint="index")
+    def index():
+        print(config.getboolean('settings', 'first_time_done'))
+        if config.getboolean('settings', 'first_time_done') is False:
+            return render_template('welcome.html')
+            # return redirect(url_for("setup_page.register"))
+        else:
+            return redirect(url_for("controller.test_ir"))
 
     return app
 

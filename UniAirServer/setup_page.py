@@ -7,7 +7,7 @@ from flask import (
 from config import config, write_to_config
 import json
 from virtualcontroller.VirtualController import VirtualController
-from database import write_to_database, virtual_controller
+from database import write_to_database, virtual_controller, read_from_database
 
 bp = Blueprint('setup_page', __name__, url_prefix='/setup')
 
