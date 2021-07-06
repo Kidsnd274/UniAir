@@ -1,5 +1,6 @@
 import json
 from virtualcontroller.VirtualController import VirtualController
+from virtualcontroller.ControllerHolder import ControllerHolder
 
 # Placeholder data
 controllerData = {
@@ -11,18 +12,18 @@ controllerData = {
     "aircon_eco_mode": False,
     "aircon_powerful_mode": False,
 }
-virtual_controller = None
+virtual_controller = ControllerHolder(None)
 
 def write_to_database():
     with open('./database.db', 'w') as f:
-        json.dump(virtual_controller.export_dict(), f)
+        json.dump(virtual_controller.controller.export_dict(), f)
 
 def read_from_database():
     with open('./database.db') as json_file:
         data = json.load(json_file)
-        virtual_controller = VirtualController(data)
+        virtual_controller.replace_controller(VirtualController(data))
         return data
 
 
 def load_placeholder_data():
-    virtual_controller = VirtualController(controllerData)
+    virtual_controller.replace_controller(VirtualController(controllerData))

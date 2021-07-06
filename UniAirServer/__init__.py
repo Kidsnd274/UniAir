@@ -34,10 +34,10 @@ def create_app():
     def index():
         print(config.getboolean('settings', 'first_time_done'))
         if config.getboolean('settings', 'first_time_done') is False:
-            return render_template('welcome.html')
+            return redirect(url_for('setup_page.welcome'))
             # return redirect(url_for("setup_page.register"))
         else:
-            return redirect(url_for("controller.test_ir"))
+            return redirect(url_for("controller.status"))
 
     return app
 

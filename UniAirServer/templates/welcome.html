@@ -16,6 +16,11 @@ UniAir Server
     .right_line {
         border-right: 1px solid white;
     }
+
+    .mobile_app_image {
+        max-width: 40%;
+        height: auto;
+    }
 </style>
 {% endblock %}
 
@@ -26,11 +31,29 @@ UniAir Server
 <div class="container">
     <div class="row">
         <div class="col right_line">
-            Download mobile app
-            <img class="img-fluid" src="{{url_for('static', filename='img/UniAirMobile.png')}}" />
+            <div class="row">
+            <h2>Download mobile app</h2>
+            </div>
+            <div class="row">
+                <center>
+                <img class="img-fluid mobile_app_image" src="{{url_for('static', filename='img/UniAirMobile.png')}}" />
+                </center>
+            </div>
+            <div align="center" style="width:50%">
+                    <div align="left">
+                        IP Address
+                        <input type="text" value="{{get_ip()}}" readonly style="border: 0px; width:auto" />
+                    </div>
+                    <p></p>
+                    <div align="left">
+                        Hostname
+                        <input type="text" value="{{get_hostname()}}" readonly style="border: 0px; width:auto" />
+                    </div>
+            </div>
         </div>
         <div class="col">
-            Continue Setup here
+            <h2>Continue Setup here</h2>
+            <p>You will still need to register this server on a mobile app later on</p>
             <form action="/setup/register">
                 <button class="btn btn-outline btn-info" type="submit">Continue</button>
             </form>

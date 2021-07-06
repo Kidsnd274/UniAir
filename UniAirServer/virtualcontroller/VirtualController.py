@@ -37,7 +37,17 @@ class VirtualController():
             self.send_updated_data_ir()
 
     def send_once(self, controller, command):
-        self.client.send_once(controller, command)
+        try:
+            print("LOG: Sending pulse...")
+            self.client.send_once(controller, command)
+        except lirc.exceptions.LircdInvalidReplyPacketError:
+            print("ERROR: Invalid reply from lircd ignored")
+        # try:
+        #     print("LOG: Sending pulse")
+        #     self.client.send_once(controller, command)
+        # except lirc.exceptions.LircdInvalidReplyPacketError:
+        #     print("ERROR: Invalid reply from lircd ignored")
+
 
     def send_updated_data_ir(self):
         if not self.controllerData.aircon_power:
@@ -47,7 +57,7 @@ class VirtualController():
         else:
             # ON_FANSPEED_VANE_MODE_TEMP
             command = "ON_" + str(self.controllerData.aircon_fanspeed) + "_" + str(self.controllerData.aircon_flap) + "_COOL_" + str(self.controllerData.aircon_temp)
-        self.client.send_once(self.controllerName, command)
+        self.send_once(self.controllerName, command)
 
     def export_dict(self):
         data = {}
@@ -56,7 +66,7 @@ class VirtualController():
         return data
 
     def test_ir(self):
-        self.client.send_once(self.controllerName, "OFF")
+        self.send_once(self.controllerName, "OFF")
         print("DEBUG: Sent IR Test, OFF from " + self.controllerName)
 
     def toggle_power(self):

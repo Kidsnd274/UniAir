@@ -8,6 +8,7 @@ from config import config, write_to_config
 import json
 from virtualcontroller.VirtualController import VirtualController
 from database import write_to_database, virtual_controller, read_from_database
+import socket
 
 bp = Blueprint('setup_page', __name__, url_prefix='/setup')
 
@@ -30,7 +31,7 @@ def register():
             "aircon_eco_mode": False,
             "aircon_powerful_mode": False,
         }
-        virtual_controller = VirtualController(controllerData)
+        virtual_controller.replace_controller(VirtualController(controllerData))
 
         # Saving controller to database (might make a database object)
         write_to_database()
@@ -56,3 +57,22 @@ def is_setup():
         response = response_json,
         mimetype = 'application/json'
     )
+
+@bp.route('/welcome')
+def welcome():
+    return render_template('welcome.html', get_ip=get_ip, get_hostname=get_hostname)
+
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
+
+def get_hostname():
+    return socket.getfqdn()
