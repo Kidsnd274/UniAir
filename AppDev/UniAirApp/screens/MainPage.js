@@ -8,6 +8,7 @@ import Controller from "./Controller";
 import Registration from "./Registration";
 import { useSelector } from "react-redux";
 import { updateAirconData } from "../redux/actions";
+import MainAppBar from "../components/MainAppBar";
 
 const MainPage = () => {
   const mainData = useSelector(state => state.airconReducer);
@@ -19,7 +20,7 @@ const MainPage = () => {
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Living Room">
+      <Drawer.Navigator initialRouteName="Living Room" screenOptions = {{header : MainAppBar}}>
         <Drawer.Screen name="Registration" component={Registration} />
         {mainData.aircons.map((x) => (
           <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />

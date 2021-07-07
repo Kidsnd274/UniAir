@@ -13,30 +13,35 @@ import { useSelector } from "react-redux";
 import ControllerEditor from "./ControllerEditor";
 import ControllerSettingMain from "./ControllerSettingMain";
 
-
 const ControllerSettingNavigation = () => {
-
   function ControllerEditorCreator(dataSet) {
     return () => {
-      return <ControllerEditor data={dataSet}/>
-    }
+      return <ControllerEditor data={dataSet} />;
+    };
   }
-  
-  const controllerData = useSelector(
-    (state) => state.airconReducer
-  );
-  
+
+  const controllerData = useSelector((state) => state.airconReducer);
+
   const Stack = createStackNavigator();
 
   return (
-      <Stack.Navigator initialRouteName = "main">
-        <Stack.Screen name = "Controllers" component = {ControllerSettingMain}/>
-        {controllerData.aircons.map((x) => (<Stack.Screen name = {x.roomName} component = {ControllerEditorCreator(x)} options = {headerStyling} />))}
-      </Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="Controllers"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Controllers" component={ControllerSettingMain} />
+      {controllerData.aircons.map((x) => (
+        <Stack.Screen
+          name={x.roomName}
+          component={ControllerEditorCreator(x)}
+          options={headerStyling}
+        />
+      ))}
+    </Stack.Navigator>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +85,7 @@ const headerStyling = {
     backgroundColor: "#00B4D8",
   },
   headerTitleStyle: {
-    color: "#FFFF"
+    color: "#FFFF",
   },
 };
 export default ControllerSettingNavigation;

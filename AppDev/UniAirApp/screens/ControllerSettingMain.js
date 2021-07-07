@@ -5,26 +5,31 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  Button,
 } from "react-native";
 import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 
-
-
 const ControllerSettingMain = (props) => {
   // const Stack = createStackNavigator();
 
-
-  const controllerData = useSelector(
-    (state) => state.airconReducer
-  );
+  const controllerData = useSelector((state) => state.airconReducer);
 
   const Selector = (info) => {
-    return (<TouchableOpacity style={styles.selector} onPress = {() => {props.navigation.navigate(info.roomName)}}>
-      <View style = {styles.selectorTitle}><Text style = {styles.selectorTitleText}>{info.roomName}</Text></View>
-    </TouchableOpacity>)
+    return (
+      <TouchableOpacity
+        style={styles.selector}
+        onPress={() => {
+          props.navigation.navigate(info.roomName);
+        }}
+      >
+        <View style={styles.selectorTitle}>
+          <Text style={styles.selectorTitleText}>{info.roomName}</Text>
+        </View>
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -38,7 +43,6 @@ const ControllerSettingMain = (props) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -63,16 +67,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     justifyContent: "center",
-    marginVertical: 10
-
+    marginVertical: 10,
   },
-  selectorTitle : {
+  selectorTitle: {
     flex: 2,
     justifyContent: "flex-start",
     width: "100%",
   },
   selectorTitleText: {
-    fontSize: 20
+    fontSize: 20,
   },
 
   selectorDisplay: {
@@ -87,14 +90,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   subContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     width: "10%",
     flex: 1,
-    flexDirection: 'row', justifyContent:"center"
-  }
-  
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });
-
-
 
 export default ControllerSettingMain;

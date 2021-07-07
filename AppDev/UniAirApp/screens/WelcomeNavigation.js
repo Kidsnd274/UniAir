@@ -12,12 +12,13 @@ import { useSelector } from "react-redux";
 import Registration from "./Registration";
 import Welcome from "./Welcome";
 import LearnMore from "./LearnMore";
+import MainAppBar from "../components/MainAppBar";
 
 const Stack = createStackNavigator();
 
 const WelcomeNavigation = (props) => {
   return (
-    <Stack.Navigator initialRouteName = "StartUp">
+    <Stack.Navigator initialRouteName = "Welcome" screenOptions = {{header : () => (<MainAppBar></MainAppBar>)}}>
       <Stack.Screen name = "Welcome" component = {Welcome} options = {headerStyling}/>
       <Stack.Screen name = "Learn More" component = {LearnMore} options = {headerStyling}/>
       <Stack.Screen name = "Registration" component = {Registration} options = {headerStyling}/>

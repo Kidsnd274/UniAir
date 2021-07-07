@@ -3,8 +3,8 @@ import { Text, View, TouchableOpacity, StyleSheet, Picker } from "react-native";
 import { Button, ButtonGroup, Icon } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const SchedulerController = () => {
-  const [date, setDate] = useState(new Date(1598051730000));
+const SchedulerController = (props) => {
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
@@ -29,10 +29,7 @@ const SchedulerController = () => {
 
   return (
     <View style={styles.container}>
-      <Picker style={{ height: 50, width: 150 }}>
-        <Picker.Item label="On" value="java" />
-        <Picker.Item label="Off" value="js" />
-      </Picker>
+      <Text>{String(date)}</Text>
       <View>
         <TouchableOpacity onPress={showDatepicker}>
           <Icon name="date-range" type="material-icons" size={30} />
@@ -41,11 +38,6 @@ const SchedulerController = () => {
       <View>
         <TouchableOpacity onPress={showTimepicker}>
           <Icon name="timer" type="material-icons" size={30} />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity>
-          <Icon name="plus" type="material-community" size={30} />
         </TouchableOpacity>
       </View>
       {show && (

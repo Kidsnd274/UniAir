@@ -6,14 +6,17 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
-import { Input, Icon, Button } from "react-native-elements";
+import { Input, Icon } from "react-native-elements";
 import { addController, removeController } from '../redux/actions'
+import { useNavigation } from "@react-navigation/core";
+import { Button } from "react-native-paper";
 
 const Registration = () => {
   const [roomName, setRoomName] = useState("3");
   const [ipAddress, setIpAddress] = useState(5000);
   const [portNo, setPortNo] = useState(0);
   const [airconModel, setAirconModel] = useState("Mitsubishi");
+  const navigation = useNavigation()
 
   const submitNewController = () => {
     addController(ipAddress, portNo, roomName, airconModel);
@@ -45,11 +48,18 @@ const Registration = () => {
         leftIcon={{ type: "material-community", name: "serial-port" }}
         onChangeText={(x) => setAirconModel(x)}
       />
-      <Button
+      {/* <Button
+        title="Back"
+        containerStyle={styles.buttonStyle}
+        onPress={() => navigation.navigate("Welcome")}
+      /> */}
+      <Button mode = "outlined" style = {styles.buttonStyle} onPress = {() => navigation.navigate("Welcome")}><Text>Back</Text></Button>
+      <Button mode = "contained" style = {styles.buttonStyle} onPress = {submitNewController}><Text>Submit</Text></Button>
+      {/* <Button
         title="Submit"
         containerStyle={styles.buttonStyle}
         onPress={submitNewController}
-      />
+      /> */}
     </View>
   );
 };
@@ -65,7 +75,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     width: "80%",
     justifyContent: "center",
-    // alignItems: "center"
+    marginVertical: 20
   },
 });
 

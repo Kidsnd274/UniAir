@@ -16,6 +16,10 @@ import NavigationDrawerContent from "./components/NavigationDrawerContent";
 import ControllerEditor from "./screens/ControllerEditor";
 import ControllerSettingNavigation from "./screens/ControllerSettingNavigation";
 import ControllerSettingMain from "./screens/ControllerSettingMain";
+import TestScreen from "./screens/TestScreen";
+import MainAppBar from "./components/MainAppBar";
+import { Provider as PaperProvider } from "react-native-paper";
+import SchedulerScreen from "./components/SchedulerScreen";
 
 export default function App() {
   const mainData = store.getState().airconReducer;
@@ -30,21 +34,26 @@ export default function App() {
   LogBox.ignoreAllLogs(true);
 
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Drawer.Navigator
-          initialRouteName="Welcome"
-          drawerContent={(props) => <NavigationDrawerContent {...props} />}
-        >
-          <Drawer.Screen name="Welcome" component={Welcome} />
-          <Drawer.Screen
-            name="ControllerList"
-            component={ControllerSelectorNavigation}
-          />
-          <Drawer.Screen name="Settings" component={SettingsNavigation} />
-          <Drawer.Screen name="Sign In" component={AuthScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
+    // <Provider store={store}>
+    //   <PaperProvider>
+    //     <NavigationContainer>
+    //       <Drawer.Navigator
+    //         initialRouteName="Welcome"
+    //         drawerContent={(props) => <NavigationDrawerContent {...props} />}
+    //       >
+    //         <Drawer.Screen name="Welcome" component={Welcome} />
+    //         <Drawer.Screen
+    //           name="ControllerList"
+    //           component={ControllerSelectorNavigation}
+    //         />
+    //         <Drawer.Screen name="Settings" component={SettingsNavigation} />
+    //         <Drawer.Screen name="Sign In" component={AuthScreen} />
+    //       </Drawer.Navigator>
+    //     </NavigationContainer>
+    //   </PaperProvider>
+    // </Provider>
+    <Provider store = {store}>
+      <SchedulerScreen/>
     </Provider>
   );
 }
@@ -62,7 +71,7 @@ const headerStyling = {
     backgroundColor: "#00B4D8",
   },
   headerTitleStyle: {
-    fontWeight: 'bold',
-    color: "#FFFF"
+    fontWeight: "bold",
+    color: "#FFFF",
   },
 };
