@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
 import { addController, removeController } from '../redux/actions'
+import { isServerSetupYet } from "../redux/api";
 
 const Registration = () => {
   const [roomName, setRoomName] = useState("3");
@@ -21,6 +22,10 @@ const Registration = () => {
 
   const removeConc = () => {
     removeController(1);
+  }
+
+  const testSetup = () => {
+    isServerSetupYet(ipAddress, portNo)
   }
 
   return (
