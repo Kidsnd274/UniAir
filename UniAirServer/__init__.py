@@ -21,7 +21,6 @@ def create_app():
     except FileNotFoundError:
         print("ERROR: Could not find database. Is this a first time setup?")
 
-    # if config.getboolean('settings', 'first_time_done') is False:
     import setup_page
     app.register_blueprint(setup_page.bp)
 
@@ -32,10 +31,8 @@ def create_app():
 
     @app.route("/")
     def index():
-        print(config.getboolean('settings', 'first_time_done'))
         if config.getboolean('settings', 'first_time_done') is False:
             return redirect(url_for('setup_page.welcome'))
-            # return redirect(url_for("setup_page.register"))
         else:
             return redirect(url_for("controller.status"))
 

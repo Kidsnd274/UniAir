@@ -9,6 +9,8 @@ bp = Blueprint('setup', __name__, url_prefix='/api')
 
 @bp.route('/aircon_data', methods=["GET", "POST"])
 def aircon_data():
+    if config.getboolean('settings', 'first_time_done') is False:
+        return "Server not setup yet!", 400
     if request.method == 'POST':
         if not request.json:
             abort(400)

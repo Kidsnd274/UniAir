@@ -14,6 +14,8 @@ bp = Blueprint('setup_page', __name__, url_prefix='/setup')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    if config.getboolean('settings', 'first_time_done') is True:
+        return redirect(url_for('controller.status'))
     if request.method == 'POST':
         error = None
         aircon_model = request.form['aircon_model']
@@ -40,13 +42,9 @@ def register():
         write_to_config()
 
         if error is None:
-            return redirect(url_for('controller.test_ir'))
+            return redirect(url_for('controller.status'))
 
     return render_template('setup/setup.html')
-
-@bp.route('/success')
-def success():
-    return render_template('setup/success.html')
 
 @bp.route('/is_setup')
 def is_setup():
@@ -60,6 +58,8 @@ def is_setup():
 
 @bp.route('/welcome')
 def welcome():
+    if config.getboolean('settings', 'first_time_done') is True:
+        return redirect(url_for('controller.status'))
     return render_template('welcome.html', get_ip=get_ip, get_hostname=get_hostname)
 
 def get_ip():
