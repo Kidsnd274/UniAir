@@ -3,14 +3,16 @@ import { Appbar } from "react-native-paper";
 import { Platform, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
-const MainAppBar = (props) => {
+const MainAppBar = ({scene,navigation}) => {
 
-  const navigation = useNavigation();
+  const navigationRaw = useNavigation();
+  const {options}=scene.descriptor;
+  const title = options.headerTitle;
 
   return (
     <Appbar.Header style = {styles.header}>
-      <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} color = "#FFFF" />
-      <Appbar.Content title= {props.title} />
+      <Appbar.Action icon="menu" onPress={() => navigationRaw.openDrawer()} color = "#FFFF" />
+      <Appbar.Content title= {title} />
     </Appbar.Header>
   );
 }

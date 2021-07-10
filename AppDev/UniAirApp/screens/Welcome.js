@@ -1,11 +1,15 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { persistStore } from "redux-persist";
 
 const Welcome = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.subContainerTop}>
-       <Text style={styles.tagLine}>UNI</Text><View style = {styles.tagLine2Container}><Text style={styles.tagLine2}>AIR</Text></View>
+        <Text style={styles.tagLine}>UNI</Text>
+        <View style={styles.tagLine2Container}>
+          <Text style={styles.tagLine2}>AIR</Text>
+        </View>
       </View>
       <View style={styles.subContainerBottom}>
         <TouchableOpacity
@@ -20,6 +24,12 @@ const Welcome = (props) => {
         >
           <Text style={styles.textRegister}>Register</Text>
         </TouchableOpacity>
+        {/* <TouchableOpacity
+          onPress={() => persistStore(this.props).purge()}
+          style={styles.buttonStyleLearnMore}
+        >
+          <Text>Hi</Text>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -75,7 +85,7 @@ const styles = StyleSheet.create({
   },
 
   tagLine2Container: {
-    backgroundColor: "#00B4D8"
+    backgroundColor: "#00B4D8",
   },
 
   textLearnMore: {
@@ -104,8 +114,7 @@ const styles = StyleSheet.create({
     height: "10%",
     margin: 10,
     justifyContent: "center",
-    alignItems: "center"
-
+    alignItems: "center",
   },
 });
 

@@ -9,8 +9,8 @@ import {
 import { Icon, Header } from "react-native-elements";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
-import Settings from "./Settings";
-import AuthScreen from "./AuthScreen";
+import Settings from "../screens/Settings";
+import AuthScreen from "../screens/AuthScreen";
 import ControllerSettingNavigation from "./ControllerSettingNavigation";
 const Stack = createStackNavigator();
 

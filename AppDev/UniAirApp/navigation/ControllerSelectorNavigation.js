@@ -9,14 +9,15 @@ import {
 import { Icon, Header } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import ControllerSelectorMain from "../screens/ControllerSelectorMain";
 import { useSelector } from "react-redux";
-import ControllerEditor from "./ControllerEditor";
-import ControllerSettingMain from "./ControllerSettingMain";
+import Controller from "../screens/Controller";
+import ControllerAppBar from "../components/appbar/ControllerAppBar";
 
-const ControllerSettingNavigation = () => {
-  function ControllerEditorCreator(dataSet) {
+const ControllerSelectorNavigation = () => {
+  function ControllerCreator(dataSet) {
     return () => {
-      return <ControllerEditor data={dataSet} />;
+      return <Controller data={dataSet} />;
     };
   }
 
@@ -27,16 +28,25 @@ const ControllerSettingNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="Controllers"
-      screenOptions={{
-        headerShown: false,
-      }}
+      
+
+      // screenOptions={{
+      //   header: ({ scene, navigation }) => (
+      //     <ControllerAppBar scene={scene} navigation={navigation} />
+      //   ),
+      // }}
     >
-      <Stack.Screen name="Controllers" component={ControllerSettingMain} />
+      <Stack.Screen
+        name="Controllers"
+        component={ControllerSelectorMain}
+        // options={{ headerTitle: "Controller List" }}
+      />
       {controllerData.aircons.map((x) => (
         <Stack.Screen
           name={x.roomName}
-          component={ControllerEditorCreator(x)}
-          options={headerStyling}
+          component={ControllerCreator(x)}
+          // options={{ headerTitle: x.id }}
+          options={{ headerShown:false }}
         />
       ))}
     </Stack.Navigator>
@@ -60,11 +70,9 @@ const styles = StyleSheet.create({
   selector: {
     flexDirection: "column",
     flex: 1,
-    borderWidth: 1,
     width: "80%",
     alignContent: "center",
     marginVertical: 10,
-    borderColor: "red",
     alignItems: "center",
   },
   selectorDisplay: {
@@ -88,4 +96,5 @@ const headerStyling = {
     color: "#FFFF",
   },
 };
-export default ControllerSettingNavigation;
+
+export default ControllerSelectorNavigation;

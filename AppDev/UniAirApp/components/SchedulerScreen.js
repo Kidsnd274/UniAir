@@ -1,29 +1,41 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
-import { Button } from "react-native-paper";
+import { Button, Appbar } from "react-native-paper";
 import SchedulerController from "./SchedulerController";
 import { useSelector } from "react-redux";
+import SchedulerAppBar from "./appbar/SchedulerAppBar";
 
-const SchedulerScreen = () => {
-  
+const SchedulerScreen = (props) => {
   const controllerData = useSelector(
-    // (state) => state.airconReducer.aircons[props.data.id]
-    (state) => state.airconReducer.aircons[0]
+    (state) => state.airconReducer.aircons[props.data.id]
+    // (state) => state.airconReducer.aircons[0]
   );
 
-  const [aircon_fanspeed, setstate_aircon_fanspeed] = useState(controllerData.controllerData.aircon_fanspeed)
-  const [aircon_flap, setstate_aircon_flap] = useState(controllerData.controllerData.aircon_flap)
-  const [aircon_eco_mode, setstate_aircon_eco_mode] = useState(controllerData.controllerData.aircon_eco_mode)
-  const [aircon_powerful_mode, setstate_aircon_powerful_mode] = useState(controllerData.controllerData.aircon_powerful_mode)
-  const [date, setDate] = useState(new Date().toDateString())
+  const [aircon_fanspeed, setstate_aircon_fanspeed] = useState(
+    controllerData.controllerData.aircon_fanspeed
+  );
+  const [aircon_flap, setstate_aircon_flap] = useState(
+    controllerData.controllerData.aircon_flap
+  );
+  const [aircon_eco_mode, setstate_aircon_eco_mode] = useState(
+    controllerData.controllerData.aircon_eco_mode
+  );
+  const [aircon_powerful_mode, setstate_aircon_powerful_mode] = useState(
+    controllerData.controllerData.aircon_powerful_mode
+  );
+  const [date, setDate] = useState(new Date().toDateString());
 
   return (
     <View style={styles.container}>
-    <View style={styles.display}>
-    <View style = {styles.leftDisplay}></View>
-    <View style = {styles.rightDisplay}></View>
-    </View>
+        <SchedulerAppBar
+          schedulerModal={props.schedulerModal}
+          data={props.data}
+        />
+      <View style={styles.display}>
+        <View style={styles.leftDisplay}></View>
+        <View style={styles.rightDisplay}></View>
+      </View>
 
       <View style={styles.subcontainer}>
         <View style={styles.settingContainer}>
@@ -99,10 +111,10 @@ const SchedulerScreen = () => {
           <Text>{new Date().toDateString()}</Text>
         </View>
       </View>
-      <View style={styles.submitButton}>
-        <Button mode="outlined">
+      <View style={styles.submitView}>
+        <TouchableOpacity style = {styles.submitTouchable}>
           <Text>Submit</Text>
-        </Button>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -116,6 +128,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 30,
     paddingHorizontal: 30,
+    justifyContent: "space-evenly"
   },
   subcontainer: {
     flex: 1,
@@ -143,23 +156,30 @@ const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
   },
-  submitButton: {
-    flex: 0.5,
+  submitView: {
+    flex:1,
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   display: {
-    flex:3,
+    flex: 3,
     borderWidth: 1,
     flexDirection: "row",
   },
   leftDisplay: {
-    flex:1,
-    borderWidth:1
+    flex: 1,
+    borderWidth: 1,
   },
   rightDisplay: {
-    flex:1.75,
-    borderWidth:1
+    flex: 1.75,
+    borderWidth: 1,
+  },
+  submitTouchable: {
+    width: "70%",
+    borderWidth:1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5
   }
 });

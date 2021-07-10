@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  Alert
 } from "react-native";
 import { Input, Icon } from "react-native-elements";
 import { addController, removeController } from '../redux/actions'
 import { useNavigation } from "@react-navigation/core";
-import { Button } from "react-native-paper";
+import { Button, Snackbar} from "react-native-paper";
 
 const Registration = () => {
   const [roomName, setRoomName] = useState("3");
@@ -20,6 +21,8 @@ const Registration = () => {
 
   const submitNewController = () => {
     addController(ipAddress, portNo, roomName, airconModel);
+    navigation.navigate("Welcome")
+    Alert.alert("Registration", "Registration Completed" )
   };
 
   const removeConc = () => {
