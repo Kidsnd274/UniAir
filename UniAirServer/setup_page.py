@@ -52,9 +52,10 @@ def is_setup():
         'is_setup': config.getboolean('settings', 'first_time_done')
     }
     response = Response(
-        response = response_json,
+        response = json.dumps(response_json),
         mimetype = 'application/json'
     )
+    return response
 
 @bp.route('/welcome')
 def welcome():

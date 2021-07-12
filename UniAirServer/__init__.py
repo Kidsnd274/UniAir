@@ -26,8 +26,10 @@ def create_app():
 
     import api
     import controller
+    import settings_page
     app.register_blueprint(api.bp)
     app.register_blueprint(controller.bp)
+    app.register_blueprint(settings_page.bp)
 
     @app.route("/")
     def index():

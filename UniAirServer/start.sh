@@ -1,2 +1,2 @@
 source venv/bin/activate
-python3 app.py
+python3 __init__.py

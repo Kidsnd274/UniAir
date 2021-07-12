@@ -1,4 +1,4 @@
-{% extends 'base_not_setup.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
 UniAir Server Setup
@@ -9,12 +9,11 @@ UniAir Server Setup
 
 {% block content %}
 <center>
-<h1>UniAir Server Setup</h1>
+<h1>UniAir Server Settings</h1>
 <form method="post">
     <label for="aircon_model">Aircon Model</label>
-    <input class="form-control" name="aircon_model" id="aircon_model" style="border: 0px; width:auto" required>
-    <p></p>
-    <input class="btn btn-primary" type="submit" value="Register">
+    <input name="aircon_model" id="aircon_model" required>
+    <input type="submit" value="Register">
     <p>Currently only "mitsu_control" is working</p>
 </form>
 </center>
