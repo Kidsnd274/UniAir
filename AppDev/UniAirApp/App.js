@@ -51,6 +51,7 @@ export default function App() {
             <Drawer.Screen name="Sign In" component={AuthScreen} />
           </Drawer.Navigator>
         </NavigationContainer>
+        {/* <SchedulerScreen/> */}
       </PersistGate>
     </Provider>
   );

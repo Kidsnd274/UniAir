@@ -12,40 +12,78 @@ const SchedulerScreen = (props) => {
     // (state) => state.airconReducer.aircons[0]
   );
 
-  const [aircon_fanspeed, setstate_aircon_fanspeed] = useState(
+  const [aircon_power, set_aircon_power] = useState(
+    controllerData.controllerData.aircon_power
+  );
+
+  const [aircon_temperature, set_aircon_temperature] = useState(
+    controllerData.controllerData.aircon_temp
+  );
+  const [aircon_fanspeed, set_aircon_fanspeed] = useState(
     controllerData.controllerData.aircon_fanspeed
   );
-  const [aircon_flap, setstate_aircon_flap] = useState(
+  const [aircon_flap, set_aircon_flap] = useState(
     controllerData.controllerData.aircon_flap
   );
-  const [aircon_eco_mode, setstate_aircon_eco_mode] = useState(
+  const [aircon_eco_mode, set_aircon_eco_mode] = useState(
     controllerData.controllerData.aircon_eco_mode
   );
-  const [aircon_powerful_mode, setstate_aircon_powerful_mode] = useState(
+  const [aircon_powerful_mode, set_aircon_powerful_mode] = useState(
     controllerData.controllerData.aircon_powerful_mode
   );
   const [date, setDate] = useState(new Date().toDateString());
 
   return (
     <View style={styles.container}>
-        <SchedulerAppBar
-          schedulerModal={props.schedulerModal}
-          data={props.data}
-        />
+      <SchedulerAppBar
+        schedulerModal={props.schedulerModal}
+        data={props.data}
+      />
       <View style={styles.display}>
-        <View style={styles.leftDisplay}></View>
-        <View style={styles.rightDisplay}></View>
+        <View style={styles.leftDisplay}>
+          <View style={styles.displayTopLeft}>
+            <View style={styles.general}>
+              <Text>{aircon_fanspeed}</Text>
+              <Icon name="fan" type="material-community" />
+            </View>
+            <View style={styles.general}>
+              <Text>{aircon_flap}</Text>
+              <Icon name="fan" type="material-community" />
+            </View>
+          </View>
+          <View style={styles.general}>
+            <Icon name="tree" type="material-community" />
+            <Icon name="snowflake" type="material-community" />
+          </View>
+        </View>
+        <View style={styles.rightDisplay}>
+          <View style={styles.displayTopRight}>
+            <View style={styles.general}>
+              <Text>{aircon_temperature}</Text>
+              <Icon name="temperature-celsius" type="material-community" />
+            </View>
+          </View>
+          <View style={styles.displayBottomRight}>
+            <Text>{new Date().toDateString()}</Text>
+          </View>
+        </View>
       </View>
 
       <View style={styles.subcontainer}>
         <View style={styles.settingContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => set_aircon_temperature(aircon_temperature - 1)}
+          >
             <Icon name="plus" type="material-community" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => set_aircon_power(!aircon_power)}>
             <Icon name="power" type="material-community" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => set_aircon_temperature(aircon_temperature + 1)}
+          >
             <Icon name="minus" type="material-community" />
           </TouchableOpacity>
         </View>
@@ -54,13 +92,19 @@ const SchedulerScreen = (props) => {
         </View>
       </View>
       <View style={styles.subcontainer}>
-        <View style={styles.settingContainer}>
+        <View
+          style={styles.settingContainer}
+          onPress={() => set_aircon_fanspeed(aircon_fanspeed + 1)}
+        >
           <TouchableOpacity style={styles.button}>
             <Icon name="fan-chevron-up" type="material-community" />
           </TouchableOpacity>
-          <Text>{aircon_fanspeed}</Text>
           <TouchableOpacity style={styles.button}>
-            <Icon name="fan-chevron-down" type="material-community" />
+            <Icon
+              name="fan-chevron-down"
+              type="material-community"
+              onPress={() => set_aircon_fanspeed(aircon_fanspeed + 1)}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.settingTitle}>
@@ -70,11 +114,18 @@ const SchedulerScreen = (props) => {
       <View style={styles.subcontainer}>
         <View style={styles.settingContainer}>
           <TouchableOpacity style={styles.button}>
-            <Icon name="fan-chevron-up" type="material-community" />
+            <Icon
+              name="fan-chevron-up"
+              type="material-community"
+              onPress={() => set_aircon_flap(aircon_flap + 1)}
+            />
           </TouchableOpacity>
-          <Text>{aircon_flap}</Text>
           <TouchableOpacity style={styles.button}>
-            <Icon name="fan-chevron-down" type="material-community" />
+            <Icon
+              name="fan-chevron-down"
+              type="material-community"
+              onPress={() => set_aircon_flap(aircon_flap + 1)}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.settingTitle}>
@@ -112,7 +163,7 @@ const SchedulerScreen = (props) => {
         </View>
       </View>
       <View style={styles.submitView}>
-        <TouchableOpacity style = {styles.submitTouchable}>
+        <TouchableOpacity style={styles.submitTouchable}>
           <Text>Submit</Text>
         </TouchableOpacity>
       </View>
@@ -128,7 +179,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 30,
     paddingHorizontal: 30,
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   subcontainer: {
     flex: 1,
@@ -155,9 +206,13 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
+    width: "33%",
+    height: "80%",
+    justifyContent: "center",
+    alignItems: "center"
   },
   submitView: {
-    flex:1,
+    flex: 1,
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -177,9 +232,40 @@ const styles = StyleSheet.create({
   },
   submitTouchable: {
     width: "70%",
-    borderWidth:1,
+    borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5
+    borderRadius: 5,
+  },
+  displayTopLeft: {
+    flexDirection: "column",
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    borderWidth: 1
+  },
+  displayBottomLeft: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    borderWidth: 1
+  },
+  displayTopRight: {
+    flexDirection: "column",
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    borderWidth: 1
+  },
+  displayBottomRight: {
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    borderWidth: 1
+  },
+  general: {
+     flex: 1, flexDirection: "row", justifyContent: "center", alignItems : "center"
   }
 });
