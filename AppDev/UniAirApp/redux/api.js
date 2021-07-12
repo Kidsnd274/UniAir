@@ -52,3 +52,10 @@ export const sendAirconData = airconId => async (dispatch, getState) => {
         console.error("ERROR:", error)
     );
 }
+
+export const isServerSetupYet = async (ipAddress, port) => {
+    const response = await axiosInstance
+        .get("http://" + ipAddress + ":" + port + "/setup/is_setup")
+        .catch(error => console.error("Error:", error))
+    return response.data['is_setup']
+}
