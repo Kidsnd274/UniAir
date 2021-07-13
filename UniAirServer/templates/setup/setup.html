@@ -13,9 +13,15 @@ UniAir Server Setup
 <form method="post">
     <label for="aircon_model">Aircon Model</label>
     <input class="form-control" name="aircon_model" id="aircon_model" style="border: 0px; width:auto" required>
+    <p>Currently only "mitsu_control" is working</p>
+    <p></p>
+    <label for="lircd_address">LIRCD Address</label>
+    <input class="form-control" name="lircd_address" id="lircd_address" style="border: 0px; width:auto" value="{{lircd_default_address}}" required>
+    <p><i><small>Leave this as default if you are not sure</small></i></p>
+    <label for="secret_key">Secret Key (for mobile app)</label>
+    <input class="form-control" type="password" name="secret_key" id="secret_key" style="border: 0px; width:auto" required>
     <p></p>
     <input class="btn btn-primary" type="submit" value="Register">
-    <p>Currently only "mitsu_control" is working</p>
 </form>
 </center>
 {% endblock %}

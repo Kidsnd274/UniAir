@@ -1,8 +1,10 @@
+from os import write
 import socket
 import lirc
 import json
 from datetime import datetime
 from virtualcontroller.ControllerData import ControllerData
+from config import config
 
 class VirtualController():
     """Main virtual controller handling IR commands with LIRC and web server"""
@@ -13,7 +15,7 @@ class VirtualController():
 
         self.client = lirc.Client(
             connection = lirc.LircdConnection(
-                address = "/var/run/lirc/lircd-tx", # Use /var/run/lirc/lircd for default lirc installations
+                address = config.get('settings', 'lircd_address'),
                 socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM),
                 timeout = 5.0
             )
@@ -40,14 +42,9 @@ class VirtualController():
         try:
             print("LOG: Sending pulse...")
             self.client.send_once(controller, command)
+            # write_to_database()
         except lirc.exceptions.LircdInvalidReplyPacketError:
             print("ERROR: Invalid reply from lircd ignored")
-        # try:
-        #     print("LOG: Sending pulse")
-        #     self.client.send_once(controller, command)
-        # except lirc.exceptions.LircdInvalidReplyPacketError:
-        #     print("ERROR: Invalid reply from lircd ignored")
-
 
     def send_updated_data_ir(self):
         if not self.controllerData.aircon_power:

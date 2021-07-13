@@ -1,9 +1,9 @@
 from flask import (
-    Blueprint, url_for, request, abort, Response
+    Blueprint, request, abort, Response
 )
 from virtualcontroller.VirtualController import VirtualController
 from config import config
-from database import virtual_controller
+from database import virtual_controller, write_to_database
 
 bp = Blueprint('setup', __name__, url_prefix='/api')
 
@@ -17,6 +17,7 @@ def aircon_data():
         else:
             virtual_controller.controller.update_aircon_data(request.json)
             virtual_controller.controller.send_updated_data_ir()
+            write_to_database()
     response = Response(
         response = virtual_controller.controller.get_aircon_data(),
         mimetype = 'application/json'

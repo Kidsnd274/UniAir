@@ -1,9 +1,10 @@
 import functools
 from os import write
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, Response
+    Blueprint, flash, redirect, render_template, request, url_for, Response
 )
-# from werkzeug.security import check_password_hash, generate_password_hash
+from auth import login_user_authenticated
+from werkzeug.security import check_password_hash, generate_password_hash
 from config import config, write_to_config
 import json
 from virtualcontroller.VirtualController import VirtualController
@@ -19,8 +20,16 @@ def register():
     if request.method == 'POST':
         error = None
         aircon_model = request.form['aircon_model']
+        secret_key = request.form['secret_key']
+
+        if not aircon_model:
+            error = "Aircon Model is required"
+        elif not secret_key:
+            error = "Secret Key is required"
+
         config['settings']['aircon_model'] = aircon_model
         config['settings']['first_time_done'] = "true"
+        config['settings']['secret_key'] = generate_password_hash(secret_key)
         # In the future, include configuration for lirc as well
 
         # Generating default values for controller data
@@ -37,14 +46,16 @@ def register():
 
         # Saving controller to database (might make a database object)
         write_to_database()
-
         # Saving config file
         write_to_config()
 
         if error is None:
-            return redirect(url_for('controller.status'))
+            login_user_authenticated()
+            return redirect(url_for('auth.login'))
+        
+        flash(error)
 
-    return render_template('setup/setup.html')
+    return render_template('setup/setup.html', lircd_default_address=config.get('settings', 'lircd_address'))
 
 @bp.route('/is_setup')
 def is_setup():
