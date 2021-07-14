@@ -2,9 +2,18 @@ from flask import (
     Blueprint, render_template, url_for, request, redirect
 )
 from flask_login import login_required
-from database import virtual_controller
-from setup_page import get_ip, get_hostname
-from config import config
+try:
+    from .database import virtual_controller
+    from .setup_page import get_ip, get_hostname
+    from .config import config
+except:
+    pass
+try:
+    from database import virtual_controller
+    from setup_page import get_ip, get_hostname
+    from config import config
+except:
+    pass
 
 bp = Blueprint('controller', __name__, url_prefix='/controller')
 

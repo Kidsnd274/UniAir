@@ -3,8 +3,16 @@ import socket
 import lirc
 import json
 from datetime import datetime
-from virtualcontroller.ControllerData import ControllerData
-from config import config
+try:
+    from .ControllerData import ControllerData
+    from ..config import config
+except:
+    pass
+try:
+    from virtualcontroller.ControllerData import ControllerData
+    from config import config
+except:
+    pass
 
 class VirtualController():
     """Main virtual controller handling IR commands with LIRC and web server"""

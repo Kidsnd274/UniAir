@@ -1,15 +1,22 @@
-import functools
-from os import write
+import json, socket
 from flask import (
     Blueprint, flash, redirect, render_template, request, url_for, Response
 )
-from auth import login_user_authenticated
-from werkzeug.security import check_password_hash, generate_password_hash
-from config import config, write_to_config
-import json
-from virtualcontroller.VirtualController import VirtualController
-from database import write_to_database, virtual_controller, read_from_database
-import socket
+from werkzeug.security import generate_password_hash
+try:
+    from .auth import login_user_authenticated
+    from .config import config, write_to_config
+    from .virtualcontroller.VirtualController import VirtualController
+    from .database import write_to_database, virtual_controller, read_from_database
+except:
+    pass
+try:
+    from auth import login_user_authenticated
+    from config import config, write_to_config
+    from virtualcontroller.VirtualController import VirtualController
+    from database import write_to_database, virtual_controller, read_from_database
+except:
+    pass
 
 bp = Blueprint('setup_page', __name__, url_prefix='/setup')
 
@@ -20,16 +27,16 @@ def register():
     if request.method == 'POST':
         error = None
         aircon_model = request.form['aircon_model']
-        secret_key = request.form['secret_key']
+        password = request.form['password']
 
         if not aircon_model:
             error = "Aircon Model is required"
-        elif not secret_key:
+        elif not password:
             error = "Secret Key is required"
 
         config['settings']['aircon_model'] = aircon_model
         config['settings']['first_time_done'] = "true"
-        config['settings']['secret_key'] = generate_password_hash(secret_key)
+        config['settings']['password'] = generate_password_hash(password)
         # In the future, include configuration for lirc as well
 
         # Generating default values for controller data

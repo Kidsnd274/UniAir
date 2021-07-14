@@ -1,8 +1,17 @@
 from flask import Flask, redirect, url_for
 from flask_login import LoginManager, current_user, UserMixin
-from config import config
-from database import read_from_database, virtual_controller
-from auth import User
+try:
+    from .config import config
+    from .database import read_from_database, virtual_controller
+    from .auth import User, generate_secret_key
+except:
+    pass
+try:
+    from config import config
+    from database import read_from_database, virtual_controller
+    from auth import User, generate_secret_key
+except:
+    pass
 
 def create_app():
     """Create and configure an instance of the Flask Application"""
@@ -11,13 +20,14 @@ def create_app():
     config['settings'] = {
         'first_time_done': 'false',
         'lircd_address': '/var/run/lirc/lircd-tx', # Use /var/run/lirc/lircd for default lirc installations
-        # 'secret_key': 'abc123',
+        'secret_key': generate_secret_key(),
         # 'database_file': './database.db',
     }
     config.read('settings.ini')
     # print(config.get('settings', 'first_time_done'))
 
     app = Flask(__name__, instance_relative_config=True)
+    app.config['SECRET_KEY'] = config.get('settings', 'secret_key')
 
     # Login Manager Stuff
     login_manager = LoginManager()
@@ -35,13 +45,24 @@ def create_app():
     except FileNotFoundError:
         print("ERROR: Could not find database. Is this a first time setup?")
 
-    import setup_page
+    try:
+        from . import setup_page
+        from . import api
+        from . import controller
+        from . import settings_page
+        from . import auth
+    except:
+        pass
+    try:
+        import setup_page
+        import api
+        import controller
+        import settings_page
+        import auth
+    except:
+        pass
+    
     app.register_blueprint(setup_page.bp)
-
-    import api
-    import controller
-    import settings_page
-    import auth
     app.register_blueprint(api.bp)
     app.register_blueprint(controller.bp)
     app.register_blueprint(settings_page.bp)

@@ -2,9 +2,18 @@ from flask import (
     Blueprint, render_template, url_for, redirect
 )
 from flask_login import login_required
-from database import read_from_database, write_to_database
-from setup_page import get_ip, get_hostname
-from config import config, write_to_config
+try:
+    from .database import read_from_database, write_to_database
+    from .setup_page import get_ip, get_hostname
+    from .config import config, write_to_config
+except:
+    pass
+try:
+    from database import read_from_database, write_to_database
+    from setup_page import get_ip, get_hostname
+    from config import config, write_to_config
+except:
+    pass
 
 bp = Blueprint('settings', __name__, url_prefix='/settings')
 

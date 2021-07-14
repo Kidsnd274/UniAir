@@ -1,7 +1,16 @@
 import json
-from virtualcontroller.VirtualController import VirtualController
-from virtualcontroller.ControllerHolder import ControllerHolder
-from config import config
+try:
+    from .virtualcontroller.VirtualController import VirtualController
+    from .virtualcontroller.ControllerHolder import ControllerHolder
+    from .config import config
+except:
+    pass
+try:
+    from virtualcontroller.VirtualController import VirtualController
+    from virtualcontroller.ControllerHolder import ControllerHolder
+    from config import config
+except:
+    pass
 
 # Placeholder data
 controllerData = {

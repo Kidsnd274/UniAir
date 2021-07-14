@@ -1,13 +1,25 @@
 from flask import (
     Blueprint, request, abort, Response
 )
-from virtualcontroller.VirtualController import VirtualController
-from config import config
-from database import virtual_controller, write_to_database
+try:
+    from .virtualcontroller.VirtualController import VirtualController
+    from .config import config
+    from .database import virtual_controller, write_to_database
+    from .auth import token_required
+except:
+    pass
+try:
+    from virtualcontroller.VirtualController import VirtualController
+    from config import config
+    from database import virtual_controller, write_to_database
+    from auth import token_required
+except:
+    pass
 
 bp = Blueprint('setup', __name__, url_prefix='/api')
 
 @bp.route('/aircon_data', methods=["GET", "POST"])
+@token_required
 def aircon_data():
     if config.getboolean('settings', 'first_time_done') is False:
         return "Server not setup yet!", 400
