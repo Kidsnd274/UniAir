@@ -21,6 +21,7 @@ import TestScreen from "./screens/TestScreen";
 import MainAppBar from "./components/appbar/MainAppBar";
 import { Provider as PaperProvider } from "react-native-paper";
 import SchedulerScreen from "./components/SchedulerScreen";
+import firebase from "firebase";
 
 export default function App() {
   const mainData = store.getState().airconReducer;
@@ -31,7 +32,12 @@ export default function App() {
       return <Controller data={dataSet} />;
     };
   }
-
+  console.log(firebase
+  .firestore()
+  .collection("user")
+  .doc("test")
+  .set({acConfig : "hi"}))
+  
   // LogBox.ignoreAllLogs(true);
 
   return (
@@ -51,6 +57,7 @@ export default function App() {
             <Drawer.Screen name="Sign In" component={AuthScreen} />
           </Drawer.Navigator>
         </NavigationContainer>
+
         {/* <SchedulerScreen/> */}
       </PersistGate>
     </Provider>

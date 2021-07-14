@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   View,
   Button,
@@ -18,8 +18,15 @@ import {
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Icon } from "react-native-elements";
 import firebase from "../database/firebaseConfig";
+import { useNavigation } from "@react-navigation/core";
+
 
 const NavigationDrawerContent = (props) => {
+  useEffect(() => {
+      signOut()
+    }
+  )
+
   var user = firebase.auth().currentUser;
 
   function userAvatar() {
@@ -35,6 +42,24 @@ const NavigationDrawerContent = (props) => {
       return firebase.auth().currentUser.displayName;
     } else {
       return "Guest";
+    }
+  }
+
+  function signOut() {
+    if (user) {
+      return ( 
+      <View style={styles.accountDrawer}>
+        <Drawer.Section title="Account Setting">
+          <DrawerItem
+            icon={() => <Icon name="deleteuser" type="ant-design" />}
+            label="SignOut"
+            onPress={() => {
+              firebase.auth().signOut().then()
+            }}
+          />
+        </Drawer.Section>
+      </View>
+      )
     }
   }
 
@@ -58,10 +83,7 @@ const NavigationDrawerContent = (props) => {
           <Drawer.Section title="Quick Access">
             <DrawerItem
               icon={() => (
-                <Icon
-                  name="file-tray-stacked-sharp"
-                  type="ionicon"
-                />
+                <Icon name="file-tray-stacked-sharp" type="ionicon" />
               )}
               label="Welcome"
               onPress={() => {
@@ -69,7 +91,12 @@ const NavigationDrawerContent = (props) => {
               }}
             />
             <DrawerItem
-              icon={() => <Icon name="controller-classic-outline" type="material-community" />}
+              icon={() => (
+                <Icon
+                  name="controller-classic-outline"
+                  type="material-community"
+                />
+              )}
               label="Controller List"
               onPress={() => {
                 props.navigation.navigate("ControllerList");
@@ -88,6 +115,7 @@ const NavigationDrawerContent = (props) => {
             />
           </Drawer.Section>
         </View>
+        {signOut()}
       </DrawerContentScrollView>
     </View>
   );
