@@ -166,7 +166,19 @@ export const removeController = (airconId) => {
   store.dispatch(thunkFunction(airconId));
 }
 
+export const restoreFireStore = (acConfig) => {
+  const thunkFunction = (acConfig) => (dispatch) => {
+    console.log("LOG: Restore " + acConfig);
+    dispatch({
+      type: "RESTORE_FIRESTORE",
+      acConfig: acConfig,
+    })
+  }
+  store.dispatch(thunkFunction(acConfig));
+}
 // API functions
 export const updateAirconData = (airconId) => {
   return store.dispatch(fetchAirconData(airconId));
 };
+
+

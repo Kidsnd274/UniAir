@@ -15,6 +15,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import firebase from "../database/firebaseConfig";
 import { useSelector } from "react-redux";
+import { restoreFireStore } from "../redux/actions";
 
 const auth = firebase.auth();
 
@@ -157,7 +158,7 @@ const AuthScreen = () => {
       var item = firebase
         .firestore()
         .collection("user")
-        .doc("GKpS9pAi6yTJx8lREKbfLeO9B4z1").get().then(x => console.log(objToString(x.data())));
+        .doc("GKpS9pAi6yTJx8lREKbfLeO9B4z1").get().then(x => restoreFireStore(x.data()["acConfig"]));
       console.log(item)
     } else {
       Alert.alert("Error", "Please sign in to your google account");

@@ -32,12 +32,6 @@ export default function App() {
       return <Controller data={dataSet} />;
     };
   }
-  console.log(firebase
-  .firestore()
-  .collection("user")
-  .doc("test")
-  .set({acConfig : "hi"}))
-  
   // LogBox.ignoreAllLogs(true);
 
   return (

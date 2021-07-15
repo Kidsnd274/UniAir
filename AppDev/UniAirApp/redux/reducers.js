@@ -99,6 +99,11 @@ function airconReducer(state = initialState, action) {
       console.log("For loop done")
       newArray.splice(action.airconId, 1);
       return { ...state, aircons: newArray };
+
+    case "RESTORE_FIRESTORE":
+      newArray = action.payload.acConfig
+      return {...newArray}
+      
     default:
       return state;
   }
