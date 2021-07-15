@@ -117,22 +117,21 @@ export const updateTab = (airconId, newValue) => {
 };
 
 //Adding New Controller
-export const addController = (ipAddress, port, roomName, airconModel) => {
+export const addController = (ipAddress, port, roomName, testController) => {
   const thunkFunction =
-    (ipAddress, port, roomName, aircon_model) => (dispatch, getState) => {
-      console.log("LOG: ADD_CONTROLLER ");
-      // console.log(getState().airconReducer.aircons.length)
+    (ipAddress, port, roomName, testController) => (dispatch, getState) => {
+      console.log("LOG: ADD_CONTROLLER at redux/actions.js");
       dispatch({
         type: "ADD_CONTROLLER",
         payload: {
           ipAddress: ipAddress,
           port: port,
           roomName: roomName,
-          aircon_model: aircon_model,
           id: getState().airconReducer.aircons.length,
           aircon_tab: "1",
+          testController: false,
           // Default values that should change
-          controllerData: {
+          controllerData: { // Might remove this in the future as the program will pull fresh data when server is authenticated
             date_and_time: "",
             aircon_power: false,
             aircon_temp: 24,
@@ -152,8 +151,40 @@ export const addController = (ipAddress, port, roomName, airconModel) => {
         },
       });
     };
-  store.dispatch(thunkFunction(ipAddress, port, roomName, airconModel));
+  store.dispatch(thunkFunction(ipAddress, port, roomName, testController));
 };
+
+export const addTestController = (roomName) => {
+  const thunkFunction = (roomName) => (dispatch, getState) => {
+    dispatch({ // Test Controller
+      type: "ADD_CONTROLLER",
+      payload: {
+        roomName: roomName,
+        id: getState().airconReducer.aircons.length,
+        aircon_tab: "1",
+        testController: true,
+        // Default values that should change
+        controllerData: {
+          aircon_power: false,
+          aircon_temp: 24,
+          aircon_fanspeed: 2,
+          aircon_flap: 3,
+          aircon_eco_mode: false,
+          aircon_powerful_mode: false,
+        },
+        controllerConfig: {
+          max_aircon_temp: 31,
+          min_aircon_temp: 16,
+          max_aircon_fanspeed: 4,
+          min_aircon_fanspeed: 0,
+          max_aircon_flap: 4,
+          min_aircon_flap: 0,
+        }
+      },
+    });
+  }
+  store.dispatch(thunkFunction(roomName))
+}
 
 export const removeController = (airconId) => {
   const thunkFunction = (airconId) => (dispatch) => {
