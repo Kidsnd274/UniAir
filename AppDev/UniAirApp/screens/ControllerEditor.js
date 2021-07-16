@@ -6,11 +6,17 @@ import { TextInput } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 import { removeController } from "../redux/actions";
 import { useNavigation } from "@react-navigation/native";
+import { ShadowPropTypesIOS } from "react-native";
+import { TextPropTypes } from "react-native";
+import { store } from "../redux/store";
 
 const ControllerEditor = (props) => {
-  const controllerData = useSelector(
-    (state) => state.airconReducer.aircons[props.data.id]
-  );
+  const mainData = store.getState().airconReducer;
+
+  // const controllerData = useSelector(
+  //   (state) => state.airconReducer.aircons[props.data.id]
+  // );
+  const controllerData = mainData.aircons[props.data.id]
 
   const check = () => {
     if (typeof props.settingModal === "undefined") {
@@ -34,6 +40,30 @@ const ControllerEditor = (props) => {
       </TouchableOpacity>
     );
   };
+
+  // const deleteController = () => {
+  //   if (typeof props.settingModal === "undefined") {
+  //     return (
+  //       null
+  //     );
+  //   }
+
+  //   return (
+  //     <TouchableOpacity
+  //     onPress={() => removeController(props.data.id)}
+  //     style={{ ...styles.submitTouchable, backgroundColor: "red" }}
+  //   >
+  //     <Text style={styles.submitText}>DELETE CONTROLLER</Text>
+  //   </TouchableOpacity>
+  //   );
+  // };
+  const removeAndExit = () => {
+    navigation.navigate("Controllers")
+    setTimeout(() => {
+      removeController(props.data.id)
+    }, 1000);
+  }
+
   const navigation = useNavigation();
 
   const [roomName, setRoomName] = useState(controllerData.roomName);
@@ -42,7 +72,7 @@ const ControllerEditor = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style = {styles.headerView}>
+      <View style={styles.headerView}>
         <Text style={{ fontSize: 20, textDecorationLine: "underline" }}>
           Controller Information
         </Text>
@@ -73,17 +103,18 @@ const ControllerEditor = (props) => {
         />
       </View>
       <View style={styles.subContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Controllers")}
+        {/* <TouchableOpacity
+          onPress={() => navigation.navigate("Welcome")}
           style={{ ...styles.submitTouchable, backgroundColor: "red" }}
         >
           <Text style={styles.submitText}>BACK</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        {check()}
         <TouchableOpacity style={styles.submitTouchable}>
           <Text style={styles.submitText}>SUBMIT CHANGES</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => removeController(props.data.id)}
+          onPress={() => removeAndExit()}
           style={{ ...styles.submitTouchable, backgroundColor: "red" }}
         >
           <Text style={styles.submitText}>DELETE CONTROLLER</Text>
@@ -114,10 +145,10 @@ const styles = StyleSheet.create({
   },
   submitText: { color: "#FFFF" },
   headerView: {
-    justifyContent : "center",
+    justifyContent: "center",
     alignItems: "center",
-    paddingTop: 10
-  }
+    paddingTop: 10,
+  },
 });
 
 export default ControllerEditor;

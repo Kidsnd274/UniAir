@@ -51,7 +51,7 @@ const Controller = (props) => {
 
   return (
     <View style={styles.container}>
-      <ControllerAppBar data={props.data} settingModal = {SettingModalVisible}/>
+      <ControllerAppBar data={props.data} settingModal = {SettingModalVisible} controllerContext = {true}/>
       <View style={styles.controllerContainer}>
         <ControllerTop id={props.data.id} />
       </View>

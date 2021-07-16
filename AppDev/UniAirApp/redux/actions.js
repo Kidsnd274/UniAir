@@ -49,7 +49,7 @@ export const updateFanSpeed = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
-  store.dispatch(sendAirconData(airconId)) // Send updates to server
+  store.dispatch(sendAirconData(airconId)); // Send updates to server
 };
 
 export const toggleEcoMode = (airconId, newValue) => {
@@ -64,7 +64,7 @@ export const toggleEcoMode = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
-  store.dispatch(sendAirconData(airconId))
+  store.dispatch(sendAirconData(airconId));
 };
 
 export const updateFlap = (airconId, newValue) => {
@@ -81,7 +81,7 @@ export const updateFlap = (airconId, newValue) => {
     });
   };
   store.dispatch(thunkFunction(airconId, newValue));
-  store.dispatch(sendAirconData(airconId)) // Send updates to server
+  store.dispatch(sendAirconData(airconId)); // Send updates to server
 };
 
 export const togglePowerMode = (airconId, newValue) => {
@@ -148,11 +148,22 @@ export const addController = (ipAddress, port, roomName, airconModel) => {
             min_aircon_fanspeed: 0,
             max_aircon_flap: 4,
             min_aircon_flap: 0,
-          }
+          },
         },
       });
     };
   store.dispatch(thunkFunction(ipAddress, port, roomName, airconModel));
+};
+
+export const checkRoomName = (roomName) => {
+  const airconList = store.getState().airconReducer.aircons;
+  let value = true;
+  for (const element of airconList) {
+    if (element["roomName"] == roomName) {
+      value = false;
+    }
+  }
+  return value;
 };
 
 export const removeController = (airconId) => {
@@ -161,10 +172,10 @@ export const removeController = (airconId) => {
     dispatch({
       type: "REMOVE_CONTROLLER",
       airconId: airconId,
-    })
-  }
+    });
+  };
   store.dispatch(thunkFunction(airconId));
-}
+};
 
 export const restoreFireStore = (acConfig) => {
   const thunkFunction = (acConfig) => (dispatch) => {
@@ -172,13 +183,11 @@ export const restoreFireStore = (acConfig) => {
     dispatch({
       type: "RESTORE_FIRESTORE",
       acConfig: acConfig,
-    })
-  }
+    });
+  };
   store.dispatch(thunkFunction(acConfig));
-}
+};
 // API functions
 export const updateAirconData = (airconId) => {
   return store.dispatch(fetchAirconData(airconId));
 };
-
-

@@ -75,7 +75,7 @@ const SchedulerScreen = (props) => {
             style={styles.button}
             onPress={() => set_aircon_temperature(aircon_temperature - 1)}
           >
-            <Icon name="plus" type="material-community" />
+            <Icon name="minus" type="material-community" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => set_aircon_power(!aircon_power)}>
             <Icon name="power" type="material-community" />
@@ -84,7 +84,7 @@ const SchedulerScreen = (props) => {
             style={styles.button}
             onPress={() => set_aircon_temperature(aircon_temperature + 1)}
           >
-            <Icon name="minus" type="material-community" />
+            <Icon name="plus" type="material-community" />
           </TouchableOpacity>
         </View>
         <View style={styles.settingTitle}>

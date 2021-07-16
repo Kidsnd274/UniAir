@@ -32,7 +32,7 @@ export default function App() {
       return <Controller data={dataSet} />;
     };
   }
-  // LogBox.ignoreAllLogs(true);
+  LogBox.ignoreAllLogs(true);
 
   return (
     <Provider store={store}>
@@ -51,9 +51,7 @@ export default function App() {
             <Drawer.Screen name="Sign In" component={AuthScreen} />
           </Drawer.Navigator>
         </NavigationContainer>
-
-        {/* <SchedulerScreen/> */}
-      </PersistGate>
+        </PersistGate>
     </Provider>
   );
 }

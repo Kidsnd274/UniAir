@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import { Menu } from "react-native-paper";
+import { store, persistor } from "../redux/store";
 
 const Settings = (props) => {
   return (
@@ -23,6 +24,11 @@ const Settings = (props) => {
         icon="menu"
         onPress={() => props.navigation.navigate("Edit Controller Details")}
         title="Edit Controller Details"
+      />
+      <Menu.Item
+        icon="menu"
+        onPress={() => {persistor.purge()}}
+        title="Clear Local Data"
       />
     </View>
   );
