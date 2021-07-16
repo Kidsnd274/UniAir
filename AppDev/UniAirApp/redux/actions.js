@@ -117,17 +117,19 @@ export const updateTab = (airconId, newValue) => {
 };
 
 //Adding New Controller
-export const addController = (ipAddress, port, roomName, testController) => {
+export const addController = (ipAddress, port, roomName, token) => {
   const thunkFunction =
-    (ipAddress, port, roomName, testController) => (dispatch, getState) => {
+    (ipAddress, port, roomName, token) => (dispatch, getState) => {
       console.log("LOG: ADD_CONTROLLER at redux/actions.js");
+      const newAirconId = getState().airconReducer.aircons.length
       dispatch({
         type: "ADD_CONTROLLER",
         payload: {
           ipAddress: ipAddress,
           port: port,
           roomName: roomName,
-          id: getState().airconReducer.aircons.length,
+          token: token,
+          id: newAirconId,
           aircon_tab: "1",
           testController: false,
           // Default values that should change
@@ -150,8 +152,9 @@ export const addController = (ipAddress, port, roomName, testController) => {
           }
         },
       });
+      updateAirconData(newAirconId);
     };
-  store.dispatch(thunkFunction(ipAddress, port, roomName, testController));
+  store.dispatch(thunkFunction(ipAddress, port, roomName, token));
 };
 
 export const addTestController = (roomName) => {

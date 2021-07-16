@@ -13,6 +13,8 @@ import Registration from "../screens/Registration";
 import Welcome from "../screens/Welcome";
 import LearnMore from "../screens/LearnMore";
 import MainAppBar from "../components/appbar/MainAppBar";
+import ServerLogin from "../screens/ServerLogin";
+import ServerSetup from "../screens/ServerSetup";
 
 const Stack = createStackNavigator();
 
@@ -39,7 +41,17 @@ const WelcomeNavigation = (props) => {
       <Stack.Screen
         name="Registration"
         component={Registration}
-        options={{headerTitle : "Registration"}}
+        options={{headerTitle : "Register a UniAir Server"}}
+      />
+      <Stack.Screen
+        name="ServerLogin"
+        component={ServerLogin}
+        options={{headerTitle : "UniAir Server Login"}}
+      />
+      <Stack.Screen
+        name="ServerSetup"
+        component={ServerSetup}
+        options={{headerTitle : "UniAir Server Setup"}}
       />
     </Stack.Navigator>
   );

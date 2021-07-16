@@ -7,11 +7,12 @@ import {
   Alert,
   ToastAndroid,
   Platform,
+  ScrollView,
 } from "react-native";
 import { Input, Icon } from "react-native-elements";
-import { addController, addTestController } from "../redux/actions";
+import { addTestController } from "../redux/actions";
 import { useNavigation } from "@react-navigation/core";
-import { Button, Checkbox, Switch, Snackbar } from "react-native-paper";
+import { Button, Switch, Snackbar } from "react-native-paper";
 import { isServerSetupYet } from "../redux/api";
 
 const Registration = () => {
@@ -30,29 +31,56 @@ const Registration = () => {
     }
   }
 
-  const submitNewController = () => {
-    if (testController) {
-      addTestController(roomName)
-      navigation.navigate("ControllerList");
-      notifyMessage("Test Controller Created")
+  const submitNewController = async () => {
+    if (roomName === "") {
+      notifyMessage("Your Room Name can't be empty!")
     } else {
-      // addController(ipAddress, portNo, roomName, testController);
+      if (testController) {
+        addTestController(roomName)
+        navigation.navigate("ControllerList");
+        notifyMessage("Test Controller Created")
+      } else {
+        let setupBool = await isServerSetupYet(ipAddress, portNo)
+        if (setupBool === true) {
+          const payload = { 
+            ipAddress: ipAddress,
+            portNo: portNo,
+            roomName: roomName,
+          }
+          navigation.navigate("ServerLogin", payload);
+        } else if (setupBool === false) {
+          const payload = { 
+            ipAddress: ipAddress,
+            portNo: portNo,
+            roomName: roomName,
+          }
+          navigation.navigate("ServerSetup", payload);
+        } else {
+          console.log("LOG: Connection Unsuccessful " + setupBool)
+          notifyMessage("Connection Unsuccessful\nPlease check IP Address and Port")
+        }
+      }
     }
   };
 
-  const testSetup = () => {
+  const testSetup = async () => {
     let message = "";
-    let setupBool = isServerSetupYet(ipAddress, portNo);
+    let setupBool = await isServerSetupYet(ipAddress, portNo);
     if (setupBool === true) {
       message = "Connection Successful!\nServer has already been set up";
     } else if (setupBool === false) {
       message = "Connection Successful!\nServer has not been set up";
     } else {
+      console.log("LOG: Connection Unsuccessful " + setupBool)
       message = "Connection Unsuccessful\nPlease check IP Address and Port";
     }
 
     notifyMessage(message)
   };
+
+  const connectButtonString = () => {
+    return testController ? "Register" : "Connect";
+  }
 
   const renderAdvancedOptions = () => {
     if (advancedOptions) {
@@ -107,7 +135,7 @@ const Registration = () => {
 
   return (
     <View style={styles.mainView}>
-      <View style={styles.topSegmentStyle}>
+      <ScrollView contentContainerStyle={styles.topSegmentStyle}>
         <Text style={styles.paragraphText}>
           Enter the IP Address of your UniAir Server
         </Text>
@@ -138,7 +166,7 @@ const Registration = () => {
           />
         </View>
         {renderAdvancedOptions()}
-      </View>
+      </ScrollView>
       <View style={styles.bottomButtonStyle}>
         <Button
           mode="outlined"
@@ -152,7 +180,7 @@ const Registration = () => {
           style={styles.buttonStyle}
           onPress={submitNewController}
         >
-          <Text>Connect</Text>
+          <Text>{connectButtonString()}</Text>
         </Button>
       </View>
     </View>
@@ -164,17 +192,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     height: "100%",
-    justifyContent: "space-between",
+    // justifyContent: "space-between", // Another way to make element go down
   },
   topSegmentStyle: {
     flexDirection: "column",
     width: "100%",
     height: "auto",
     alignItems: "center",
+    flexGrow: 1, // One way to make the other element push down by filling up available space
   },
   bottomButtonStyle: {
     flexDirection: "row",
     justifyContent: "flex-end",
+    // marginTop: "auto", // Auto margin pushes item down
   },
   advancedOptionsStyle: {
     flexDirection: "column",
@@ -220,7 +250,8 @@ const styles = StyleSheet.create({
     color: "#9B9B9B",
   },
   buttonStyle: {
-    marginVertical: 30,
+    marginTop: 12,
+    marginBottom: 30,
     marginRight: 20,
   },
 });
