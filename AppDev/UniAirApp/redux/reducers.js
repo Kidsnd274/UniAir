@@ -6,7 +6,7 @@ const initialState = {
       roomName: "Living Room",
       id: 0,
       aircon_tab: "1",
-      aircon_model: "1",
+      testController: true,
       controllerData: {
         date_and_time: "",
         aircon_power: false,
@@ -31,7 +31,7 @@ const initialState = {
       roomName: "Toliet",
       id: 1,
       aircon_tab: "1",
-      aircon_model: "1",
+      testController: true,
       controllerData: {
         date_and_time: "",
         aircon_power: false,
