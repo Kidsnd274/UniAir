@@ -50,7 +50,6 @@ def get_token():
         return abort(403, description="Server not setup!")
 
     error = None
-    print(request.json)
     password = request.json['password']
     if not request:
         abort(400)

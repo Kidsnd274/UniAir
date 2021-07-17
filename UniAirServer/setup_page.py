@@ -27,6 +27,7 @@ def register():
     if request.method == 'POST':
         error = None
         aircon_model = request.form['aircon_model']
+        lircd_address = request.form['lircd_address']
         password = request.form['password']
 
         if not aircon_model:
@@ -35,9 +36,11 @@ def register():
             error = "Secret Key is required"
 
         config['settings']['aircon_model'] = aircon_model
+        config['settings']['lircd_address'] = lircd_address
         config['settings']['first_time_done'] = "true"
         config['settings']['password'] = generate_password_hash(password)
-        # In the future, include configuration for lirc as well
+        # Saving config file
+        write_to_config()
 
         # Generating default values for controller data
         controllerData = {
@@ -53,8 +56,7 @@ def register():
 
         # Saving controller to database (might make a database object)
         write_to_database()
-        # Saving config file
-        write_to_config()
+
 
         if error is None:
             login_user_authenticated()

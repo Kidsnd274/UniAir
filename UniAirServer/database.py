@@ -1,4 +1,4 @@
-import json
+import json, os
 try:
     from .virtualcontroller.VirtualController import VirtualController
     from .virtualcontroller.ControllerHolder import ControllerHolder
@@ -37,3 +37,10 @@ def read_from_database():
 
 def load_placeholder_data():
     virtual_controller.replace_controller(VirtualController(controllerData))
+
+def delete_database():
+    virtual_controller.replace_controller(None)
+    if os.path.exists("./database.db"):
+        os.remove("./database.db")
+    else:
+        print("LOG: Database file not found, attempted to delete")

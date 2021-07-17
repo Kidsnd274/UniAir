@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+import os
 
 config = ConfigParser()
 
@@ -8,3 +9,9 @@ def write_to_config():
 
 def read_to_config():
     config.read('settings.ini')
+
+def delete_config():
+    if os.path.exists("./settings.ini"):
+        os.remove("./settings.ini")
+    else:
+        print("LOG: Settings file not found, attempted to delete")

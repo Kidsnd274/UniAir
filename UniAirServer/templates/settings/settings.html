@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block title %} UniAir Server Settings {% endblock %}
 {% block head %}
+
 <style>
   .mobile_address .user-profile {
     margin: 0 0 1rem 0;
@@ -37,8 +38,12 @@
     border: 0;
     margin-bottom: 1rem;
   }
+  .modalText {
+    color: black;
+  }
 </style>
 {% endblock %} {% block content %}
+
 <center>
   <h1>UniAir Server Settings</h1>
   <div class="container">
@@ -92,7 +97,29 @@
                 <h6 class="mb-3 text-primary">Danger Zone</h6>
                 <div class="form-group" style="text-align: left">
                     <text>Reset Settings</text>
-                    <button type="button" class="btn btn-danger">RESET</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">RESET</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title modalText" id="exampleModalLabel">Reset All SETTINGS and Clear DATABASE?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body modalText">
+                            This will delete your settings and database!<br>There's no going back
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <form action="/settings/reset_settings" method="post">
+                              <button type="submit" class="btn btn-danger">RESET</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
