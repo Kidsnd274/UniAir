@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import Blueprint, flash, request, redirect, url_for, render_template, abort, current_app, jsonify
 from flask_login import login_user, logout_user, login_required, current_user, UserMixin
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 import datetime
 import jwt
 try:
@@ -90,6 +90,12 @@ def token_required(f):
             return jsonify(invalid_msg), 401
     return _verify
 
+def change_password(currentPassword, newPassword):
+    if check_password_hash(config.get('settings', 'password'), currentPassword):
+        config['settings']['password'] = generate_password_hash(newPassword)
+        return "Your Password has been changed"
+    else:
+        return "Incorrect Current Password"
 
 def login_user_authenticated():
     """ONLY USE THIS WHEN AUTHENTICATED"""
