@@ -60,7 +60,7 @@ const ServerSetup = (props) => { // Should be ServerSetup
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.mainView}>
+    <ScrollView contentContainerStyle={styles.mainView} keyboardShouldPersistTaps='handled'>
       <Text style={styles.paragraphText}>Connected. Please setup your UniAir Server</Text>
       <View style={styles.horizontalLine} />
       <Input

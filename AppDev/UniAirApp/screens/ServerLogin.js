@@ -41,7 +41,7 @@ const ServerLogin = (props) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.mainView}>
+    <ScrollView contentContainerStyle={styles.mainView} keyboardShouldPersistTaps='handled'>
       <Text style={styles.titleText}>Knock! Knock!</Text>
       <Text style={styles.subText}>What's the password?</Text>
       <Input

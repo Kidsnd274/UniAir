@@ -135,7 +135,7 @@ const Registration = () => {
 
   return (
     <View style={styles.mainView}>
-      <ScrollView contentContainerStyle={styles.topSegmentStyle}>
+      <ScrollView contentContainerStyle={styles.topSegmentStyle} keyboardShouldPersistTaps='handled'>
         <Text style={styles.paragraphText}>
           Enter the IP Address of your UniAir Server
         </Text>
