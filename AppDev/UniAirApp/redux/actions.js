@@ -121,7 +121,7 @@ export const addController = (ipAddress, port, roomName, token) => {
   const thunkFunction =
     (ipAddress, port, roomName, token) => (dispatch, getState) => {
       console.log("LOG: ADD_CONTROLLER at redux/actions.js");
-      const newAirconId = getState().airconReducer.aircons.length
+      const newAirconId = getState().airconReducer.aircons.length;
       dispatch({
         type: "ADD_CONTROLLER",
         payload: {
@@ -133,7 +133,8 @@ export const addController = (ipAddress, port, roomName, token) => {
           aircon_tab: "1",
           testController: false,
           // Default values that should change
-          controllerData: { // Might remove this in the future as the program will pull fresh data when server is authenticated
+          controllerData: {
+            // Might remove this in the future as the program will pull fresh data when server is authenticated
             date_and_time: "",
             aircon_power: false,
             aircon_temp: 24,
@@ -150,6 +151,7 @@ export const addController = (ipAddress, port, roomName, token) => {
             max_aircon_flap: 4,
             min_aircon_flap: 0,
           },
+          scheduler: {},
         },
       });
       updateAirconData(newAirconId);
@@ -169,7 +171,8 @@ export const checkRoomName = (roomName) => {
 };
 export const addTestController = (roomName) => {
   const thunkFunction = (roomName) => (dispatch, getState) => {
-    dispatch({ // Test Controller
+    dispatch({
+      // Test Controller
       type: "ADD_CONTROLLER",
       payload: {
         roomName: roomName,
@@ -192,12 +195,13 @@ export const addTestController = (roomName) => {
           min_aircon_fanspeed: 0,
           max_aircon_flap: 4,
           min_aircon_flap: 0,
-        }
+        },
+        scheduler: {},
       },
     });
-  }
-  store.dispatch(thunkFunction(roomName))
-}
+  };
+  store.dispatch(thunkFunction(roomName));
+};
 
 export const removeController = (airconId) => {
   const thunkFunction = (airconId) => (dispatch) => {
@@ -220,6 +224,74 @@ export const restoreFireStore = (acConfig) => {
   };
   store.dispatch(thunkFunction(acConfig));
 };
+export const addSchedule = (
+  airconId,
+  date,
+  time,
+  aircon_power,
+  aircon_temp,
+  aircon_fanspeed,
+  aircon_flap,
+  aircon_eco_mode,
+  aircon_powerful_mode
+) => {
+  const thunkFunction =
+    (
+      airconId,
+      date,
+      time,
+      aircon_power,
+      aircon_temp,
+      aircon_fanspeed,
+      aircon_flap,
+      aircon_eco_mode,
+      aircon_powerful_mode
+    ) =>
+    (dispatch, getState) => {
+      console.log("LOG: SCHEDULER at redux/actions.js");
+      const newSchedulerId = getState().airconReducer.aircons.length;
+      dispatch({
+        type: "ADD_CONTROLLER",
+        payload: {
+          airconId: airconId,
+          id: newSchedulerId,
+          date: date,
+          time: time,
+          aircon_power: aircon_power,
+          aircon_temp: aircon_temp,
+          aircon_fanspeed: aircon_fanspeed,
+          aircon_flap: aircon_flap,
+          aircon_eco_mode: aircon_eco_mode,
+          aircon_powerful_mode: aircon_powerful_mode,
+        },
+      });
+      addSchedule(
+        airconId,
+        date,
+        time,
+        aircon_power,
+        aircon_temp,
+        aircon_fanspeed,
+        aircon_flap,
+        aircon_eco_mode,
+        aircon_powerful_mode
+      );
+    };
+  store.dispatch(
+    thunkFunction(
+      airconId,
+      date,
+      time,
+      aircon_power,
+      aircon_temp,
+      aircon_fanspeed,
+      aircon_flap,
+      aircon_eco_mode,
+      aircon_powerful_mode
+    )
+  );
+};
+
 // API functions
 export const updateAirconData = (airconId) => {
   return store.dispatch(fetchAirconData(airconId));

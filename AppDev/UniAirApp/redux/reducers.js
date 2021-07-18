@@ -24,6 +24,18 @@ const initialState = {
         max_aircon_flap: 4,
         min_aircon_flap: 0,
       },
+      scheduler: [
+        {
+          id: 1,
+          date_and_time: "",
+          aircon_power: false,
+          aircon_temp: 24,
+          aircon_fanspeed: 2,
+          aircon_flap: 3,
+          aircon_eco_mode: false,
+          aircon_powerful_mode: false,
+        },
+      ],
     },
     {
       ipAddress: "192.168.1.81",
@@ -49,6 +61,48 @@ const initialState = {
         max_aircon_flap: 4,
         min_aircon_flap: 0,
       },
+      scheduler: [
+        {
+          id: 1,
+          date_and_time: "",
+          aircon_power: false,
+          aircon_temp: 24,
+          aircon_fanspeed: 2,
+          aircon_flap: 3,
+          aircon_eco_mode: false,
+          aircon_powerful_mode: false,
+        },
+        {
+          id: 2,
+          date_and_time: "",
+          aircon_power: true,
+          aircon_temp: 25,
+          aircon_fanspeed: 2,
+          aircon_flap: 3,
+          aircon_eco_mode: false,
+          aircon_powerful_mode: false,
+        },
+        {
+          id: 3,
+          date_and_time: "",
+          aircon_power: true,
+          aircon_temp: 25,
+          aircon_fanspeed: 2,
+          aircon_flap: 3,
+          aircon_eco_mode: false,
+          aircon_powerful_mode: false,
+        },
+        {
+          id: 4,
+          date_and_time: "",
+          aircon_power: true,
+          aircon_temp: 25,
+          aircon_fanspeed: 2,
+          aircon_flap: 3,
+          aircon_eco_mode: false,
+          aircon_powerful_mode: false,
+        },
+      ],
     },
   ],
   settings: {
@@ -96,14 +150,27 @@ function airconReducer(state = initialState, action) {
       for (let index = action.airconId + 1; index < newArray.length; index++) {
         newArray[index].id -= 1;
       }
-      console.log("For loop done")
+      console.log("For loop done");
       newArray.splice(action.airconId, 1);
       return { ...state, aircons: newArray };
 
     case "RESTORE_FIRESTORE":
-      newArray = action.payload.acConfig
+      newArray = action.payload.acConfig;
+      return { ...newArray };
+
+    case "ADD_CONTROLLER":
+      newArray[action.airconId].scheduler.push({
+        id: action.id,
+        date_and_time: "",
+        aircon_power: action.aircon_power,
+        aircon_temp: action.aircon_temp,
+        aircon_fanspeed: action.aircon_fanspeed,
+        aircon_flap: action.aircon_flap,
+        aircon_eco_mode: action.aircon_eco_mode,
+        aircon_powerful_mode: action.aircon_powerful_mode,
+      });
       return {...newArray}
-      
+
     default:
       return state;
   }

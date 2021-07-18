@@ -34,6 +34,7 @@ export default function App() {
   }
   LogBox.ignoreAllLogs(true);
 
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
