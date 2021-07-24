@@ -56,6 +56,7 @@ const ServerLogin = (props) => {
       <View style={styles.buttonViewStyle}>
         <Button
           mode="outlined"
+          color="#0090AD"
           style={styles.buttonStyle}
           onPress={backButton}
         >
@@ -63,6 +64,7 @@ const ServerLogin = (props) => {
         </Button>
         <Button
           mode="contained"
+          color="#00B4D8"
           style={styles.buttonStyle}
           onPress={submitPassword}
         >

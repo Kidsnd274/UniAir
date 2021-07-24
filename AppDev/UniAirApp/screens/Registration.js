@@ -103,6 +103,7 @@ const Registration = () => {
             </Text>
             <Button
               mode="outlined"
+              color="#0090AD"
               onPress={testSetup}
               disabled={testController}
               style={styles.marginRightStyle}
@@ -170,6 +171,7 @@ const Registration = () => {
       <View style={styles.bottomButtonStyle}>
         <Button
           mode="outlined"
+          color="#0090AD"
           style={styles.buttonStyle}
           onPress={() => navigation.navigate("Welcome")}
         >
@@ -177,6 +179,8 @@ const Registration = () => {
         </Button>
         <Button
           mode="contained"
+          color="#00B4D8"
+          dark={true}
           style={styles.buttonStyle}
           onPress={submitNewController}
         >
