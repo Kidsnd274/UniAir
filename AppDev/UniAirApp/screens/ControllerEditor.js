@@ -4,11 +4,12 @@ import { Button, ButtonGroup, Header } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { TextInput } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
-import { removeController } from "../redux/actions";
+import { removeController, editController } from "../redux/actions";
 import { useNavigation } from "@react-navigation/native";
 import { ShadowPropTypesIOS } from "react-native";
 import { TextPropTypes } from "react-native";
 import { store } from "../redux/store";
+
 
 const ControllerEditor = (props) => {
   const mainData = store.getState().airconReducer;
@@ -110,7 +111,7 @@ const ControllerEditor = (props) => {
           <Text style={styles.submitText}>BACK</Text>
         </TouchableOpacity> */}
         {check()}
-        <TouchableOpacity style={styles.submitTouchable}>
+        <TouchableOpacity style={styles.submitTouchable} onPress = {() => editController(props.data.id, ipAddress, port,roomName )}>
           <Text style={styles.submitText}>SUBMIT CHANGES</Text>
         </TouchableOpacity>
         <TouchableOpacity

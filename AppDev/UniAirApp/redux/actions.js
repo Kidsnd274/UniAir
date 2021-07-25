@@ -214,12 +214,28 @@ export const removeController = (airconId) => {
   store.dispatch(thunkFunction(airconId));
 };
 
+export const editController = (airconId, ipAddress, port, roomName) => {
+  const thunkFunction = (airconId, ipAddress, port, roomName) => (dispatch) => {
+    console.log("LOG: EDIT CONTROLLER")
+    dispatch({
+      type: "EDIT_CONTROLLER",
+      payload: {
+        id: airconId,
+        ipAddress: ipAddress,
+        port: port,
+        roomName: roomName
+      }
+    })
+  }
+  store.dispatch(thunkFunction(airconId, ipAddress, port, roomName));
+}
+
 export const restoreFireStore = (acConfig) => {
   const thunkFunction = (acConfig) => (dispatch) => {
     console.log("LOG: Restore " + acConfig);
     dispatch({
       type: "RESTORE_FIRESTORE",
-      acConfig: acConfig,
+      acConfig: JSON.parse(acConfig),
     });
   };
   store.dispatch(thunkFunction(acConfig));

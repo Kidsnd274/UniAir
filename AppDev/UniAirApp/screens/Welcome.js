@@ -1,8 +1,14 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { persistStore } from "redux-persist";
+import firebase from "../database/firebaseConfig";
+import "firebase/auth";
+import "firebase/firestore";
 
 const Welcome = (props) => {
+  // console.log(firebase.firestore().collection("user").doc(firebase.auth().currentUser.uid))
+  // console.log(String(firebase.auth().currentUser.uid))
+
   return (
     <View style={styles.container}>
       <View style={styles.subContainerTop}>
@@ -30,6 +36,13 @@ const Welcome = (props) => {
         >
           <Text>Hi</Text>
         </TouchableOpacity> */}
+        <TouchableOpacity
+          onPress={() => {
+            firebase.firestore().collection('user').doc(firebase.auth().currentUser.uid).get().then((x) => console.log(x.data()["acConfig"]));
+          }}
+        >
+          <Text>12</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

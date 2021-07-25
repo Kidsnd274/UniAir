@@ -105,9 +105,6 @@ const initialState = {
       ],
     },
   ],
-  settings: {
-    something_here: 0,
-  },
 };
 
 function airconReducer(state = initialState, action) {
@@ -146,6 +143,12 @@ function airconReducer(state = initialState, action) {
     case "ADD_CONTROLLER":
       newArray.push(action.payload);
       return { ...state, aircons: newArray };
+    case  "EDIT_CONTROLLER":
+      newArray[action.payload.id].ipAddress = action.payload.ipAddress
+      newArray[action.payload.id].port = action.payload.port
+      newArray[action.payload.id].roomName = action.payload.roomName
+      return { ...state, aircons: newArray };
+      
     case "REMOVE_CONTROLLER":
       for (let index = action.airconId + 1; index < newArray.length; index++) {
         newArray[index].id -= 1;
@@ -155,8 +158,9 @@ function airconReducer(state = initialState, action) {
       return { ...state, aircons: newArray };
 
     case "RESTORE_FIRESTORE":
-      newArray = action.payload.acConfig;
-      return { ...newArray };
+      newArray = action.acConfig;
+      console.log(newArray)
+      return { ...state, aircons: newArray };
 
     case "ADD_CONTROLLER":
       newArray[action.airconId].scheduler.push({
