@@ -8,7 +8,7 @@ import { serverSetup, getToken } from "../redux/api";
 
 const ServerSetup = (props) => { // Should be ServerSetup
   const [airconModel, setAirconModel] = useState("mitsubishi_kh18a")
-  const [lircdAddress, setLircdAddress] = useState("/var/run/lirc/lircd-tx") // Default lircd address
+  const [lircdAddress, setLircdAddress] = useState("/var/run/lirc/lircd") // Default lircd address
   const [newPassword, setNewPassword] = useState("");
 
   function notifyMessage(msg) {
