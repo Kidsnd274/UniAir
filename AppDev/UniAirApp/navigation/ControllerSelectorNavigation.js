@@ -22,6 +22,7 @@ const ControllerSelectorNavigation = () => {
   }
 
   const controllerData = useSelector((state) => state.airconReducer);
+  
 
   const Stack = createStackNavigator();
 
@@ -98,3 +99,5 @@ const headerStyling = {
 };
 
 export default ControllerSelectorNavigation;
+
+

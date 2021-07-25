@@ -17,10 +17,16 @@ import ControllerEditor from "./ControllerEditor";
 import SchedulerScreen from "../components/SchedulerScreen";
 
 const Controller = (props) => {
+
+  // const allcontrollerData = useSelector(
+  //   (state) => state
+  // );
+  
+
   const controllerData = useSelector(
     (state) => state.airconReducer.aircons[props.data.id]
   );
-
+  // console.log( allcontrollerData)
   const aircon_tab = useSelector(
     (state) => state.airconReducer.aircons[props.data.id].aircon_tab
   );

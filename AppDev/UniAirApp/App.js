@@ -27,6 +27,8 @@ export default function App() {
   const mainData = store.getState().airconReducer;
   const Drawer = createDrawerNavigator();
 
+  setTimeout(() => console.log(store.getState()));
+
   function ControllerCreator(dataSet) {
     return () => {
       return <Controller data={dataSet} />;
@@ -34,25 +36,51 @@ export default function App() {
   }
   LogBox.ignoreAllLogs(true);
 
+  function firstScreen(arr) {
+    if (arr.length == 0) {
+      return "Welcome";
+    } else {
+      return "ControllerList";
+    }
+  }
+
+  const testing = () => {
+    return (
+      <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName={firstScreen(mainData.aircons)}
+          drawerContent={(props) => <NavigationDrawerContent {...props} />}
+        >
+          <Drawer.Screen name="Welcome" component={Welcome} />
+          <Drawer.Screen
+            name="ControllerList"
+            component={ControllerSelectorNavigation}
+          />
+          <Drawer.Screen name="Settings" component={SettingsNavigation} />
+          <Drawer.Screen name="Sign In" component={AuthScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    );
+  };
 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <Drawer.Navigator
-            initialRouteName="Welcome"
-            drawerContent={(props) => <NavigationDrawerContent {...props} />}
-          >
-            <Drawer.Screen name="Welcome" component={Welcome} />
-            <Drawer.Screen
-              name="ControllerList"
-              component={ControllerSelectorNavigation}
-            />
-            <Drawer.Screen name="Settings" component={SettingsNavigation} />
-            <Drawer.Screen name="Sign In" component={AuthScreen} />
-          </Drawer.Navigator>
-        </NavigationContainer>
-        </PersistGate>
+        <Drawer.Navigator
+          initialRouteName={firstScreen(mainData.aircons)}
+          drawerContent={(props) => <NavigationDrawerContent {...props} />}
+        >
+          <Drawer.Screen name="Welcome" component={Welcome} />
+          <Drawer.Screen
+            name="ControllerList"
+            component={ControllerSelectorNavigation}
+          />
+          <Drawer.Screen name="Settings" component={SettingsNavigation} />
+          <Drawer.Screen name="Sign In" component={AuthScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }
