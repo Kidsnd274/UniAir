@@ -155,11 +155,10 @@ const AuthScreen = () => {
 
   const restoreFromFireStore = () => {
     if (firebase.auth().currentUser) {
-      var item = firebase
+      firebase
         .firestore()
         .collection("user")
-        .doc("GKpS9pAi6yTJx8lREKbfLeO9B4z1").get().then(x => restoreFireStore(x.data()["acConfig"]));
-      console.log(item)
+        .doc("GKpS9pAi6yTJx8lREKbfLeO9B4z1").get().then(x => restoreFireStore(x.data().acConfig));
     } else {
       Alert.alert("Error", "Please sign in to your google account");
     }
@@ -169,11 +168,12 @@ const AuthScreen = () => {
     //Check if CurrentUser is logged in
     if (firebase.auth().currentUser) {
       console.log("hi");
+      console.log(controllerData["aircons"])
       firebase
         .firestore()
         .collection("user")
         .doc(firebase.auth().currentUser.uid)
-        .set({ acConfig: JSON.stringify(controllerData) })
+        .set({ acConfig: JSON.stringify(controllerData["aircons"]) })
         .then((x) => Alert.alert("Success", "Settings have been saved"));
     } else {
       Alert.alert("Error", "Please sign in to your google account");

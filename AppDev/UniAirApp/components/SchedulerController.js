@@ -4,14 +4,14 @@ import { Button, ButtonGroup, Icon } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const SchedulerController = (props) => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(props.date);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "default");
-    setDate(currentDate);
+    props.setDate(currentDate);
   };
 
   const showMode = (currentMode) => {
@@ -29,7 +29,7 @@ const SchedulerController = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text>{String(date)}</Text>
+      <Text>{String(props.date)}</Text>
       <View>
         <TouchableOpacity onPress={showDatepicker}>
           <Icon name="date-range" type="material-icons" size={30} />
@@ -43,7 +43,7 @@ const SchedulerController = (props) => {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={props.date}
           mode={mode}
           is24Hour={true}
           display="default"
