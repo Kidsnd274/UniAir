@@ -3,46 +3,31 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import StartUp from "./StartUp";
-import Controller from "./Controller";
-import Registration from "./Registration";
-import { useSelector } from "react-redux";
-import { updateAirconData } from "../redux/actions";
-import MainAppBar from "../components/MainAppBar";
+import ControllerSelectorNavigation from "../navigation/ControllerSelectorNavigation";
+import Welcome from "../navigation/WelcomeNavigation";
+import SettingsNavigation from "../navigation/SettingsNavigation";
+import AuthScreen from "./AuthScreen";
+import NavigationDrawerContent from "../components/NavigationDrawerContent";
 
 const MainPage = () => {
-  const mainData = useSelector(state => state.airconReducer);
   const Drawer = createDrawerNavigator();
-
-  useEffect(() => {
-    updateAirconData(0);
-  })
 
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Living Room" screenOptions = {{header : MainAppBar}}>
-        <Drawer.Screen name="Registration" component={Registration} />
-        {mainData.aircons.map((x) => (
-          <Drawer.Screen name={x.roomName} component={ControllerCreator(x)} />
-        ))}
+      <Drawer.Navigator
+        initialRouteName="Welcome"
+        drawerContent={(props) => <NavigationDrawerContent {...props} />}
+      >
+        <Drawer.Screen name="Welcome" component={Welcome} />
+        <Drawer.Screen
+          name="ControllerList"
+          component={ControllerSelectorNavigation}
+        />
+        <Drawer.Screen name="Settings" component={SettingsNavigation} />
+        <Drawer.Screen name="Sign In" component={AuthScreen} />
       </Drawer.Navigator>
-    </NavigationContainer>
+  </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-function ControllerCreator(dataSet) {
-  console.log("LOG: Controller created at screens/MainPage")
-  return () => {
-    return <Controller data={dataSet} />;
-  };
-}
 
 export default MainPage;
