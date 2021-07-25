@@ -41,6 +41,7 @@ const ControllerSelectorNavigation = () => {
         name="Controllers"
         component={ControllerSelectorMain}
         // options={{ headerTitle: "Controller List" }}
+        options={{ headerShown:false }}
       />
       {controllerData.aircons.map((x) => (
         <Stack.Screen
