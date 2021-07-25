@@ -19,7 +19,7 @@ def create_app():
     # Default Settings
     config['settings'] = {
         'first_time_done': 'false',
-        'lircd_address': '/var/run/lirc/lircd-tx', # Use /var/run/lirc/lircd for default lirc installations
+        'lircd_address': '/var/run/lirc/lircd', # Use /var/run/lirc/lircd for default lirc installations
         'secret_key': generate_secret_key(),
         # 'database_file': './database.db',
     }
