@@ -93,13 +93,13 @@ const ControllerSelectorMain = (props) => {
 
   return (
     <View style={styles.container}>
-      <Appbar.Header>
+      <Appbar.Header style = {{backgroundColor: "#00B4D8"}}>
         <Appbar.Action
           icon="menu"
           onPress={() => navigationRaw.openDrawer()}
           color="#FFFF"
         />
-        <Appbar.Content title={"Controller"} />
+        <Appbar.Content title={"Controller"} color= "#FFFf"/>
 
         <Appbar.Action
           icon="plus"

@@ -5,6 +5,7 @@ import { Button, Appbar } from "react-native-paper";
 import SchedulerController from "./SchedulerController";
 import { useSelector } from "react-redux";
 import SchedulerAppBar from "./appbar/SchedulerAppBar";
+import { addSchedule } from "../redux/actions";
 
 const SchedulerScreen = (props) => {
   const controllerData = useSelector(
@@ -33,44 +34,57 @@ const SchedulerScreen = (props) => {
   );
   const [date, setDate] = useState(new Date());
 
-  console.log(date)
+  console.log(date);
 
-  console.log(new Date().toString())
+  console.log(new Date().toString());
 
   const airconTemp = () => {
-    if(aircon_power){
-      return <Icon name="power" type="material-community" />
+    if (aircon_power) {
+      return <Icon name="power" type="material-community" />;
     }
-    return <View style = {{flexDirection :"row"}}><Text>{aircon_temperature}</Text><Icon name="temperature-celsius" type="material-community" /></View>
-  }
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <Text>{aircon_temperature}</Text>
+        <Icon name="temperature-celsius" type="material-community" />
+      </View>
+    );
+  };
 
   const airconPowerMode = () => {
     if (aircon_powerful_mode) {
-      return <Icon name="snowflake" type="material-community" color = 'blue'/>
+      return <Icon name="snowflake" type="material-community" color="blue" />;
     }
-    return <Icon name="snowflake" type="material-community"/>
-  }
+    return <Icon name="snowflake" type="material-community" />;
+  };
 
-  
   const airconEcoMode = () => {
     if (aircon_eco_mode) {
-      return <Icon name="tree" type="material-community" color = 'green'/>
+      return <Icon name="tree" type="material-community" color="green" />;
     }
-    return <Icon name="tree" type="material-community"/>
-  }
+    return <Icon name="tree" type="material-community" />;
+  };
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1, justifyContent: "flex-start", flexDirection: "row" , alignItems: "center"}}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "flex-start",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
         <TouchableOpacity
           onPress={() => {
             props.schedulerModal();
           }}
         >
-          <Icon type = "ionicons" name = "arrow-back"/>
+          <Icon type="ionicons" name="arrow-back" />
         </TouchableOpacity>
-        <View style = {{justifyContent: "center", alignItems: "center", flex: 1}}>
-          <Text>Event Scheulder</Text>
+        <View
+          style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
+        >
+          <Text>Scheduler</Text>
         </View>
       </View>
       <View style={styles.display}>
@@ -92,12 +106,10 @@ const SchedulerScreen = (props) => {
         </View>
         <View style={styles.rightDisplay}>
           <View style={styles.displayTopRight}>
-            <View style={styles.general}>
-              {airconTemp()}
-            </View>
+            <View style={styles.general}>{airconTemp()}</View>
           </View>
           <View style={styles.displayBottomRight}>
-            <Text>{date.toString()}</Text>
+            <Text style={{ justifyContent: "center" }}>{date.toString()}</Text>
           </View>
         </View>
       </View>
@@ -171,7 +183,10 @@ const SchedulerScreen = (props) => {
       <View style={{ flexDirection: "row", flex: 1 }}>
         <View style={styles.subcontainer}>
           <View style={styles.settingContainer}>
-            <TouchableOpacity style={styles.button} onPress = {() => set_aircon_powerful_mode(!aircon_powerful_mode)}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => set_aircon_powerful_mode(!aircon_powerful_mode)}
+            >
               <Icon name="snowflake" type="material-community" />
             </TouchableOpacity>
           </View>
@@ -181,8 +196,11 @@ const SchedulerScreen = (props) => {
         </View>
         <View style={styles.subcontainer}>
           <View style={styles.settingContainer}>
-            <TouchableOpacity style={styles.button} onPress = {() => set_aircon_eco_mode(!aircon_eco_mode)}>
-            <Icon name="tree" type="material-community" />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => set_aircon_eco_mode(!aircon_eco_mode)}
+            >
+              <Icon name="tree" type="material-community" />
             </TouchableOpacity>
           </View>
           <View style={styles.settingTitle}>
@@ -192,14 +210,30 @@ const SchedulerScreen = (props) => {
       </View>
       <View style={styles.subcontainer}>
         <View style={styles.settingContainer}>
-          <SchedulerController date = {date} setDate = {setDate}/>
+          <SchedulerController date={date} setDate={setDate} />
         </View>
         <View style={styles.settingTitle}>
           <Text>{new Date().toDateString()}</Text>
         </View>
       </View>
       <View style={styles.submitView}>
-        <TouchableOpacity style={styles.submitTouchable} onPress = {() => console.log(date.toString())}>
+        <TouchableOpacity
+          style={styles.submitTouchable}
+          onPress={() =>
+            addSchedule(
+              props.data.id,
+              date.toDateString(),
+              date.toTimeString(),
+              aircon_power,
+              aircon_temperature,
+              aircon_fanspeed,
+              aircon_flap,
+              aircon_eco_mode,
+              aircon_powerful_mode
+            )
+          }
+          // onPress = {() => console.log("addSchedule")}
+        >
           <Text>Submit</Text>
         </TouchableOpacity>
       </View>
@@ -245,6 +279,7 @@ const styles = StyleSheet.create({
     height: "80%",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 4,
   },
   submitView: {
     flex: 1,
@@ -259,11 +294,11 @@ const styles = StyleSheet.create({
   },
   leftDisplay: {
     flex: 1,
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   rightDisplay: {
     flex: 1.75,
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   submitTouchable: {
     width: "70%",
@@ -277,14 +312,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-evenly",
     alignItems: "center",
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   displayBottomLeft: {
     flexDirection: "row",
     flex: 1,
     justifyContent: "space-evenly",
     alignItems: "center",
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   displayTopRight: {
     flexDirection: "column",
@@ -296,7 +331,7 @@ const styles = StyleSheet.create({
   displayBottomRight: {
     flexDirection: "row",
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
   },
