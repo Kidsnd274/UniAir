@@ -103,6 +103,7 @@ const ServerSetup = (props) => { // Should be ServerSetup
       <View style={styles.buttonViewStyle}>
         <Button
           mode="outlined"
+          color="#0090AD"
           style={styles.buttonStyle}
           onPress={backButton}
         >
@@ -110,6 +111,7 @@ const ServerSetup = (props) => { // Should be ServerSetup
         </Button>
         <Button
           mode="contained"
+          color="#00B4D8"
           style={styles.buttonStyle}
           onPress={registerButton}
         >
