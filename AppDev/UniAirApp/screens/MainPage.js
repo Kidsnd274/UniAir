@@ -8,14 +8,28 @@ import Welcome from "../navigation/WelcomeNavigation";
 import SettingsNavigation from "../navigation/SettingsNavigation";
 import AuthScreen from "./AuthScreen";
 import NavigationDrawerContent from "../components/NavigationDrawerContent";
+import { useSelector } from "react-redux";
+
 
 const MainPage = () => {
   const Drawer = createDrawerNavigator();
 
+  const controllerData = useSelector(
+    (state) => state.airconReducer.aircons
+  );
+
+  const startPage = () => {
+    if (controllerData.length == 0) {
+      return "Welcome"
+    } else {
+      return "ControllerList"
+    }
+  }
+
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Welcome"
+        initialRouteName= {startPage()}
         drawerContent={(props) => <NavigationDrawerContent {...props} />}
       >
         <Drawer.Screen name="Welcome" component={Welcome} />

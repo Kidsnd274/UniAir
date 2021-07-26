@@ -196,7 +196,7 @@ export const addTestController = (roomName) => {
           max_aircon_flap: 4,
           min_aircon_flap: 0,
         },
-        scheduler: {},
+        scheduler: [],
       },
     });
   };
@@ -240,6 +240,7 @@ export const restoreFireStore = (acConfig) => {
   };
   store.dispatch(thunkFunction(acConfig));
 };
+
 export const addSchedule = (
   airconId,
   date,
@@ -267,7 +268,7 @@ export const addSchedule = (
       console.log("LOG: SCHEDULER at redux/actions.js");
       const newSchedulerId = getState().airconReducer.aircons.length;
       dispatch({
-        type: "ADD_CONTROLLER",
+        type: "ADD_EVENT",
         payload: {
           airconId: airconId,
           id: newSchedulerId,

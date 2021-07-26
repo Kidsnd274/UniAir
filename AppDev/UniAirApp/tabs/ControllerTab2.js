@@ -59,15 +59,17 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "blue",
     width: "100%",
+    height: "100%"
   },
   schedulerContainer: {
     flex: 1,
     justifyContent: "center",
-
+    width: "100%",
+    alignItems: "center"
   },
   scheduleList: {
     flex: 4,
-    borderWidth:1,
+    // borderWidth:1,
     width: "100%",
     justifyContent: "center",
     alignContent: "center"
@@ -90,6 +92,10 @@ const styles = StyleSheet.create({
     width: "80%",
     borderWidth: 1,
     flexDirection: "row",
+    justifyContent: "center",
+    height: "80%",
+    alignItems: "center",
+    borderRadius:5
   }
 });
 

@@ -22,6 +22,7 @@ const ControllerSelectorNavigation = () => {
   }
 
   const controllerData = useSelector((state) => state.airconReducer);
+  
 
   const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ const ControllerSelectorNavigation = () => {
         name="Controllers"
         component={ControllerSelectorMain}
         // options={{ headerTitle: "Controller List" }}
+        options={{ headerShown:false }}
       />
       {controllerData.aircons.map((x) => (
         <Stack.Screen
@@ -98,3 +100,5 @@ const headerStyling = {
 };
 
 export default ControllerSelectorNavigation;
+
+

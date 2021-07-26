@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 const ControllerSettingMain = (props) => {
   // const Stack = createStackNavigator();
+  console.log("Setting" + controllerData)
 
   const controllerData = useSelector((state) => state.airconReducer);
 
