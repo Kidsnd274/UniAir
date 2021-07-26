@@ -84,7 +84,8 @@ function airconReducer(state = initialState, action) {
         aircon_powerful_mode: action.aircon_powerful_mode,
       });
       return { ...newArray };
-
+    case "DELETE_STORE":
+      return {...state, aircons: []}
     default:
       return state;
   }

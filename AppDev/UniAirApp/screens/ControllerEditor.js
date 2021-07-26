@@ -18,7 +18,7 @@ const ControllerEditor = (props) => {
   //   (state) => state.airconReducer.aircons[props.data.id]
   // );
   const controllerData = mainData.aircons[props.data.id]
-
+  console.log(controllerData)
   const check = () => {
     if (typeof props.settingModal === "undefined") {
       return (
@@ -68,7 +68,7 @@ const ControllerEditor = (props) => {
   const navigation = useNavigation();
 
   const [roomName, setRoomName] = useState(controllerData.roomName);
-  const [ipAddress, setIpAdress] = useState(controllerData.ipAddress);
+  const [ipAddress, setIpAddress] = useState(controllerData.ipAddress);
   const [port, setPort] = useState(controllerData.port);
 
   return (
@@ -91,7 +91,7 @@ const ControllerEditor = (props) => {
         <TextInput
           label="Ip Address"
           value={ipAddress}
-          onChange={(x) => setIpAdress(x)}
+          onChange={(x) => setIpAddress(x)}
           style={styles.textInputStyles}
         />
       </View>
@@ -111,7 +111,8 @@ const ControllerEditor = (props) => {
           <Text style={styles.submitText}>BACK</Text>
         </TouchableOpacity> */}
         {check()}
-        <TouchableOpacity style={styles.submitTouchable} onPress = {() => editController(props.data.id, ipAddress, port,roomName )}>
+        <TouchableOpacity style={styles.submitTouchable} onPress = {() => console.log(ipAddress)}>
+        {/* editController(props.data.id, ipAddress, port,roomName ) */}
           <Text style={styles.submitText}>SUBMIT CHANGES</Text>
         </TouchableOpacity>
         <TouchableOpacity

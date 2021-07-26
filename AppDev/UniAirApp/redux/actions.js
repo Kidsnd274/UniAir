@@ -309,6 +309,17 @@ export const addSchedule = (
   );
 };
 
+export const deleteLocalStore = () => {
+  const thunkFunction = () => (dispatch) => {
+    console.log("LOG: Clear Local");
+    dispatch({
+      type: "DELETE_STORE",
+      acConfig: [],
+    });
+  };
+  store.dispatch(thunkFunction());
+};
+
 // API functions
 export const updateAirconData = (airconId) => {
   return store.dispatch(fetchAirconData(airconId));

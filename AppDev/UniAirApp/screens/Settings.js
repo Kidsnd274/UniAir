@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
 import {
@@ -11,8 +12,15 @@ import {
 
 import { Menu } from "react-native-paper";
 import { store, persistor } from "../redux/store";
+import { deleteLocalStore } from "../redux/actions";
 
 const Settings = (props) => {
+  
+  const navigationRaw = useNavigation()
+  const purger = () => {
+    deleteLocalStore()
+    setTimeout(() => navigationRaw.navigate("Welcome"),30)
+  }
   return (
     <View style={styles.container}>
       <Menu.Item
@@ -27,7 +35,7 @@ const Settings = (props) => {
       />
       <Menu.Item
         icon="menu"
-        onPress={() => {persistor.purge()}}
+        onPress={() => {purger()}}
         title="Clear Local Data"
       />
     </View>
