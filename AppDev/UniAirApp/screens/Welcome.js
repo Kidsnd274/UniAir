@@ -41,7 +41,6 @@ const Welcome = (props) => {
             firebase.firestore().collection('user').doc(firebase.auth().currentUser.uid).get().then((x) => console.log(x.data()["acConfig"]));
           }}
         >
-          <Text>12</Text>
         </TouchableOpacity>
       </View>
     </View>
