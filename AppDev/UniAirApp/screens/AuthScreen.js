@@ -158,7 +158,7 @@ const AuthScreen = () => {
       firebase
         .firestore()
         .collection("user")
-        .doc("GKpS9pAi6yTJx8lREKbfLeO9B4z1").get().then(x => restoreFireStore(x.data().acConfig));
+        .doc(firebase.auth().currentUser.uid).get().then(x => restoreFireStore(x.data().acConfig));
     } else {
       Alert.alert("Error", "Please sign in to your google account");
     }
