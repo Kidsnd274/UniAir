@@ -1,5 +1,5 @@
-.vscode/*
-*.code-workspace
-
-# Local History for Visual Studio Code
-.history/
+**/.vscode/
+**/settings.ini
+**/database.db
+**/venv
+**/__pycache__

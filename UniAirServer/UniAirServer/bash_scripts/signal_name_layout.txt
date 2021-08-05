@@ -1,0 +1,2 @@
+# ON_FANSPEED_VANE_MODE_TEMP
+# Vane 1 = Highest

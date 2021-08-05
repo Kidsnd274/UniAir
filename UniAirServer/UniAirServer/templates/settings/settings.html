@@ -1,0 +1,255 @@
+{% extends 'base.html' %} {% block title %} UniAir Server Settings {% endblock
+%} {% block head %}
+
+<style>
+  .mobile_address .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+  .account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+  }
+  .account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+  }
+  .account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+  }
+  .account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  .account-settings .about {
+    margin: 1rem 0 0 0;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .card {
+    background: #272e48;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+  }
+  .modalText {
+    color: black;
+  }
+  .right_line {
+    border-right: 1px solid white;
+  }
+</style>
+{% endblock %} {% block content %}
+<center>
+  <h1>UniAir Server Settings</h1>
+</center>
+<div class="container">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="d-flex flex-column align-items-center mt-5">
+          <p style="font-size: 22px; text-align: center">
+            <b>Connect with the UniAir Mobile app</b>
+          </p>
+          <p>
+            IP Address
+            <input
+              type="text"
+              class="form-control"
+              value="{{get_ip()}}"
+              readonly
+              style="border: 0px; width: auto"
+            />
+          </p>
+          <p>
+            Hostname
+            <input
+              type="text"
+              class="form-control"
+              value="{{get_hostname()}}"
+              readonly
+              style="border: 0px; width: auto"
+            />
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <h4 class="mb-3" style="font-weight: bold; color: aqua">
+                Main Settings
+              </h4>
+              <div class="row mb-4">
+                <div class="d-flex flex-row">
+                  <div class="w-50 right_line">
+                    <form action="/settings/update_settings" method="post">
+                      <div class="d-flex flex-column">
+                        <div style="width: 95%">
+                          <label for="inputAirconModel">Aircon Model</label>
+                          <input
+                            class="form-control"
+                            name="aircon_model"
+                            placeholder="mitsubishi_kh18a"
+                            value="{{aircon_model}}"
+                            required
+                          />
+                        </div>
+                        <div class="mt-2" style="width: 95%">
+                          <label for="lircd_address">LIRCD Address</label>
+                          <input
+                            class="form-control"
+                            name="lircd_address"
+                            placeholder="/var/run/lirc/lircd-tx"
+                            value="{{lircd_address}}"
+                            required
+                          />
+                        </div>
+                        <div class="d-flex flex-row justify-content-end mx-4 my-3">
+                          <button type="submit" class="btn btn-primary">
+                            Update Settings
+                          </button>
+                        </div>
+                        <div class="mx-4" style="text-align: right;">
+                              {% with messages = get_flashed_messages(category_filter=["updateSettings"]) %}
+                                {% if messages %}
+                                  <ul class=flashes>
+                                  {% for message in messages %}
+                                    {{ message }}
+                                  {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              {% endwith %}
+                           </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="w-50">
+                    <form action="/settings/update_password" method="post">
+                      <div class="mx-4 d-flex flex-column">
+                          <div>
+                            <label for="currentPassword">Current Password</label>
+                            <input
+                              type="password"
+                              class="form-control"
+                              name="currentPassword"
+                              placeholder="Current Password"
+                              required
+                            />
+                          </div>
+                          <div class="mt-2">
+                            <label for="newPassword">New password</label>
+                            <input
+                              type="password"
+                              class="form-control"
+                              name="newPassword"
+                              placeholder="New Password"
+                              required
+                            />
+                          </div>
+                          <div class="d-flex flex-row justify-content-end my-3">
+                            <button type="submit" class="btn btn-warning">
+                              Update Password
+                            </button>
+                          </div>
+                            <div style="text-align: right;">
+                              {% with messages = get_flashed_messages(category_filter=["updatePassword"]) %}
+                                {% if messages %}
+                                  <ul class=flashes>
+                                  {% for message in messages %}
+                                    {{ message }}
+                                  {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              {% endwith %}
+                           </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row gutters">
+              <div
+                class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                style="padding: 10px"
+              >
+                <h4 class="mb-3" style="font-weight: bold; color: pink">
+                  Danger Zone
+                </h4>
+                <div class="form-group" style="text-align: left">
+                  <text>Reset Settings</text>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    RESET
+                  </button>
+                  <!-- Modal -->
+                  <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title modalText"
+                            id="exampleModalLabel"
+                          >
+                            Reset All SETTINGS and Clear DATABASE?
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body modalText">
+                          This will delete your settings and database!<br />There's
+                          no going back
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            Cancel
+                          </button>
+                          <form action="/settings/reset_settings" method="post">
+                            <button type="submit" class="btn btn-danger">
+                              RESET
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

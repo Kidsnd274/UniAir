@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title %} UniAir Server Status {% endblock
+%} {% block head %} {% endblock %} {% block content %}
+<center>
+  <h1>UniAir Server</h1>
+  <h2>Status Page</h2>
+  Sends an OFF command from configured controller
+  <form method="post">
+    <button class="btn btn-outline btn-info" type="submit">Test IR</button>
+  </form>
+  <p></p>
+  <p style="font-size: 22px"><b>Connect with the UniAir Mobile app</b></p>
+  <p>
+    IP Address
+    <input
+      type="text"
+      class="form-control"
+      value="{{get_ip()}}"
+      readonly
+      style="border: 0px; width: auto"
+    />
+  </p>
+  <p>
+    Hostname
+    <input
+      type="text"
+      class="form-control"
+      value="{{get_hostname()}}"
+      readonly
+      style="border: 0px; width: auto"
+    />
+  </p>
+</center>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base_not_setup.html' %}
+
+{% block title %}
+UniAir Server Setup
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<center>
+<h1>UniAir Server Setup</h1>
+<form method="post">
+    <label for="aircon_model">Aircon Model</label>
+    <input class="form-control" name="aircon_model" id="aircon_model" value="mitsubishi_kh18a" style="border: 0px; width:auto" required>
+    <p><i><small>Currently only "mitsubishi_kh18a" is working</small></i></p>
+    <p></p>
+    <label for="lircd_address">LIRCD Address</label>
+    <input class="form-control" name="lircd_address" id="lircd_address" style="border: 0px; width:auto" value="{{lircd_default_address}}" required>
+    <p><i><small>Leave this as default if you are not sure ("/var/run/lirc/lircd-tx")</small></i></p>
+    <label for="password">Password (for mobile app)</label>
+    <input class="form-control" type="password" name="password" id="password" style="border: 0px; width:auto" required>
+    <p></p>
+    <input class="btn btn-primary" type="submit" value="Register">
+</form>
+</center>
+{% endblock %}

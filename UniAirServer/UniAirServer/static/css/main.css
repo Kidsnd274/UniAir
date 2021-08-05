@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+}
+
+/*html {
+    display: table;
+    margin: auto;
+}*/
+
+body {
+    margin: auto;
+    background-color: #212121;
+    color: white;
+    font-family: 'Trebuchet MS';
+    vertical-align: middle;
+}
+
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+}

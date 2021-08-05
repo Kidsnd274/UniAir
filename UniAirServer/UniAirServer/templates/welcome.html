@@ -1,0 +1,64 @@
+{% extends 'base_not_setup.html' %}
+
+{% block title %}
+UniAir Server Welcome
+{% endblock %}
+
+{% block head %}
+<style>
+    .vertical {
+        border-left: 6px solid white;
+        height: 200px;
+        position:absolute;
+        left: 50%;
+    }
+
+    .right_line {
+        border-right: 1px solid white;
+    }
+
+    .mobile_app_image {
+        max-width: 40%;
+        height: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<center>
+<h1>Welcome to UniAir</h1>
+<h2>Setting up your UniAir Server</h2>
+<div class="container">
+    <div class="row">
+        <div class="col right_line">
+            <div class="row">
+            <h2>Download mobile app</h2>
+            </div>
+            <div class="row">
+                <center>
+                <img class="img-fluid mobile_app_image" src="{{url_for('static', filename='img/UniAirMobile.png')}}" />
+                </center>
+            </div>
+            <div align="center" style="width:50%">
+                    <div align="left">
+                        IP Address
+                        <input class="form-control" type="text" value="{{get_ip()}}" readonly style="border: 0px; width:auto" />
+                    </div>
+                    <p></p>
+                    <div align="left">
+                        Hostname
+                        <input class="form-control" type="text" value="{{get_hostname()}}" readonly style="border: 0px; width:auto" />
+                    </div>
+            </div>
+        </div>
+        <div class="col">
+            <h2>Continue Setup here</h2>
+            <p>You will still need to register this server on a mobile app later on</p>
+            <form action="/setup/register">
+                <button class="btn btn-outline btn-info" type="submit">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock %}
