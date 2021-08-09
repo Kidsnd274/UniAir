@@ -16,19 +16,22 @@ import {
 } from "react-native-elements";
 import SchedulerController from "../components/SchedulerController";
 import { useSelector } from "react-redux";
+import { deleteScheduler } from "../redux/actions";
 
 const ControllerTab2 = (props) => {
-
   const scheduler = useSelector(
     (state) => state.airconReducer.aircons[props.id].scheduler
   );
-  console.log(scheduler)
+  console.log(scheduler);
 
-  function Schedule(x) {
+  function Schedule(x, index) {
     return (
       <View style={styles.item}>
-        <Text>{x.aircon_fanspeed}</Text>
-        <TouchableOpacity>
+        <View style = {styles.object}>
+          <Text>{x.date}</Text>
+          <Text>{x.time}</Text>
+        </View>
+        <TouchableOpacity onPress = {() => deleteScheduler(index)}>
           <Text>Delete</Text>
         </TouchableOpacity>
       </View>
@@ -38,11 +41,15 @@ const ControllerTab2 = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.scheduleList}>
-        <ScrollView>{scheduler.map((x) => Schedule(x))}</ScrollView>
+        <ScrollView>{scheduler.map((x, index) => Schedule(x, index))}</ScrollView>
       </View>
       <View style={styles.schedulerContainer}>
-        <TouchableOpacity onPress={() => props.schedulerModal()} style = {styles.addSchedule}>
-          <Text>Add Instruction</Text><Icon name="add" type="ionicons" />
+        <TouchableOpacity
+          onPress={() => props.schedulerModal()}
+          style={styles.addSchedule}
+        >
+          <Text>Add Instruction</Text>
+          <Icon name="add" type="ionicons" />
         </TouchableOpacity>
       </View>
     </View>
@@ -59,20 +66,20 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "blue",
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   schedulerContainer: {
     flex: 1,
     justifyContent: "center",
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
   },
   scheduleList: {
     flex: 4,
     // borderWidth:1,
     width: "100%",
     justifyContent: "center",
-    alignContent: "center"
+    alignContent: "center",
   },
   scrollContainer: {
     width: "100",
@@ -95,7 +102,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "80%",
     alignItems: "center",
-    borderRadius:5
+    borderRadius: 5,
+  },
+  object: {
+    flexDirection: "column"
   }
 });
 

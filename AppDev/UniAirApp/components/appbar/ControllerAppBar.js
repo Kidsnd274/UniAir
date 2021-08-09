@@ -29,7 +29,7 @@ const ControllerAppBar = (props) => {
   return (
     <Appbar.Header style = {styles.header}>
       <Appbar.Action icon="arrow-left" onPress={() => navigationRaw.goBack()} color = "#FFFF" />
-      <Appbar.Content title= {title} />
+      <Appbar.Content title= {title} color = "#FFFF"/>
       <Appbar.Action icon="menu-down-outline" onPress={() => {props.settingModal()}} color = "#FFFF"/>
       <Appbar.Action icon="sync" onPress={refreshControllerData} color = "#FFFF" />
     </Appbar.Header>

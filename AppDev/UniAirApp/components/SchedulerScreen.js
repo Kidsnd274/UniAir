@@ -232,7 +232,8 @@ const SchedulerScreen = (props) => {
               aircon_powerful_mode
             )
           }
-          // onPress = {() => console.log("addSchedule")}
+          // onPress = {() => console.log(date.toTimeString()
+          // )}
         >
           <Text>Submit</Text>
         </TouchableOpacity>

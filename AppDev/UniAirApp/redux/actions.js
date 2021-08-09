@@ -151,7 +151,7 @@ export const addController = (ipAddress, port, roomName, token) => {
             max_aircon_flap: 4,
             min_aircon_flap: 0,
           },
-          scheduler: {},
+          scheduler: [],
         },
       });
       updateAirconData(newAirconId);
@@ -282,17 +282,6 @@ export const addSchedule = (
           aircon_powerful_mode: aircon_powerful_mode,
         },
       });
-      addSchedule(
-        airconId,
-        date,
-        time,
-        aircon_power,
-        aircon_temp,
-        aircon_fanspeed,
-        aircon_flap,
-        aircon_eco_mode,
-        aircon_powerful_mode
-      );
     };
   store.dispatch(
     thunkFunction(
@@ -319,6 +308,17 @@ export const deleteLocalStore = () => {
   };
   store.dispatch(thunkFunction());
 };
+
+export const deleteScheduler = (airconId, schedulerId) => {
+  const thunkFunction = (airconId, schedulerId) => (dispatch) => {
+    dispatch({
+      type: "DELETE_EVENT",
+      airconId: airconId,
+      schedulerId:  schedulerId,
+    });
+  };
+  store.dispatch(thunkFunction(airconId, schedulerId));
+}
 
 // API functions
 export const updateAirconData = (airconId) => {

@@ -58,6 +58,9 @@ function airconReducer(state = initialState, action) {
         aircon_powerful_mode: action.payload.aircon_powerful_mode,
       });
       return { ...state, aircons: newArray };
+    case "DELETE_EVENT":
+      newArray[action.airconId].scheduler.splice(action.scheduleId, 1)
+      return {...state, aircons : newArray };
 
     case "REMOVE_CONTROLLER":
       for (let index = action.airconId + 1; index < newArray.length; index++) {

@@ -14,29 +14,29 @@ const SchedulerController = (props) => {
     props.setDate(currentDate);
   };
 
-  const showMode = (currentMode) => {
-    setShow(true);
+  const displayMode = (currentMode) => {
     setMode(currentMode);
+    setShow(true);
   };
 
-  const showDatepicker = () => {
-    showMode("date");
+  const datePicker = () => {
+   displayMode("date");
   };
 
-  const showTimepicker = () => {
-    showMode("time");
+  const timePicker = () => {
+   displayMode("time");
   };
 
   return (
     <View style={styles.container}>
       <Text>{String(props.date)}</Text>
       <View>
-        <TouchableOpacity onPress={showDatepicker}>
+        <TouchableOpacity onPress={datePicker}>
           <Icon name="date-range" type="material-icons" size={30} />
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity onPress={showTimepicker}>
+        <TouchableOpacity onPress={timePicker}>
           <Icon name="timer" type="material-icons" size={30} />
         </TouchableOpacity>
       </View>
