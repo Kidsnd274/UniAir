@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "column",
-    borderWidth: 2,
-    borderColor: "blue",
     width: "100%",
     height: "100%",
   },
