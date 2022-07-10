@@ -1,5 +1,5 @@
 # UniAir
-A system to convert a mundane air-conditioner to a smart one
+A system to convert a mundane air-conditioner to a smart one\
 Project for [NUS Orbital](https://orbital.comp.nus.edu.sg/) (CP2106: Independent Software Development Project)
 
 ## Description
